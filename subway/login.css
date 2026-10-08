@@ -110,7 +110,7 @@ input::placeholder {
     margin-top: 20px;
     border-radius: 22px;
     background-color: var(--baseBorder);
-    color: var(--text);
+    color: var(--placeholder);
     font-family: inherit;
     font-size: 1.6rem;
     font-weight: 700;
