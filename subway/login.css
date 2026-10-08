@@ -109,9 +109,8 @@ input::placeholder {
     height: 44px;
     margin-top: 20px;
     border-radius: 22px;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: #000000;
-    opacity: 0.2;
+    background-color: #CCCCCC;
+    color: #CCCCCC;
     font-family: inherit;
     font-size: 1.6rem;
     font-weight: 700;
