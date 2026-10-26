@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,53 +14,60 @@
     <div id="wrap">
         <header>제목공간</header>
         <main>
-            <div class="hero-sec">
-                <!-- Slider main container -->
+            <section class="hero-sec">
                 <div class="swiper visual">
-                    <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
-                        <!-- Slides -->
                         <div class="swiper-slide">
-                            <img src="img/visual1.png" alt="초코파이배너" class="pc">
-                            <img src="img/m_visual01.png" alt="모바일초코파이배너" class="mo">
+                            <img src="img/visual1.png" alt="초코파이 배너" class="pc">
+                            <img src="img/m_visual01.png" alt="모바일 초코파이 배너" class="mo">
                         </div>
                         <div class="swiper-slide">
-                            <img src="img/visual02.png" alt="닥터유배너" class="pc">
-                            <img src="img/m_visual02.png" alt="모바일닥터유배너" class="mo">
+                            <img src="img/visual02.png" alt="닥터유 배너" class="pc">
+                            <img src="img/m_visual02.png" alt="모바일 닥터유 배너" class="mo">
                         </div>
-                        <div class="swiper-slide">Slide 2</div>
                         <div class="swiper-slide">Slide 3</div>
-                        ...
+                        <div class="swiper-slide">Slide 4</div>
+                    </div>
+
+                    <div class="visual-controls">
+                        <div class="visual-progress">
+                            <div class="visual-pagination swiper-pagination"></div>
+                            <div class="visual-scrollbar swiper-scrollbar"></div>
+                        </div>
+                        <div class="visual-arrows">
+                            <button type="button" class="visual-prev swiper-button-prev" aria-label="이전 배너"></button>
+                            <button type="button" class="visual-next swiper-button-next" aria-label="다음 배너"></button>
+                        </div>
+                    </div>
                 </div>
-                
-                <!-- If we need scrollbar -->
-                <div class="swiper-scrollbar"></div>
-            </div>
+            </section>
         </main>
-        <footer>&copy</footer>
+        <footer>&copy;</footer>
     </div>
+
     <script>
-        const swiper = new Swiper('.hero-sec > .swiper', {
-            // Optional parameters
+        const swiper = new Swiper('.hero-sec .visual', {
             direction: 'horizontal',
             loop: true,
-
-            // If we need pagination
+            speed: 700,
             pagination: {
-                el: '.visual .swiper-pagination',
+                el: '.visual-pagination',
+                clickable: true,
+                renderBullet: function (index, className) {
+                    const brands = ['오리온', '닥터유', '마켓오네이처', '바이오'];
+                    return '<button type="button" class="' + className + '">' + brands[index % brands.length] + '</button>';
+                },
             },
-
-            // Navigation arrows
             navigation: {
-                nextEl: '.visual .swiper-button-next',
-                prevEl: '.visual .swiper-button-prev',
+                nextEl: '.visual-next',
+                prevEl: '.visual-prev',
             },
-
-            // And if we need scrollbar
             scrollbar: {
-                el: '.visual .swiper-scrollbar',
+                el: '.visual-scrollbar',
+                draggable: true,
+                dragSize: 'auto',
             },
-});
+        });
     </script>
 </body>
 </html>
