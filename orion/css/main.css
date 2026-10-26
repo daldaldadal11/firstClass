@@ -176,25 +176,26 @@ a {
     flex: 0 0 56px;
     margin: 0;
     padding: 0;
-    border: 0;
+    border: 1px solid rgba(255, 255, 255, .65);
     border-radius: 50%;
     background: transparent;
     cursor: pointer;
-    transition: opacity .2s ease;
+    transition: background-color .2s ease, opacity .2s ease;
 }
 
 .visual-arrows button:hover {
-    opacity: .75;
+    background: rgba(255, 255, 255, .14);
 }
 
 .visual-arrows button img {
     display: block;
-    width: 56px;
-    height: 56px;
+    width: 9.262px;
+    height: 15px;
+    object-fit: contain;
 }
 
 .visual-prev img {
-    transform: rotate(180deg) scaleY(-1);
+    transform: rotate(180deg);
 }
 
 @media (max-width: 1024px) {
@@ -255,8 +256,7 @@ a {
         gap: 8px;
     }
 
-    .visual-arrows button,
-    .visual-arrows button img {
+    .visual-arrows button {
         width: 40px;
         height: 40px;
         flex-basis: 40px;
@@ -311,7 +311,7 @@ a {
     }
 }
 
-/* 피그마 기준: 브랜드 텍스트와 진행선의 시작점을 정확히 맞춤 */
+/* Align the brand labels and progress line to the same starting point */
 .hero-sec .visual-progress {
     width: min(1520px, 100%);
     max-width: 1520px;
