@@ -58,7 +58,7 @@ body {
     width: auto;
     height: auto;
     margin: 0 !important;
-    padding: 0 0 0;
+    padding: 0;
     border: 0;
     border-radius: 0;
     background: transparent;
@@ -94,30 +94,35 @@ body {
     gap: 12px;
 }
 
-.visual-arrows .swiper-button-prev,
-.visual-arrows .swiper-button-next {
-    position: relative;
-    inset: auto;
+.visual-arrows button {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 56px;
     height: 56px;
+    flex: 0 0 56px;
     margin: 0;
+    padding: 0;
     border: 1px solid rgba(255, 255, 255, .8);
     border-radius: 50%;
-    color: #fff;
     background: transparent;
-    transition: background-color .2s ease, color .2s ease;
+    cursor: pointer;
+    transition: background-color .2s ease;
 }
 
-.visual-arrows .swiper-button-prev:hover,
-.visual-arrows .swiper-button-next:hover {
-    background: #fff;
-    color: #222;
+.visual-arrows button:hover {
+    background: rgba(255, 255, 255, .15);
 }
 
-.visual-arrows .swiper-button-prev::after,
-.visual-arrows .swiper-button-next::after {
-    font-size: 16px;
-    font-weight: 500;
+.visual-arrows button img {
+    display: block;
+    width: 10px;
+    height: 15px;
+}
+
+.visual-prev img {
+    transform: rotate(180deg);
 }
 
 @media (max-width: 1024px) {
@@ -160,10 +165,10 @@ body {
         gap: 8px;
     }
 
-    .visual-arrows .swiper-button-prev,
-    .visual-arrows .swiper-button-next {
+    .visual-arrows button {
         width: 40px;
         height: 40px;
+        flex-basis: 40px;
     }
 }
 
