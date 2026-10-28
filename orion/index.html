@@ -17,27 +17,19 @@
                 <div class="swiper visual">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="img/visual1.png" alt="초코파이 배너" class="pc">
-                            <img src="img/m_visual01.png" alt="모바일 초코파이 배너" class="mo">
+                            <img src="img/visual1.png" alt="슬라이드 1 - 초코파이 정 배너" class="pc">
+                            <img src="img/m_visual01.png" alt="모바일 슬라이드 1 - 초코파이 정 배너" class="mo">
                         </div>
                         <div class="swiper-slide">
-                            <img src="img/visual02.png" alt="닥터유 배너" class="pc">
-                            <img src="img/m_visual02.png" alt="모바일 닥터유 배너" class="mo">
+                            <img src="img/visual02.png" alt="슬라이드 2 - 닥터유 배너" class="pc">
+                            <img src="img/m_visual02.png" alt="모바일 슬라이드 2 - 닥터유 배너" class="mo">
                         </div>
                         <div class="swiper-slide">
-                            <img src="img/visual03.png" alt="마켓오네이처 배너" class="pc">
+                            <img src="img/visual03.png" alt="슬라이드 3 - 마켓오네이처 배너" class="slide-fallback">
                         </div>
                         <div class="swiper-slide">
-                            <img src="img/visual04.png" alt="바이오 배너" class="pc">
+                            <img src="img/visual04.png" alt="슬라이드 4 - 바이오 배너" class="slide-fallback">
                         </div>
-                    </div>
-
-                    <div class="hero-copy">
-                        <h1>맛있고 품질 좋은 제품을<br>합리적인 가격으로 공급합니다.</h1>
-                        <a class="hero-more" href="#" aria-label="자세히 보기">
-                            <span>자세히 보기</span>
-                            <img src="img/Vector.svg" alt="">
-                        </a>
                     </div>
 
                     <div class="visual-controls">
@@ -69,7 +61,7 @@
                 clickable: true,
                 renderBullet: function (index, className) {
                     const brands = ['오리온', '닥터유', '마켓오네이처', '바이오'];
-                    return '<button type="button" class="' + className + '">' + brands[index % brands.length] + '</button>';
+                    return '<button type="button" class="' + className + '">' + brands[index] + '</button>';
                 },
             },
             navigation: {
