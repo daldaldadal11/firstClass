@@ -1,3 +1,48 @@
+:root {
+    /* Primitives */
+    --gray: #F5F5F5;
+
+    /* Red */
+    --orion: #E60020;
+    --deep: #B8001A;
+
+    /* Yellow */
+    --golden: #FFC928;
+
+    /* Neutral */
+    --white: #FFFFFF;
+    --soft-gray: #F7F7F7;
+    --charcoal: #222222;
+    --mid-gray: #666666;
+    --light-gray: #E5E5E5;
+
+    /* Semantic */
+    --r-gray: #EEEEEE;
+
+    /* Background */
+    --background-default: var(--white);
+    --background-subtle: var(--soft-gray);
+
+    /* Surface */
+    --surface-default: var(--white);
+    --surface-subtle: var(--soft-gray);
+
+    /* Text */
+    --text-primary: var(--charcoal);
+    --text-secondary: var(--mid-gray);
+    --text-inverse: var(--white);
+
+    /* Border */
+    --border-default: var(--white);
+
+    /* Action */
+    --action-primary: var(--white);
+    --action-primary-hover: var(--white);
+
+    /* Accent */
+    --accent-highlight: var(--golden);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -9,8 +54,8 @@ body {
 }
 
 body {
-    background: #fff;
-    font-family: "pretendard variable", sans-serif;
+    background: var(--background-default);
+    font-family: "Pretendard Variable", sans-serif;
 }
 
 button,
@@ -47,7 +92,7 @@ a {
     top: 368px;
     left: max(48px, calc((100% - 1552px) / 2));
     width: min(900px, calc(100% - 96px));
-    color: #fff;
+    color: var(--text-inverse);
 }
 
 .hero-copy h1 {
@@ -68,9 +113,9 @@ a {
     height: 60px;
     margin-top: 51px;
     padding: 12px 25px;
-    border: 1px solid #fff;
+    border: 1px solid var(--border-default);
     border-radius: 50px;
-    color: #fff;
+    color: var(--text-inverse);
     text-decoration: none;
     white-space: nowrap;
     font-size: 20px;
@@ -87,8 +132,8 @@ a {
 }
 
 .hero-more:hover {
-    color: #222;
-    background: #fff;
+    color: var(--text-primary);
+    background: var(--action-primary-hover);
 }
 
 .hero-more:hover img {
@@ -106,7 +151,7 @@ a {
     align-items: flex-end;
     justify-content: space-between;
     gap: 32px;
-    color: #fff;
+    color: var(--text-inverse);
 }
 
 .visual-progress {
@@ -135,13 +180,13 @@ a {
     background: transparent;
     opacity: 1;
     color: rgba(255, 255, 255, .7);
-    font: 500 18px/1 "pretendard variable", sans-serif;
+    font: 500 18px/1 "Pretendard Variable", sans-serif;
     text-align: left;
     cursor: pointer;
 }
 
 .visual-pagination .swiper-pagination-bullet-active {
-    color: #fff;
+    color: var(--text-inverse);
 }
 
 .visual-scrollbar.swiper-scrollbar {
@@ -156,7 +201,7 @@ a {
 
 .visual-scrollbar .swiper-scrollbar-drag {
     border-radius: 0;
-    background: #fff;
+    background: var(--text-inverse);
 }
 
 .visual-arrows {
