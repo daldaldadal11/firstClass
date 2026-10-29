@@ -124,10 +124,6 @@
             transition: color .2s ease;
         }
 
-        .header-menu-column.is-active a {
-            color: var(--text-primary);
-        }
-
         .header-menu-column a:hover {
             color: #d71920;
         }
@@ -416,12 +412,6 @@
                 trigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
             });
             alignSubmenusToTriggers();
-
-            const submenuColumns = companyMenuOverlay.querySelectorAll('.header-menu-column');
-            const activeIndex = Array.prototype.indexOf.call(menuTriggers, activeTrigger);
-            submenuColumns.forEach(function (column, index) {
-                column.classList.toggle('is-active', index === activeIndex);
-            });
 
             // Keep the line steady when moving from a trigger into its own submenu.
             // Only replay the grow animation when the active top-level menu changes.
