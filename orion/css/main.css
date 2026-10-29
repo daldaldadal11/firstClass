@@ -63,7 +63,7 @@ a {
     font: inherit;
 }
 
-.mo {
+.hero-sec .swiper-slide > img.mo {
     display: none;
 }
 
@@ -264,11 +264,11 @@ a {
 }
 
 @media (max-width: 1024px) {
-    .pc {
+    .hero-sec .swiper-slide > img.pc {
         display: none;
     }
 
-    .mo {
+    .hero-sec .swiper-slide > img.mo {
         display: block;
     }
 
