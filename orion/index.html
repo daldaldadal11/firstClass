@@ -417,6 +417,8 @@
             companyMenuOverlay.classList.remove('is-open');
             header.classList.remove('menu-overlay-open');
             companyMenuOverlay.setAttribute('aria-hidden', 'true');
+            menuIndicator.style.opacity = '0';
+            menuIndicator.style.width = '0px';
             menuTriggers.forEach(function (trigger) {
                 trigger.classList.remove('is-active');
                 trigger.setAttribute('aria-expanded', 'false');
