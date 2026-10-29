@@ -462,6 +462,11 @@ a {
     padding-left: 0;
 }
 
+/* Keep the Market O Nature to Bio label gap at 286px (333px gap minus 47px) */
+.hero-sec .visual-pagination .swiper-pagination-bullet:nth-child(4) {
+    margin-left: -47px !important;
+}
+
 .hero-sec .visual-scrollbar {
     position: relative;
     left: 0;
