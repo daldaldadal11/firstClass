@@ -44,11 +44,11 @@
             transition: opacity .3s ease-in;
         }
 
-        .site-header.menu-overlay-open .header-nav .header-nav-trigger {
+        .site-header.menu-overlay-open .header-nav .header-nav-trigger.is-active {
             color: #d71920;
         }
 
-        .site-header.menu-overlay-open .header-nav .header-nav-trigger::after {
+        .site-header.menu-overlay-open .header-nav .header-nav-trigger.is-active::after {
             opacity: 1;
         }
 
@@ -232,11 +232,11 @@
                 </a>
                 <nav class="header-nav" aria-label="주 메뉴">
                     <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">회사 소개</a>
-                    <a href="#">사업 분야</a>
-                    <a href="#">윤리경영</a>
-                    <a href="#">투자정보</a>
-                    <a href="#">뉴스룸</a>
-                    <a href="#">고객센터</a>
+                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">사업 분야</a>
+                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">윤리경영</a>
+                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">투자정보</a>
+                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">뉴스룸</a>
+                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">고객센터</a>
                 </nav>
                 <div class="header-tools">
                     <a class="header-language" href="#">English</a>
@@ -245,7 +245,7 @@
                     </button>
                 </div>
             </div>
-            <div class="header-menu-overlay" id="company-menu-overlay" aria-label="회사 소개 메뉴" aria-hidden="true">
+            <div class="header-menu-overlay" id="company-menu-overlay" aria-label="주 메뉴 하위 항목" aria-hidden="true">
                 <div class="header-menu-overlay-inner">
                     <div class="header-menu-column">
                         <a href="#">기업 개요</a>
@@ -345,24 +345,41 @@
     <script>
         const header = document.querySelector('.site-header');
         const headerMenuIcon = document.querySelector('.header-menu img');
-        const companyMenuTrigger = document.querySelector('.header-nav-trigger');
+        const menuTriggers = document.querySelectorAll('.header-nav-trigger');
         const companyMenuOverlay = document.querySelector('.header-menu-overlay');
         let previousSlideCopy = null;
 
-        if (companyMenuTrigger && companyMenuOverlay) {
-            companyMenuTrigger.addEventListener('mouseenter', function () {
-                companyMenuOverlay.classList.add('is-open');
-                header.classList.add('menu-overlay-open');
-                companyMenuTrigger.setAttribute('aria-expanded', 'true');
-                companyMenuOverlay.setAttribute('aria-hidden', 'false');
+        function openHeaderOverlay(activeTrigger) {
+            if (!companyMenuOverlay) return;
+            companyMenuOverlay.classList.add('is-open');
+            header.classList.add('menu-overlay-open');
+            companyMenuOverlay.setAttribute('aria-hidden', 'false');
+            menuTriggers.forEach(function (trigger) {
+                const isActive = trigger === activeTrigger;
+                trigger.classList.toggle('is-active', isActive);
+                trigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            });
+        }
+
+        function closeHeaderOverlay() {
+            if (!companyMenuOverlay) return;
+            companyMenuOverlay.classList.remove('is-open');
+            header.classList.remove('menu-overlay-open');
+            companyMenuOverlay.setAttribute('aria-hidden', 'true');
+            menuTriggers.forEach(function (trigger) {
+                trigger.classList.remove('is-active');
+                trigger.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        if (menuTriggers.length && companyMenuOverlay) {
+            menuTriggers.forEach(function (trigger) {
+                trigger.addEventListener('mouseenter', function () {
+                    openHeaderOverlay(trigger);
+                });
             });
 
-            companyMenuOverlay.addEventListener('mouseleave', function () {
-                companyMenuOverlay.classList.remove('is-open');
-                header.classList.remove('menu-overlay-open');
-                companyMenuTrigger.setAttribute('aria-expanded', 'false');
-                companyMenuOverlay.setAttribute('aria-hidden', 'true');
-            });
+            companyMenuOverlay.addEventListener('mouseleave', closeHeaderOverlay);
         }
 
         const progressFills = document.querySelectorAll('.visual-progress-fill');
