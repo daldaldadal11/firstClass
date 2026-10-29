@@ -241,6 +241,10 @@ a {
 }
 
 .visual-progress-fill {
+    transition: left .35s ease;
+}
+
+.visual-progress-fill {
     position: absolute;
     top: 0;
     left: 0;
