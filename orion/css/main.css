@@ -245,10 +245,6 @@ a {
 }
 
 .visual-progress-fill {
-    transition: left 1.2s cubic-bezier(.22, 1, .36, 1);
-}
-
-.visual-progress-fill {
     position: absolute;
     top: 0;
     left: 0;
@@ -258,12 +254,22 @@ a {
     background: var(--text-inverse);
     transform: scaleX(0);
     transform-origin: left center;
-    animation: heroProgress 5s linear forwards;
+    animation: none;
+}
+
+.visual-progress-fill.is-shrinking {
+    transform-origin: left center;
+    animation: heroProgressShrink 1.2s cubic-bezier(.22, 1, .36, 1) forwards !important;
 }
 
 @keyframes heroProgress {
     from { transform: scaleX(0); }
     to { transform: scaleX(1); }
+}
+
+@keyframes heroProgressShrink {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
 }
 
 .visual-arrows {
