@@ -102,6 +102,10 @@ a {
     word-break: keep-all;
 }
 
+.site-header.header-primary ~ main .hero-sec .swiper-slide-active .slide-copy {
+    color: var(--text-primary);
+}
+
 .slide-copy span {
     display: block;
 }
