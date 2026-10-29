@@ -51,6 +51,68 @@
         .hero-sec .slide-copy.text-primary {
             color: var(--text-primary);
         }
+
+        /* Market O Nature: centered copy at Y=167px (desktop). */
+        .hero-sec .slide-copy.text-market {
+            top: 167px;
+            left: 50%;
+            width: calc(100% - 80px);
+            text-align: center;
+        }
+
+        .hero-sec .swiper-slide-active .slide-copy.text-market {
+            transform: translate(-50%, 0);
+        }
+
+        .hero-sec .slide-copy.text-market.is-leaving {
+            transform: translate(calc(-50% - 44px), 0);
+        }
+
+        /* Bio: left-aligned copy at X=184px, Y=200px (desktop). */
+        .hero-sec .slide-copy.text-bio {
+            top: 200px;
+            left: 184px;
+            width: calc(100% - 240px);
+            text-align: left;
+        }
+
+        .hero-sec .swiper-slide-active .slide-copy.text-bio {
+            transform: translate(0, 0);
+        }
+
+        .hero-sec .slide-copy.text-bio.is-leaving {
+            transform: translate(-44px, 0);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-sec .slide-copy.text-market {
+                top: 22%;
+                left: 50%;
+                width: calc(100% - 48px);
+            }
+
+            .hero-sec .swiper-slide-active .slide-copy.text-market {
+                transform: translate(-50%, 0);
+            }
+
+            .hero-sec .slide-copy.text-market.is-leaving {
+                transform: translate(calc(-50% - 44px), 0);
+            }
+
+            .hero-sec .slide-copy.text-bio {
+                top: 24%;
+                left: 40px;
+                width: calc(100% - 80px);
+            }
+
+            .hero-sec .swiper-slide-active .slide-copy.text-bio {
+                transform: translate(0, 0);
+            }
+
+            .hero-sec .slide-copy.text-bio.is-leaving {
+                transform: translate(-44px, 0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -100,7 +162,7 @@
                         <div class="swiper-slide">
                             <img src="img/visual03.png" alt="슬라이드 3 - 마켓오네이처 배너" class="pc">
                             <img src="img/m_visual03.png" alt="모바일 슬라이드 3 - 마켓오네이처 배너" class="mo">
-                            <div class="slide-copy text-primary">
+                            <div class="slide-copy text-primary text-market">
                                 <span>‘마켓오네이처’는 자연원물 그대로의</span>
                                 <span>정직하고 건강한 맛을 담은</span>
                                 <span>오리온의 간편식사대용식 브랜드입니다.</span>
@@ -109,7 +171,7 @@
                         <div class="swiper-slide">
                             <img src="img/visual04.png" alt="슬라이드 4 - 바이오 배너" class="pc">
                             <img src="img/m_visual04.png" alt="모바일 슬라이드 4 - 바이오 배너" class="mo">
-                            <div class="slide-copy">
+                            <div class="slide-copy text-bio">
                                 <span>진단 키트 사업을 시작으로 백신, 신약 발굴 및 개발까지</span>
                                 <span>제약/바이오 Platform 기업을 추구합니다.</span>
                             </div>
