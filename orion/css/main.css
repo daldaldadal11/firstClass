@@ -241,8 +241,11 @@ a {
 }
 
 .visual-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: block;
-    width: 100%;
+    width: 25%;
     height: 100%;
     background: var(--text-inverse);
     transform: scaleX(0);
