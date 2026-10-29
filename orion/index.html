@@ -93,10 +93,25 @@
     </div>
 
     <script>
+        const header = document.querySelector('.site-header');
+
+        function updateHeaderColor(swiperInstance) {
+            const usePrimary = swiperInstance.realIndex === 1 || swiperInstance.realIndex === 2;
+            header.classList.toggle('header-primary', usePrimary);
+        }
+
         const swiper = new Swiper('.hero-sec .visual', {
             direction: 'horizontal',
             loop: true,
             speed: 700,
+            on: {
+                init: function () {
+                    updateHeaderColor(this);
+                },
+                slideChange: function () {
+                    updateHeaderColor(this);
+                },
+            },
             pagination: {
                 el: '.visual-pagination',
                 clickable: true,
