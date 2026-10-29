@@ -56,7 +56,8 @@
             pointer-events: none;
             z-index: 30;
             transform: translateX(0);
-            transition: transform 300ms ease-in, width 300ms ease-in, opacity 150ms ease-in;
+            transform-origin: left center;
+            transition: width 300ms ease-in, opacity 150ms ease-in;
         }
 
         .site-header.menu-overlay-open .header-nav-indicator {
@@ -370,8 +371,17 @@
             if (!activeTrigger || !menuIndicator) return;
             const navRect = activeTrigger.parentElement.getBoundingClientRect();
             const triggerRect = activeTrigger.getBoundingClientRect();
-            menuIndicator.style.width = triggerRect.width + 'px';
-            menuIndicator.style.transform = 'translateX(' + (triggerRect.left - navRect.left) + 'px)';
+            const targetLeft = triggerRect.left - navRect.left;
+            const targetWidth = triggerRect.width;
+
+            // Collapse at the new menu position, then grow from left to right.
+            menuIndicator.style.transition = 'none';
+            menuIndicator.style.width = '0px';
+            menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
+            menuIndicator.style.opacity = '1';
+            void menuIndicator.offsetWidth;
+            menuIndicator.style.transition = 'width 300ms ease-in, opacity 150ms ease-in';
+            menuIndicator.style.width = targetWidth + 'px';
         }
 
         function alignSubmenusToTriggers() {
