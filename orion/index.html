@@ -18,6 +18,20 @@
             align-items: center;
         }
 
+        /* Opening the overlay turns the entire header band white too. */
+        .site-header.menu-overlay-open {
+            background: #fff;
+        }
+
+        .site-header.menu-overlay-open .header-nav a,
+        .site-header.menu-overlay-open .header-language {
+            color: var(--text-primary);
+        }
+
+        .site-header.menu-overlay-open .header-menu img {
+            filter: none;
+        }
+
         .header-nav .header-nav-trigger::after {
             content: "";
             position: absolute;
@@ -62,11 +76,18 @@
         }
 
         .header-menu-overlay-inner {
-            width: min(840px, 48%);
-            margin-left: 26.5%;
+            width: min(900px, 52%);
+            margin-left: calc(50% - 450px);
             display: grid;
             grid-template-columns: repeat(6, minmax(0, 1fr));
             column-gap: 0;
+        }
+
+        @media (min-width: 1025px) and (max-width: 1400px) {
+            .header-menu-overlay-inner {
+                width: 60%;
+                margin-left: 20%;
+            }
         }
 
         .header-menu-column {
