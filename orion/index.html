@@ -76,7 +76,7 @@
                     <div class="visual-controls">
                         <div class="visual-progress">
                             <div class="visual-pagination swiper-pagination"></div>
-                            <div class="visual-scrollbar swiper-scrollbar"></div>
+                            <div class="visual-scrollbar" aria-hidden="true"><span class="visual-progress-fill"></span></div>
                         </div>
                         <div class="visual-arrows">
                             <button type="button" class="visual-prev" aria-label="이전 배너">
@@ -96,6 +96,14 @@
         const header = document.querySelector('.site-header');
         const headerMenuIcon = document.querySelector('.header-menu img');
 
+        const progressFill = document.querySelector('.visual-progress-fill');
+
+        function restartProgress() {
+            progressFill.style.animation = 'none';
+            void progressFill.offsetWidth;
+            progressFill.style.animation = '';
+        }
+
         function updateHeaderColor(swiperInstance) {
             const usePrimary = swiperInstance.realIndex === 1 || swiperInstance.realIndex === 2;
             header.classList.toggle('header-primary', usePrimary);
@@ -107,13 +115,20 @@
         const swiper = new Swiper('.hero-sec .visual', {
             direction: 'horizontal',
             loop: true,
-            speed: 700,
+            speed: 900,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
             on: {
                 init: function () {
                     updateHeaderColor(this);
+                    restartProgress();
                 },
                 slideChange: function () {
                     updateHeaderColor(this);
+                    restartProgress();
                 },
             },
             pagination: {
@@ -127,11 +142,6 @@
             navigation: {
                 nextEl: '.visual-next',
                 prevEl: '.visual-prev',
-            },
-            scrollbar: {
-                el: '.visual-scrollbar',
-                draggable: true,
-                dragSize: 'auto',
             },
         });
     </script>
