@@ -430,6 +430,186 @@
         .investment-card-arrow img{display:block;width:100%;height:100%}
         @media(max-width:900px){.investment-inner{grid-template-columns:1fr;gap:42px}.investment-links{grid-template-rows:repeat(3,minmax(190px,1fr))}}
         @media(max-width:700px){.investment-sec{padding:46px 20px}.investment-inner{gap:30px}.investment-heading{margin-bottom:18px;font-size:24px}.investment-lead{margin-bottom:18px;font-size:21px;line-height:1.55}.investment-description{margin-bottom:24px;font-size:14px}.investment-more{min-height:42px;padding:0 18px;font-size:13px}.investment-links{grid-template-rows:repeat(3,minmax(170px,1fr));gap:14px}.investment-card{min-height:170px;padding:28px 24px;border-radius:7px}.investment-card-title{font-size:21px}.investment-stock-top{align-items:flex-start;flex-direction:column;gap:12px}.investment-stock-value{gap:8px;padding:8px 13px;font-size:13px}.investment-card-arrow{left:24px;bottom:24px;width:30px;height:30px}}
+
+        /* Footer */
+        .site-footer {
+            width: 100%;
+            padding: 0 24px 42px;
+            background: #222;
+            color: #777;
+            box-sizing: border-box;
+        }
+        .footer-inner {
+            width: min(100%, 1720px);
+            margin: 0 auto;
+        }
+        .footer-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 94px;
+            border-bottom: 1px solid #484848;
+        }
+        .footer-logo img {
+            display: block;
+            width: 122px;
+            height: auto;
+        }
+        .footer-main-links {
+            display: flex;
+            align-items: center;
+            gap: 72px;
+        }
+        .footer-main-links a {
+            color: #f4f4f4;
+            font-size: 18px;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 36px;
+            padding-top: 25px;
+        }
+        .footer-company {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.8;
+        }
+        .footer-company-address {
+            margin: 0 0 12px;
+        }
+        .footer-company dl {
+            display: grid;
+            grid-template-columns: 130px minmax(0, 1fr);
+            gap: 8px 20px;
+            margin: 0;
+        }
+        .footer-company dl div {
+            display: contents;
+        }
+        .footer-company dt, .footer-company dd { margin: 0; }
+        .footer-company dd { color: #777; }
+        .footer-copyright {
+            margin: 28px 0 0;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 25px;
+        }
+        .footer-legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 28px;
+        }
+        .footer-legal-links a {
+            color: #777;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .footer-family {
+            position: relative;
+            width: 354px;
+            max-width: 100%;
+        }
+        .footer-family-toggle {
+            display: flex;
+            width: 100%;
+            min-height: 68px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border: 0;
+            border-radius: 10px;
+            background: #262626;
+            color: #777;
+            font: inherit;
+            font-size: 18px;
+            text-align: left;
+            cursor: pointer;
+        }
+        .footer-family-toggle span:last-child {
+            font-size: 20px;
+            transition: transform .2s ease;
+        }
+        .footer-family.is-open .footer-family-toggle span:last-child { transform: rotate(180deg); }
+        .footer-family-menu {
+            position: absolute;
+            right: 0;
+            bottom: calc(100% + 8px);
+            z-index: 5;
+            display: none;
+            width: 100%;
+            padding: 10px 0;
+            border: 1px solid #444;
+            border-radius: 8px;
+            background: #292929;
+            box-sizing: border-box;
+        }
+        .footer-family.is-open .footer-family-menu { display: block; }
+        .footer-family-menu a {
+            display: block;
+            padding: 10px 24px;
+            color: #aaa;
+            font-size: 15px;
+            text-decoration: none;
+        }
+        .footer-family-menu a:hover { color: #fff; background: #333; }
+        .footer-social {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 66px;
+        }
+        .footer-social a {
+            display: inline-flex;
+            min-width: 24px;
+            min-height: 28px;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1;
+            text-decoration: none;
+        }
+        .footer-social .footer-youtube { font-size: 22px; }
+        .footer-social .footer-blog { font-size: 28px; }
+        @media (max-width: 900px) {
+            .footer-main-links { gap: 24px; }
+            .footer-content { grid-template-columns: 1fr; }
+            .footer-right { align-items: flex-start; }
+            .footer-legal-links { justify-content: flex-start; gap: 18px; }
+            .footer-family { width: 100%; }
+            .footer-social { margin-top: 8px; }
+        }
+        @media (max-width: 600px) {
+            .site-footer { padding: 0 20px 28px; }
+            .footer-top { min-height: auto; padding: 25px 0; align-items: flex-start; gap: 24px; flex-direction: column; }
+            .footer-logo img { width: 110px; }
+            .footer-main-links { width: 100%; justify-content: space-between; gap: 12px; }
+            .footer-main-links a { font-size: 13px; }
+            .footer-content { gap: 28px; padding-top: 20px; }
+            .footer-company { font-size: 12px; }
+            .footer-company dl { grid-template-columns: 100px minmax(0, 1fr); gap: 6px 10px; }
+            .footer-copyright { margin-top: 22px; font-size: 11px; }
+            .footer-right { gap: 18px; }
+            .footer-legal-links { gap: 12px; }
+            .footer-legal-links a { font-size: 11px; }
+            .footer-family-toggle { min-height: 52px; padding: 0 18px; font-size: 14px; }
+            .footer-social { gap: 22px; }
+        }
+
         /* Text only: animate each line separately, in sequence. */
         .hero-sec .slide-copy {
             opacity: 1;
@@ -754,9 +934,75 @@
                 </div>
             </section>
         </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-top">
+                    <a class="footer-logo" href="#" aria-label="오리온 홈"><img src="img/orion_logo.png" alt="ORION"></a>
+                    <nav class="footer-main-links" aria-label="푸터 주요 메뉴">
+                        <a href="#">고객문의</a>
+                        <a href="#">신규거래 제안</a>
+                        <a href="#">채용</a>
+                    </nav>
+                </div>
+                <div class="footer-content">
+                    <div class="footer-company">
+                        <p class="footer-company-address">(주)오리온 서울특별시 강남구 남부순환로 2745</p>
+                        <dl>
+                            <div><dt>사업자등록번호</dt><dd>709-81-00727</dd></div>
+                            <div><dt>대표이사</dt><dd>이승준</dd></div>
+                            <div><dt>전화번호</dt><dd>02.710.6000</dd></div>
+                            <div><dt>고객센터</dt><dd>080.023.5700(수신자 부담)</dd></div>
+                        </dl>
+                        <p class="footer-copyright">COPYRIGHT ORION CORP. ALL RIGHT RESERVED.</p>
+                    </div>
+                    <div class="footer-right">
+                        <nav class="footer-legal-links" aria-label="관련 정보">
+                            <a href="#">법적고지</a>
+                            <a href="#">개인정보처리방침</a>
+                            <a href="#">이메일무단수집거부</a>
+                            <a href="#">오시는 길</a>
+                        </nav>
+                        <div class="footer-family">
+                            <button class="footer-family-toggle" type="button" aria-expanded="false">
+                                <span>패밀리 사이트</span><span aria-hidden="true">⌃</span>
+                            </button>
+                            <div class="footer-family-menu">
+                                <a href="#">오리온</a>
+                                <a href="#">닥터유</a>
+                                <a href="#">마켓오네이처</a>
+                                <a href="#">오리온 제주용암수</a>
+                            </div>
+                        </div>
+                        <div class="footer-social" aria-label="소셜 미디어">
+                            <a class="footer-youtube" href="#" aria-label="유튜브">▶</a>
+                            <a class="footer-blog" href="#" aria-label="블로그">●</a>
+                            <a href="#" aria-label="브랜드">B</a>
+                            <a href="#" aria-label="페이스북">f</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <script>
+
+        const footerFamily = document.querySelector('.footer-family');
+        const footerFamilyToggle = document.querySelector('.footer-family-toggle');
+        if (footerFamily && footerFamilyToggle) {
+            footerFamilyToggle.addEventListener('click', function () {
+                const isOpen = footerFamily.classList.toggle('is-open');
+                footerFamilyToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+            document.addEventListener('click', function (event) {
+                if (!footerFamily.contains(event.target)) {
+                    footerFamily.classList.remove('is-open');
+                    footerFamilyToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
         const header = document.querySelector('.site-header');
         const headerMenuIcon = document.querySelector('.header-menu img');
         const menuTriggers = document.querySelectorAll('.header-nav-trigger');
