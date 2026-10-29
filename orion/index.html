@@ -87,33 +87,30 @@
         }
 
         .header-menu-overlay-inner {
+            position: relative;
             width: min(100%, 1920px);
+            min-height: 150px;
             margin: 0 auto;
             padding: 0 24px;
-            display: grid;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
-            column-gap: 0;
             box-sizing: border-box;
         }
 
         .header-menu-column {
-            justify-self: center;
+            position: absolute;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 17px;
             width: max-content;
             min-width: 0;
+            transform: translateX(-50%);
         }
 
         @media (min-width: 1025px) and (max-width: 1600px) {
             .header-menu-overlay-inner {
                 padding: 0 40px;
             }
-        }
-
-        .header-menu-column {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 17px;
-            min-width: 0;
         }
 
         .header-menu-column a {
@@ -377,6 +374,20 @@
             menuIndicator.style.transform = 'translateX(' + (triggerRect.left - navRect.left) + 'px)';
         }
 
+        function alignSubmenusToTriggers() {
+            if (!companyMenuOverlay) return;
+            const overlayInner = companyMenuOverlay.querySelector('.header-menu-overlay-inner');
+            const columns = companyMenuOverlay.querySelectorAll('.header-menu-column');
+            if (!overlayInner || columns.length !== menuTriggers.length) return;
+
+            const innerRect = overlayInner.getBoundingClientRect();
+            menuTriggers.forEach(function (trigger, index) {
+                const triggerRect = trigger.getBoundingClientRect();
+                const triggerCenter = triggerRect.left + triggerRect.width / 2;
+                columns[index].style.left = (triggerCenter - innerRect.left) + 'px';
+            });
+        }
+
         function openHeaderOverlay(activeTrigger) {
             if (!companyMenuOverlay) return;
             companyMenuOverlay.classList.add('is-open');
@@ -387,6 +398,7 @@
                 trigger.classList.toggle('is-active', isActive);
                 trigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
             });
+            alignSubmenusToTriggers();
             moveMenuIndicator(activeTrigger);
         }
 
@@ -410,6 +422,7 @@
 
             companyMenuOverlay.addEventListener('mouseleave', closeHeaderOverlay);
             window.addEventListener('resize', function () {
+                alignSubmenusToTriggers();
                 const activeTrigger = document.querySelector('.header-nav-trigger.is-active');
                 if (activeTrigger) moveMenuIndicator(activeTrigger);
             });
