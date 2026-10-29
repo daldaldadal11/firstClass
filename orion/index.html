@@ -400,6 +400,9 @@
 
         function openHeaderOverlay(activeTrigger) {
             if (!companyMenuOverlay) return;
+            const currentActiveTrigger = document.querySelector('.header-nav-trigger.is-active');
+            const activeTriggerChanged = currentActiveTrigger !== activeTrigger;
+
             companyMenuOverlay.classList.add('is-open');
             header.classList.add('menu-overlay-open');
             companyMenuOverlay.setAttribute('aria-hidden', 'false');
@@ -409,7 +412,10 @@
                 trigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
             });
             alignSubmenusToTriggers();
-            moveMenuIndicator(activeTrigger);
+
+            // Keep the line steady when moving from a trigger into its own submenu.
+            // Only replay the grow animation when the active top-level menu changes.
+            if (activeTriggerChanged) moveMenuIndicator(activeTrigger);
         }
 
         function closeHeaderOverlay() {
