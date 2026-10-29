@@ -94,10 +94,14 @@
 
     <script>
         const header = document.querySelector('.site-header');
+        const headerMenuIcon = document.querySelector('.header-menu img');
 
         function updateHeaderColor(swiperInstance) {
             const usePrimary = swiperInstance.realIndex === 1 || swiperInstance.realIndex === 2;
             header.classList.toggle('header-primary', usePrimary);
+            headerMenuIcon.src = usePrimary
+                ? headerMenuIcon.dataset.primarySrc
+                : headerMenuIcon.dataset.inverseSrc;
         }
 
         const swiper = new Swiper('.hero-sec .visual', {
