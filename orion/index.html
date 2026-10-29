@@ -35,9 +35,17 @@
         .hero-sec .slide-copy span:nth-child(3) { transition-delay: .28s; }
         .hero-sec .slide-copy span:nth-child(4) { transition-delay: .42s; }
 
-        .hero-sec .slide-copy.is-leaving span {
+        /* The outgoing slide leaves as one complete text block. */
+        .hero-sec .slide-copy.is-leaving {
             opacity: 0;
-            transform: translateX(-44px);
+            transform: translate(calc(-50% - 44px), -50%);
+            transition: opacity .7s ease, transform .85s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .hero-sec .slide-copy.is-leaving span {
+            opacity: 1;
+            transform: translateX(0);
+            transition: none;
         }
     </style>
 </head>
