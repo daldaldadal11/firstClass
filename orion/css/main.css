@@ -229,7 +229,7 @@ a {
 }
 
 .visual-pagination .swiper-pagination-bullet:nth-child(4) {
-    margin-left: -47px !important; /* 333px gap becomes 286px before Bio */
+    margin-left: -47px !important; /* Market O Nature to Bio: 286px */
 }
 
 .visual-pagination .swiper-pagination-bullet-active {
