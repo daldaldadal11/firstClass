@@ -470,7 +470,8 @@ a {
 
 .header-nav a,
 .header-language {
-    color: var(--text-primary);
+    color: var(--text-inverse);
+    transition: color .2s ease;
     text-decoration: none;
     font-size: 18px;
     line-height: 1;
@@ -507,6 +508,18 @@ a {
     width: 24px;
     height: 24px;
     object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: filter .2s ease;
+}
+
+/* Dr.You / Market O Nature slides use primary text and dark menu icon */
+.site-header.header-primary .header-nav a,
+.site-header.header-primary .header-language {
+    color: var(--text-primary);
+}
+
+.site-header.header-primary .header-menu img {
+    filter: none;
 }
 
 @media (max-width: 1600px) {
