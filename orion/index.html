@@ -137,13 +137,14 @@
         /* Ethics section */
         .ethics-sec {
             width: 100%;
-            padding: 58px 24px 56px;
+            min-height: 912px;
+            padding: 85px 24px 60px;
             background: #fff;
             box-sizing: border-box;
         }
 
         .ethics-inner {
-            width: min(100%, 760px);
+            width: min(100%, 1160px);
             margin: 0 auto;
         }
 
@@ -168,8 +169,8 @@
         .ethics-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
-            grid-template-rows: repeat(2, 169px);
-            gap: 14px;
+            grid-template-rows: repeat(2, 258px);
+            gap: 22px;
         }
 
         .ethics-card {
@@ -239,12 +240,12 @@
         }
 
         @media (max-width: 700px) {
-            .ethics-sec { padding: 44px 20px; }
+            .ethics-sec { min-height: auto; padding: 44px 20px; }
             .ethics-heading { font-size: 20px; }
             .ethics-description br { display: none; }
             .ethics-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                grid-template-rows: repeat(4, 160px);
+                grid-template-rows: repeat(4, 220px);
                 gap: 12px;
             }
             .ethics-card:nth-child(4) {
