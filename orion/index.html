@@ -10,6 +10,93 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
     <style>
+        /* Company intro overlay: Figma-style dissolve, ease-in, 300ms. */
+        .header-nav .header-nav-trigger {
+            position: relative;
+            height: 80px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .header-nav .header-nav-trigger::after {
+            content: "";
+            position: absolute;
+            left: -12px;
+            right: -12px;
+            bottom: 4px;
+            height: 2px;
+            background: #d71920;
+            opacity: 0;
+            transition: opacity .3s ease-in;
+        }
+
+        .site-header.menu-overlay-open .header-nav .header-nav-trigger {
+            color: #d71920;
+        }
+
+        .site-header.menu-overlay-open .header-nav .header-nav-trigger::after {
+            opacity: 1;
+        }
+
+        .header-menu-overlay {
+            position: absolute;
+            top: 73px;
+            left: 0;
+            z-index: 25;
+            width: 100%;
+            min-height: 191px;
+            padding: 20px 0 22px;
+            background: #fff;
+            border-top: 1px solid #e6e6e6;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 300ms ease-in, visibility 300ms ease-in;
+        }
+
+        .header-menu-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .header-menu-overlay-inner {
+            width: min(840px, 48%);
+            margin-left: 26.5%;
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            column-gap: 0;
+        }
+
+        .header-menu-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 17px;
+            min-width: 0;
+        }
+
+        .header-menu-column a {
+            color: #666;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.15;
+            white-space: nowrap;
+            transition: color .2s ease;
+        }
+
+        .header-menu-column a:hover {
+            color: #d71920;
+        }
+
+        @media (max-width: 1024px) {
+            .header-menu-overlay {
+                display: none;
+            }
+        }
+
         /* Text only: animate each line separately, in sequence. */
         .hero-sec .slide-copy {
             opacity: 1;
@@ -123,7 +210,7 @@
                     <img src="img/orion_logo.png" alt="오리온">
                 </a>
                 <nav class="header-nav" aria-label="주 메뉴">
-                    <a href="#">회사소개</a>
+                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">회사 소개</a>
                     <a href="#">사업 분야</a>
                     <a href="#">윤리경영</a>
                     <a href="#">투자정보</a>
@@ -135,6 +222,43 @@
                     <button class="header-menu" type="button" aria-label="메뉴 열기">
                         <img src="img/Menu.png" data-inverse-src="img/Menu.png" data-primary-src="img/Menu_p.png" alt="">
                     </button>
+                </div>
+            </div>
+            <div class="header-menu-overlay" id="company-menu-overlay" aria-label="회사 소개 메뉴" aria-hidden="true">
+                <div class="header-menu-overlay-inner">
+                    <div class="header-menu-column">
+                        <a href="#">기업 개요</a>
+                        <a href="#">연혁</a>
+                        <a href="#">경영방침</a>
+                        <a href="#">CI</a>
+                    </div>
+                    <div class="header-menu-column">
+                        <a href="#">제과</a>
+                        <a href="#">닥터유</a>
+                        <a href="#">마켓오네이처</a>
+                        <a href="#">바이오</a>
+                    </div>
+                    <div class="header-menu-column">
+                        <a href="#">윤리경영 체계</a>
+                        <a href="#">ESG 활동</a>
+                        <a href="#">관련 보고서</a>
+                    </div>
+                    <div class="header-menu-column">
+                        <a href="#">주가 정보</a>
+                        <a href="#">재무정보</a>
+                        <a href="#">공시자료</a>
+                        <a href="#">주주 관련 정보</a>
+                    </div>
+                    <div class="header-menu-column">
+                        <a href="#">보도자료</a>
+                        <a href="#">기업 소식</a>
+                        <a href="#">브랜드 소식</a>
+                    </div>
+                    <div class="header-menu-column">
+                        <a href="#">고객 문의</a>
+                        <a href="#">자주 묻는 질문</a>
+                        <a href="#">고객의 소리</a>
+                    </div>
                 </div>
             </div>
         </header>
@@ -200,7 +324,25 @@
     <script>
         const header = document.querySelector('.site-header');
         const headerMenuIcon = document.querySelector('.header-menu img');
+        const companyMenuTrigger = document.querySelector('.header-nav-trigger');
+        const companyMenuOverlay = document.querySelector('.header-menu-overlay');
         let previousSlideCopy = null;
+
+        if (companyMenuTrigger && companyMenuOverlay) {
+            companyMenuTrigger.addEventListener('mouseenter', function () {
+                companyMenuOverlay.classList.add('is-open');
+                header.classList.add('menu-overlay-open');
+                companyMenuTrigger.setAttribute('aria-expanded', 'true');
+                companyMenuOverlay.setAttribute('aria-hidden', 'false');
+            });
+
+            companyMenuOverlay.addEventListener('mouseleave', function () {
+                companyMenuOverlay.classList.remove('is-open');
+                header.classList.remove('menu-overlay-open');
+                companyMenuTrigger.setAttribute('aria-expanded', 'false');
+                companyMenuOverlay.setAttribute('aria-hidden', 'true');
+            });
+        }
 
         const progressFills = document.querySelectorAll('.visual-progress-fill');
         let activeProgressFill = progressFills[0];
