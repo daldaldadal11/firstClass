@@ -538,11 +538,22 @@
             text-align: left;
             cursor: pointer;
         }
-        .footer-family-toggle span:last-child {
-            font-size: 20px;
+        .footer-family-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
             transition: transform .2s ease;
         }
-        .footer-family.is-open .footer-family-toggle span:last-child { transform: rotate(180deg); }
+        .footer-family-arrow img {
+            display: block;
+            width: 10px;
+            height: 15px;
+            transform: rotate(-90deg);
+            filter: brightness(0) saturate(100%) invert(48%);
+        }
+        .footer-family.is-open .footer-family-arrow { transform: rotate(180deg); }
         .footer-family-menu {
             position: absolute;
             right: 0;
@@ -583,9 +594,8 @@
             line-height: 1;
             text-decoration: none;
         }
-        .footer-social .footer-youtube { font-size: 22px; }
-        .footer-social .footer-blog { font-size: 28px; }
-        .footer-social .footer-blog img { display: block; width: 26px; height: 26px; object-fit: contain; }
+        .footer-social a img { display: block; width: 26px; height: 26px; object-fit: contain; }
+        .footer-social .footer-youtube img { width: 26px; height: 26px; }
         @media (max-width: 900px) {
             .footer-main-links { gap: 24px; }
             .footer-content { grid-template-columns: 1fr; }
@@ -966,7 +976,7 @@
                         </nav>
                         <div class="footer-family">
                             <button class="footer-family-toggle" type="button" aria-expanded="false">
-                                <span>패밀리 사이트</span><span aria-hidden="true">⌃</span>
+                                <span>패밀리 사이트</span><span class="footer-family-arrow" aria-hidden="true"><img src="img/Vector.svg" alt=""></span>
                             </button>
                             <div class="footer-family-menu">
                                 <a href="#">오리온</a>
@@ -976,10 +986,10 @@
                             </div>
                         </div>
                         <div class="footer-social" aria-label="소셜 미디어">
-                            <a class="footer-youtube" href="#" aria-label="유튜브">▶</a>
+                            <a class="footer-youtube" href="#" aria-label="유튜브"><img src="img/foo01.svg" alt=""></a>
                             <a class="footer-blog" href="#" aria-label="블로그"><img src="img/foo02.svg" alt=""></a>
-                            <a href="#" aria-label="브랜드">B</a>
-                            <a href="#" aria-label="페이스북">f</a>
+                            <a href="#" aria-label="브랜드"><img src="img/foo03.svg" alt=""></a>
+                            <a href="#" aria-label="페이스북"><img src="img/foo04.svg" alt=""></a>
                         </div>
                     </div>
                 </div>
