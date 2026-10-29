@@ -76,7 +76,7 @@
                     <div class="visual-controls">
                         <div class="visual-progress">
                             <div class="visual-pagination swiper-pagination"></div>
-                            <div class="visual-scrollbar" aria-hidden="true"><span class="visual-progress-fill"></span></div>
+                            <div class="visual-scrollbar" aria-hidden="true"><span class="visual-progress-fill is-active"></span><span class="visual-progress-fill visual-progress-fill-next"></span></div>
                         </div>
                         <div class="visual-arrows">
                             <button type="button" class="visual-prev" aria-label="이전 배너">
@@ -96,16 +96,40 @@
         const header = document.querySelector('.site-header');
         const headerMenuIcon = document.querySelector('.header-menu img');
 
-        const progressFill = document.querySelector('.visual-progress-fill');
+        const progressFills = document.querySelectorAll('.visual-progress-fill');
+        let activeProgressFill = progressFills[0];
+        let nextProgressFill = progressFills[1];
 
-        function moveProgress(swiperInstance) {
-            progressFill.style.left = (swiperInstance.realIndex * 25) + '%';
+        function startProgress(swiperInstance) {
+            const nextLeft = (swiperInstance.realIndex * 25) + '%';
+
+            nextProgressFill.style.animation = 'none';
+            nextProgressFill.classList.remove('is-shrinking', 'is-active');
+            nextProgressFill.style.left = nextLeft;
+            nextProgressFill.style.transform = 'scaleX(0)';
+            void nextProgressFill.offsetWidth;
+            nextProgressFill.style.animation = 'heroProgress 5s linear forwards';
+
+            activeProgressFill.style.animation = 'none';
+            activeProgressFill.classList.remove('is-active');
+            activeProgressFill.classList.add('is-shrinking');
+
+            const previousFill = activeProgressFill;
+            activeProgressFill = nextProgressFill;
+            nextProgressFill = previousFill;
+
+            window.setTimeout(function () {
+                previousFill.classList.remove('is-shrinking');
+                previousFill.style.transform = 'scaleX(0)';
+            }, 1250);
         }
 
-        function restartProgress() {
-            progressFill.style.animation = 'none';
-            void progressFill.offsetWidth;
-            progressFill.style.animation = '';
+        function initializeProgress(swiperInstance) {
+            activeProgressFill.style.left = (swiperInstance.realIndex * 25) + '%';
+            activeProgressFill.style.animation = 'none';
+            activeProgressFill.style.transform = 'scaleX(0)';
+            void activeProgressFill.offsetWidth;
+            activeProgressFill.style.animation = 'heroProgress 5s linear forwards';
         }
 
         function updateHeaderColor(swiperInstance) {
@@ -128,15 +152,11 @@
             on: {
                 init: function () {
                     updateHeaderColor(this);
-                    moveProgress(this);
-                    restartProgress();
+                    startProgress(this);
                 },
                 slideChange: function () {
                     updateHeaderColor(this);
-                    moveProgress(this);
-                },
-                slideChangeTransitionEnd: function () {
-                    restartProgress();
+                    startProgress(this);
                 },
             },
             pagination: {
