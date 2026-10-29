@@ -245,7 +245,7 @@ a {
 }
 
 .visual-progress-fill {
-    transition: left .35s ease;
+    transition: left 1.2s cubic-bezier(.22, 1, .36, 1);
 }
 
 .visual-progress-fill {
