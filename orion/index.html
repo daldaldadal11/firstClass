@@ -9,6 +9,25 @@
     <link rel="stylesheet" href="../font/css/pretendardvariable.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
+    <style>
+        /* Text only: slide copy enters from the right and exits to the left. */
+        .hero-sec .slide-copy {
+            opacity: 0;
+            transform: translate(calc(-50% + 44px), -44%);
+            transition: opacity .7s ease, transform .85s cubic-bezier(.22, 1, .36, 1);
+            will-change: opacity, transform;
+        }
+
+        .hero-sec .swiper-slide-active .slide-copy {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-sec .slide-copy.is-leaving {
+            opacity: 0;
+            transform: translate(calc(-50% - 44px), -50%);
+        }
+    </style>
 </head>
 <body>
     <div id="wrap">
@@ -95,6 +114,7 @@
     <script>
         const header = document.querySelector('.site-header');
         const headerMenuIcon = document.querySelector('.header-menu img');
+        let previousSlideCopy = null;
 
         const progressFills = document.querySelectorAll('.visual-progress-fill');
         let activeProgressFill = progressFills[0];
@@ -154,7 +174,25 @@
                     updateHeaderColor(this);
                     initializeProgress(this);
                 },
-                slideChange: function () {
+                slideChangeTransitionStart: function () {
+                    const currentSlide = this.slides[this.activeIndex];
+                    const currentCopy = currentSlide ? currentSlide.querySelector('.slide-copy') : null;
+
+                    if (previousSlideCopy && previousSlideCopy !== currentCopy) {
+                        previousSlideCopy.classList.remove('is-leaving');
+                    }
+
+                    const previousSlide = this.slides[this.previousIndex];
+                    const leavingCopy = previousSlide ? previousSlide.querySelector('.slide-copy') : null;
+
+                    if (leavingCopy && leavingCopy !== currentCopy) {
+                        leavingCopy.classList.add('is-leaving');
+                        window.setTimeout(function () {
+                            leavingCopy.classList.remove('is-leaving');
+                        }, 900);
+                    }
+
+                    previousSlideCopy = currentCopy;
                     updateHeaderColor(this);
                     startProgress(this);
                 },
