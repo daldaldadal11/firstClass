@@ -11,14 +11,23 @@
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
     <style>
         /* Company intro overlay: Figma-style dissolve, ease-in, 300ms. */
+        .header-nav {
+            position: relative;
+        }
+
         .header-nav .header-nav-trigger {
             position: relative;
             height: 80px;
             display: inline-flex;
             align-items: center;
+            z-index: 2;
         }
 
-        /* Opening the overlay turns the entire header band white too. */
+        /* Header and submenu form one continuous white overlay. */
+        .site-header {
+            transition: background-color 300ms ease-in;
+        }
+
         .site-header.menu-overlay-open {
             background: #fff;
         }
@@ -32,33 +41,35 @@
             filter: none;
         }
 
-        .header-nav .header-nav-trigger::after {
-            content: "";
-            position: absolute;
-            left: -12px;
-            right: -12px;
-            bottom: 4px;
-            height: 2px;
-            background: #d71920;
-            opacity: 0;
-            transition: opacity .3s ease-in;
-        }
-
         .site-header.menu-overlay-open .header-nav .header-nav-trigger.is-active {
             color: #d71920;
         }
 
-        .site-header.menu-overlay-open .header-nav .header-nav-trigger.is-active::after {
+        .header-nav-indicator {
+            position: absolute;
+            left: 0;
+            bottom: 4px;
+            height: 2px;
+            width: 0;
+            background: #d71920;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 3;
+            transform: translateX(0);
+            transition: transform 300ms ease-in, width 300ms ease-in, opacity 150ms ease-in;
+        }
+
+        .site-header.menu-overlay-open .header-nav-indicator {
             opacity: 1;
         }
 
         .header-menu-overlay {
             position: absolute;
-            top: 73px;
+            top: 72px;
             left: 0;
             z-index: 25;
             width: 100%;
-            min-height: 191px;
+            min-height: 192px;
             padding: 20px 0 22px;
             background: #fff;
             border-top: 1px solid #e6e6e6;
@@ -237,6 +248,7 @@
                     <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">투자정보</a>
                     <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">뉴스룸</a>
                     <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">고객센터</a>
+                    <span class="header-nav-indicator" aria-hidden="true"></span>
                 </nav>
                 <div class="header-tools">
                     <a class="header-language" href="#">English</a>
@@ -347,7 +359,16 @@
         const headerMenuIcon = document.querySelector('.header-menu img');
         const menuTriggers = document.querySelectorAll('.header-nav-trigger');
         const companyMenuOverlay = document.querySelector('.header-menu-overlay');
+        const menuIndicator = document.querySelector('.header-nav-indicator');
         let previousSlideCopy = null;
+
+        function moveMenuIndicator(activeTrigger) {
+            if (!activeTrigger || !menuIndicator) return;
+            const navRect = activeTrigger.parentElement.getBoundingClientRect();
+            const triggerRect = activeTrigger.getBoundingClientRect();
+            menuIndicator.style.width = triggerRect.width + 'px';
+            menuIndicator.style.transform = 'translateX(' + (triggerRect.left - navRect.left) + 'px)';
+        }
 
         function openHeaderOverlay(activeTrigger) {
             if (!companyMenuOverlay) return;
@@ -359,6 +380,7 @@
                 trigger.classList.toggle('is-active', isActive);
                 trigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
             });
+            moveMenuIndicator(activeTrigger);
         }
 
         function closeHeaderOverlay() {
@@ -380,6 +402,10 @@
             });
 
             companyMenuOverlay.addEventListener('mouseleave', closeHeaderOverlay);
+            window.addEventListener('resize', function () {
+                const activeTrigger = document.querySelector('.header-nav-trigger.is-active');
+                if (activeTrigger) moveMenuIndicator(activeTrigger);
+            });
         }
 
         const progressFills = document.querySelectorAll('.visual-progress-fill');
