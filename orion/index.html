@@ -116,7 +116,7 @@
         const swiper = new Swiper('.hero-sec .visual', {
             direction: 'horizontal',
             loop: true,
-            speed: 900,
+            speed: 1600,
             autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,
@@ -129,7 +129,7 @@
                 },
                 slideChange: function () {
                     updateHeaderColor(this);
-                    restartProgress();
+                    restartProgress(this);
                 },
             },
             pagination: {
