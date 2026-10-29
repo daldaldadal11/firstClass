@@ -227,16 +227,16 @@
             left: 50px;
             bottom: 50px;
             z-index: 1;
-            display: flex;
-            width: 34px;
-            height: 34px;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,.95);
-            border-radius: 50%;
-            color: #fff;
-            font-size: 23px;
-            line-height: 1;
+            display: block;
+            width: 36px;
+            height: 36px;
+        }
+
+        .ethics-card-arrow img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            filter: brightness(0) invert(1);
         }
 
         @media (max-width: 700px) {
@@ -260,6 +260,8 @@
             .ethics-card-arrow {
                 left: 16px;
                 bottom: 16px;
+                width: 32px;
+                height: 32px;
             }
         }
 
@@ -424,9 +426,10 @@
         .investment-stock-top{display:flex;align-items:center;justify-content:space-between;gap:20px}
         .investment-stock-value{display:inline-flex;align-items:center;gap:12px;padding:10px 25px;border-radius:999px;background:#fff;color:#222;font-size:22px;line-height:1.2;white-space:nowrap}
         .investment-stock-value strong{color:#c60020;font-weight:500}
-        .investment-card-arrow{position:absolute;left:46px;bottom:46px;display:flex;width:35px;height:35px;align-items:center;justify-content:center;border:1.5px solid currentColor;border-radius:50%;font-size:25px;line-height:1}
+        .investment-card-arrow{position:absolute;left:46px;bottom:46px;display:block;width:36px;height:36px}
+        .investment-card-arrow img{display:block;width:100%;height:100%}
         @media(max-width:900px){.investment-inner{grid-template-columns:1fr;gap:42px}.investment-links{grid-template-rows:repeat(3,minmax(190px,1fr))}}
-        @media(max-width:700px){.investment-sec{padding:46px 20px}.investment-inner{gap:30px}.investment-heading{margin-bottom:18px;font-size:24px}.investment-lead{margin-bottom:18px;font-size:21px;line-height:1.55}.investment-description{margin-bottom:24px;font-size:14px}.investment-more{min-height:42px;padding:0 18px;font-size:13px}.investment-links{grid-template-rows:repeat(3,minmax(170px,1fr));gap:14px}.investment-card{min-height:170px;padding:28px 24px;border-radius:7px}.investment-card-title{font-size:21px}.investment-stock-top{align-items:flex-start;flex-direction:column;gap:12px}.investment-stock-value{gap:8px;padding:8px 13px;font-size:13px}.investment-card-arrow{left:24px;bottom:24px;width:30px;height:30px;font-size:21px}}
+        @media(max-width:700px){.investment-sec{padding:46px 20px}.investment-inner{gap:30px}.investment-heading{margin-bottom:18px;font-size:24px}.investment-lead{margin-bottom:18px;font-size:21px;line-height:1.55}.investment-description{margin-bottom:24px;font-size:14px}.investment-more{min-height:42px;padding:0 18px;font-size:13px}.investment-links{grid-template-rows:repeat(3,minmax(170px,1fr));gap:14px}.investment-card{min-height:170px;padding:28px 24px;border-radius:7px}.investment-card-title{font-size:21px}.investment-stock-top{align-items:flex-start;flex-direction:column;gap:12px}.investment-stock-value{gap:8px;padding:8px 13px;font-size:13px}.investment-card-arrow{left:24px;bottom:24px;width:30px;height:30px}}
         /* Text only: animate each line separately, in sequence. */
         .hero-sec .slide-copy {
             opacity: 1;
@@ -660,37 +663,37 @@
                         <a class="ethics-card" href="#" aria-label="개요">
                             <img src="img/yg01.jpg" alt="">
                             <span class="ethics-card-title">개요</span>
-                            <span class="ethics-card-arrow" aria-hidden="true">›</span>
+                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
                         </a>
                         <a class="ethics-card" href="#" aria-label="임직원">
                             <img src="img/yg02.jpg" alt="">
                             <span class="ethics-card-title">임직원</span>
-                            <span class="ethics-card-arrow" aria-hidden="true">›</span>
+                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
                         </a>
                         <a class="ethics-card" href="#" aria-label="고객">
                             <img src="img/yg03.jpg" alt="">
                             <span class="ethics-card-title">고객</span>
-                            <span class="ethics-card-arrow" aria-hidden="true">›</span>
+                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
                         </a>
                         <a class="ethics-card" href="#" aria-label="보고서 및 주요성과">
                             <img src="img/yg07.jpg" alt="">
                             <span class="ethics-card-title">보고서 및<br>주요성과</span>
-                            <span class="ethics-card-arrow" aria-hidden="true">›</span>
+                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
                         </a>
                         <a class="ethics-card" href="#" aria-label="협력회사">
                             <img src="img/yg04.jpg" alt="">
                             <span class="ethics-card-title">협력회사</span>
-                            <span class="ethics-card-arrow" aria-hidden="true">›</span>
+                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
                         </a>
                         <a class="ethics-card" href="#" aria-label="주주">
                             <img src="img/yg05.jpg" alt="">
                             <span class="ethics-card-title">주주</span>
-                            <span class="ethics-card-arrow" aria-hidden="true">›</span>
+                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
                         </a>
                         <a class="ethics-card" href="#" aria-label="사회">
                             <img src="img/yg06.jpg" alt="">
                             <span class="ethics-card-title">사회</span>
-                            <span class="ethics-card-arrow" aria-hidden="true">›</span>
+                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
                         </a>
                     </div>
                 </div>
@@ -743,10 +746,10 @@
                     <div class="investment-links">
                         <a class="investment-card investment-card-stock" href="#">
                             <div class="investment-stock-top"><h3 class="investment-card-title">주가정보</h3><span class="investment-stock-value"><strong>111,800</strong><span>-800</span><span>-0.71%</span></span></div>
-                            <span class="investment-card-arrow" aria-hidden="true">›</span>
+                            <span class="investment-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
                         </a>
-                        <a class="investment-card" href="#"><h3 class="investment-card-title">공시자료</h3><span class="investment-card-arrow" aria-hidden="true">›</span></a>
-                        <a class="investment-card" href="#"><h3 class="investment-card-title">주요 소식</h3><span class="investment-card-arrow" aria-hidden="true">›</span></a>
+                        <a class="investment-card" href="#"><h3 class="investment-card-title">공시자료</h3><span class="investment-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span></a>
+                        <a class="investment-card" href="#"><h3 class="investment-card-title">주요 소식</h3><span class="investment-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span></a>
                     </div>
                 </div>
             </section>
