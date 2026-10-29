@@ -408,6 +408,25 @@
             .newsroom-controls { margin-top: 22px; }
         }
 
+        /* Investment information */
+        .investment-sec{width:100%;padding:90px 24px;background:#222;color:#fff;box-sizing:border-box}
+        .investment-inner{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:70px;width:min(100%,1380px);margin:0 auto}
+        .investment-heading{margin:0 0 28px;font-size:38px;line-height:1.3;font-weight:700}
+        .investment-lead{margin:0 0 26px;font-size:30px;line-height:1.65;font-weight:600;word-break:keep-all}
+        .investment-description{margin:0 0 34px;color:#eee;font-size:20px;line-height:1.6}
+        .investment-more{display:inline-flex;min-height:54px;align-items:center;gap:18px;padding:0 25px;border:1px solid #fff;border-radius:999px;color:#fff;font-size:17px;font-weight:600;text-decoration:none}
+        .investment-more span{font-size:26px}
+        .investment-links{display:grid;grid-template-rows:repeat(3,minmax(200px,1fr));gap:27px}
+        .investment-card{position:relative;display:block;min-height:200px;padding:48px 46px;border-radius:10px;background:#f5f5f5;color:#222;text-decoration:none;box-sizing:border-box;transition:transform .25s ease}
+        .investment-card:hover{transform:translateY(-3px)}
+        .investment-card-stock{background:#c60020;color:#fff}
+        .investment-card-title{margin:0;font-size:30px;font-weight:700;line-height:1.35}
+        .investment-stock-top{display:flex;align-items:center;justify-content:space-between;gap:20px}
+        .investment-stock-value{display:inline-flex;align-items:center;gap:12px;padding:10px 25px;border-radius:999px;background:#fff;color:#222;font-size:22px;line-height:1.2;white-space:nowrap}
+        .investment-stock-value strong{color:#c60020;font-weight:500}
+        .investment-card-arrow{position:absolute;left:46px;bottom:46px;display:flex;width:35px;height:35px;align-items:center;justify-content:center;border:1.5px solid currentColor;border-radius:50%;font-size:25px;line-height:1}
+        @media(max-width:900px){.investment-inner{grid-template-columns:1fr;gap:42px}.investment-links{grid-template-rows:repeat(3,minmax(190px,1fr))}}
+        @media(max-width:700px){.investment-sec{padding:46px 20px}.investment-inner{gap:30px}.investment-heading{margin-bottom:18px;font-size:24px}.investment-lead{margin-bottom:18px;font-size:21px;line-height:1.55}.investment-description{margin-bottom:24px;font-size:14px}.investment-more{min-height:42px;padding:0 18px;font-size:13px}.investment-links{grid-template-rows:repeat(3,minmax(170px,1fr));gap:14px}.investment-card{min-height:170px;padding:28px 24px;border-radius:7px}.investment-card-title{font-size:21px}.investment-stock-top{align-items:flex-start;flex-direction:column;gap:12px}.investment-stock-value{gap:8px;padding:8px 13px;font-size:13px}.investment-card-arrow{left:24px;bottom:24px;width:30px;height:30px;font-size:21px}}
         /* Text only: animate each line separately, in sequence. */
         .hero-sec .slide-copy {
             opacity: 1;
@@ -710,6 +729,24 @@
                         <button class="newsroom-arrow" type="button" aria-label="다음 뉴스">
                             <img src="img/news_arrow2.svg" alt="">
                         </button>
+                    </div>
+                </div>
+            </section>
+            <section class="investment-sec" aria-labelledby="investment-heading">
+                <div class="investment-inner">
+                    <div class="investment-intro">
+                        <h2 class="investment-heading" id="investment-heading">투자정보</h2>
+                        <p class="investment-lead">내실있는 성장으로 새로운<br>도약을 준비하는 오리온</p>
+                        <p class="investment-description">주주와 함께 더 큰 기업의 가치를 만들어 가겠습니다.</p>
+                        <a class="investment-more" href="#">자세히 보기 <span aria-hidden="true">›</span></a>
+                    </div>
+                    <div class="investment-links">
+                        <a class="investment-card investment-card-stock" href="#">
+                            <div class="investment-stock-top"><h3 class="investment-card-title">주가정보</h3><span class="investment-stock-value"><strong>111,800</strong><span>-800</span><span>-0.71%</span></span></div>
+                            <span class="investment-card-arrow" aria-hidden="true">›</span>
+                        </a>
+                        <a class="investment-card" href="#"><h3 class="investment-card-title">공시자료</h3><span class="investment-card-arrow" aria-hidden="true">›</span></a>
+                        <a class="investment-card" href="#"><h3 class="investment-card-title">주요 소식</h3><span class="investment-card-arrow" aria-hidden="true">›</span></a>
                     </div>
                 </div>
             </section>
