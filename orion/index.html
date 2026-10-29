@@ -87,17 +87,24 @@
         }
 
         .header-menu-overlay-inner {
-            width: min(900px, 52%);
-            margin-left: calc(50% - 450px);
+            width: min(100%, 1920px);
+            margin: 0 auto;
+            padding: 0 24px;
             display: grid;
             grid-template-columns: repeat(6, minmax(0, 1fr));
             column-gap: 0;
+            box-sizing: border-box;
         }
 
-        @media (min-width: 1025px) and (max-width: 1400px) {
+        .header-menu-column {
+            justify-self: center;
+            width: max-content;
+            min-width: 0;
+        }
+
+        @media (min-width: 1025px) and (max-width: 1600px) {
             .header-menu-overlay-inner {
-                width: 60%;
-                margin-left: 20%;
+                padding: 0 40px;
             }
         }
 
