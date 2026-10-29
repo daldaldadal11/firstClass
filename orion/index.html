@@ -98,7 +98,8 @@
 
         const progressFill = document.querySelector('.visual-progress-fill');
 
-        function restartProgress() {
+        function restartProgress(swiperInstance) {
+            progressFill.style.left = (swiperInstance.realIndex * 25) + '%';
             progressFill.style.animation = 'none';
             void progressFill.offsetWidth;
             progressFill.style.animation = '';
@@ -124,7 +125,7 @@
             on: {
                 init: function () {
                     updateHeaderColor(this);
-                    restartProgress();
+                    restartProgress(this);
                 },
                 slideChange: function () {
                     updateHeaderColor(this);
