@@ -258,7 +258,7 @@ a {
 }
 
 .visual-progress-fill.is-shrinking {
-    transform-origin: left center;
+    transform-origin: right center;
     animation: heroProgressShrink 1.2s cubic-bezier(.22, 1, .36, 1) forwards !important;
 }
 
