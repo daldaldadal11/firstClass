@@ -10,22 +10,34 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
     <style>
-        /* Text only: slide copy enters from the right and exits to the left. */
+        /* Text only: animate each line separately, in sequence. */
         .hero-sec .slide-copy {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+            transition: none;
+        }
+
+        .hero-sec .slide-copy span {
+            display: block;
             opacity: 0;
-            transform: translate(calc(-50% + 44px), -44%);
-            transition: opacity .7s ease, transform .85s cubic-bezier(.22, 1, .36, 1);
+            transform: translateX(44px);
+            transition: opacity .55s ease, transform .75s cubic-bezier(.22, 1, .36, 1);
             will-change: opacity, transform;
         }
 
-        .hero-sec .swiper-slide-active .slide-copy {
+        .hero-sec .swiper-slide-active .slide-copy span {
             opacity: 1;
-            transform: translate(-50%, -50%);
+            transform: translateX(0);
         }
 
-        .hero-sec .slide-copy.is-leaving {
+        .hero-sec .slide-copy span:nth-child(1) { transition-delay: 0s; }
+        .hero-sec .slide-copy span:nth-child(2) { transition-delay: .14s; }
+        .hero-sec .slide-copy span:nth-child(3) { transition-delay: .28s; }
+        .hero-sec .slide-copy span:nth-child(4) { transition-delay: .42s; }
+
+        .hero-sec .slide-copy.is-leaving span {
             opacity: 0;
-            transform: translate(calc(-50% - 44px), -50%);
+            transform: translateX(-44px);
         }
     </style>
 </head>
