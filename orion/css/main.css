@@ -341,7 +341,7 @@ a {
     .slide-copy {
         width: calc(100% - 48px);
         font-size: clamp(26px, 7vw, 34px);
-        line-height: 22px;
+        line-height: 88px;
         letter-spacing: -0.5px;
     }
 
