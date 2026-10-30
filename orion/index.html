@@ -58,7 +58,7 @@
             z-index: 30;
             transform: translateX(0);
             transform-origin: left center;
-            transition: width 300ms ease-in, opacity 150ms ease-in;
+            transition: none;
         }
 
         .site-header.menu-overlay-open .header-nav-indicator {
@@ -110,6 +110,16 @@
             width: max-content;
             min-width: 0;
             transform: translateX(-50%);
+            width: 180px;
+            min-height: 100%;
+            padding: 20px 24px 24px;
+            box-sizing: border-box;
+            background: transparent;
+            transition: background-color .15s ease;
+        }
+
+        .header-menu-column.is-active {
+            background: rgba(0, 0, 0, .055);
         }
 
         @media (min-width: 1025px) and (max-width: 1600px) {
@@ -1041,14 +1051,10 @@
             const targetLeft = triggerRect.left - navRect.left;
             const targetWidth = triggerRect.width;
 
-            // Collapse at the new menu position, then grow from left to right.
             menuIndicator.style.transition = 'none';
-            menuIndicator.style.width = '0px';
             menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
-            menuIndicator.style.opacity = '1';
-            void menuIndicator.offsetWidth;
-            menuIndicator.style.transition = 'width 300ms ease-in, opacity 150ms ease-in';
             menuIndicator.style.width = targetWidth + 'px';
+            menuIndicator.style.opacity = '1';
         }
 
         function alignSubmenusToTriggers() {
@@ -1062,6 +1068,7 @@
                 const triggerRect = trigger.getBoundingClientRect();
                 const triggerCenter = triggerRect.left + triggerRect.width / 2;
                 columns[index].style.left = (triggerCenter - innerRect.left) + 'px';
+                columns[index].classList.toggle('is-active', trigger.classList.contains('is-active'));
             });
         }
 
