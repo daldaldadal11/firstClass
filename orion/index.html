@@ -127,12 +127,13 @@
             padding: 20px 24px 24px;
             box-sizing: border-box;
             background: transparent;
-            transform: translateX(-50%);
+            /* Begin just a little inward from each column's final position. */
+            transform: translateX(calc(-50% + var(--menu-offset, 0px) * .84));
             transition: transform 520ms cubic-bezier(.22,.61,.36,1), background-color .15s ease;
         }
 
         .header-menu-overlay.is-open .header-menu-column {
-            transform: translateX(calc(-50% + var(--menu-offset, 0px) * .16));
+            transform: translateX(calc(-50% + var(--menu-offset, 0px)));
         }
 
         .header-menu-column.is-active {
@@ -1069,7 +1070,7 @@
             const navCenter = navRect.left + navRect.width / 2;
             const overlayInner = companyMenuOverlay.querySelector('.header-menu-overlay-inner');
             const innerRect = overlayInner.getBoundingClientRect();
-            const panelCenter = innerRect.left + innerRect.width / 2 + (triggerCenter - innerRect.left - innerRect.width / 2) * .16;
+            const panelCenter = triggerCenter;
             const targetWidth = 150;
             const targetLeft = panelCenter - navRect.left - targetWidth / 2;
 
