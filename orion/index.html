@@ -36,16 +36,26 @@
             transform: translateX(0);
         }
 
-        /* Header and submenu form one continuous white overlay. */
+        /* Frosted glass layer: blur the page behind the menu, not its contents. */
         .site-header {
+            position: relative;
+            isolation: isolate;
             background: transparent;
-            transition: background-color 360ms ease;
         }
 
         .site-header.menu-overlay-open {
+            background: transparent;
+        }
+
+        .site-header.menu-overlay-open::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
             background: rgba(255, 255, 255, .82);
             -webkit-backdrop-filter: blur(18px);
             backdrop-filter: blur(18px);
+            pointer-events: none;
         }
 
         .site-header.menu-overlay-open .header-nav a,
