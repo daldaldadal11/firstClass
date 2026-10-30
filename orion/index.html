@@ -132,7 +132,7 @@
             box-sizing: border-box;
             background: transparent;
             /* Begin just a little inward from each column's final position. */
-            transform: translateX(calc(-50% + var(--menu-offset, 0px) * .84));
+            transform: translateX(calc(-50% + var(--menu-start-offset, 0px)));
             transition: transform 520ms cubic-bezier(.22,.61,.36,1), background-color .15s ease;
         }
 
@@ -1070,7 +1070,9 @@
             if (!headerMenuIcon) return;
             const usePrimary = header.classList.contains('menu-overlay-open') ||
                 header.classList.contains('header-primary');
-            syncHeaderMenuIcon();
+            headerMenuIcon.src = usePrimary
+                ? headerMenuIcon.dataset.primarySrc
+                : headerMenuIcon.dataset.inverseSrc;
         }
 
         function moveMenuIndicator(activeTrigger, animateFromGathered) {
@@ -1089,6 +1091,7 @@
             const startLeft = panelStartCenter - targetWidth / 2;
 
             menuIndicator.style.width = targetWidth + 'px';
+            menuIndicator.style.opacity = '1';
 
             if (animateFromGathered) {
                 menuIndicator.style.transition = 'none';
@@ -1115,7 +1118,9 @@
                 // offsetLeft is layout-based, so submenu destinations stay aligned
                 // with the final spread position while the trigger is animating.
                 const triggerCenter = navRect.left + trigger.offsetLeft + trigger.offsetWidth / 2;
-                columns[index].style.setProperty('--menu-offset', (triggerCenter - innerRect.left - innerRect.width / 2) + 'px');
+                const offset = triggerCenter - innerRect.left - innerRect.width / 2;
+                columns[index].style.setProperty('--menu-offset', offset + 'px');
+                columns[index].style.setProperty('--menu-start-offset', (offset * .84) + 'px');
                 columns[index].classList.toggle('is-active', trigger.classList.contains('is-active'));
             });
         }
