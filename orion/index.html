@@ -1066,6 +1066,13 @@
         const menuIndicator = document.querySelector('.header-nav-indicator');
         let previousSlideCopy = null;
 
+        function syncHeaderMenuIcon() {
+            if (!headerMenuIcon) return;
+            const usePrimary = header.classList.contains('menu-overlay-open') ||
+                header.classList.contains('header-primary');
+            syncHeaderMenuIcon();
+        }
+
         function moveMenuIndicator(activeTrigger, animateFromGathered) {
             if (!activeTrigger || !menuIndicator) return;
             const targetWidth = 150;
@@ -1121,6 +1128,7 @@
 
             companyMenuOverlay.classList.add('is-open');
             header.classList.add('menu-overlay-open');
+            syncHeaderMenuIcon();
             companyMenuOverlay.setAttribute('aria-hidden', 'false');
             menuTriggers.forEach(function (trigger) {
                 const isActive = trigger === activeTrigger;
@@ -1138,6 +1146,7 @@
             if (!companyMenuOverlay) return;
             companyMenuOverlay.classList.remove('is-open');
             header.classList.remove('menu-overlay-open');
+            syncHeaderMenuIcon();
             companyMenuOverlay.setAttribute('aria-hidden', 'true');
             menuTriggers.forEach(function (trigger) {
                 trigger.classList.remove('is-active');
