@@ -43,9 +43,9 @@
         }
 
         .site-header.menu-overlay-open {
-            background: rgba(255, 255, 255, .78);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, .88);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
         }
 
         .site-header.menu-overlay-open .header-nav a,
@@ -73,7 +73,7 @@
             z-index: 30;
             transform: translateX(0);
             transform-origin: left center;
-            transition: none;
+            transition: opacity 360ms ease;
         }
 
         .site-header.menu-overlay-open .header-nav-indicator {
@@ -87,10 +87,10 @@
             z-index: 25;
             width: 100%;
             min-height: 191px;
-            padding: 0 0 20px;
-            background: rgba(255, 255, 255, .78);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
+            padding: 0 0 32px;
+            background: rgba(255, 255, 255, .88);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
             border-top: 0;
             box-sizing: border-box;
             opacity: 0;
@@ -127,7 +127,7 @@
             gap: 30px;
             width: 150px;
             min-width: 0;
-            min-height: calc(100% + 20px);
+            min-height: calc(100% + 32px);
             padding: 20px 24px 24px;
             box-sizing: border-box;
             background: transparent;
@@ -1082,16 +1082,15 @@
             const startLeft = panelStartCenter - targetWidth / 2;
 
             menuIndicator.style.width = targetWidth + 'px';
-            menuIndicator.style.opacity = '1';
 
             if (animateFromGathered) {
                 menuIndicator.style.transition = 'none';
                 menuIndicator.style.transform = 'translateX(' + startLeft + 'px)';
                 void menuIndicator.offsetWidth;
-                menuIndicator.style.transition = 'transform 520ms cubic-bezier(.22,.61,.36,1)';
+                menuIndicator.style.transition = 'transform 520ms cubic-bezier(.22,.61,.36,1), opacity 360ms ease';
                 menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
             } else {
-                menuIndicator.style.transition = 'none';
+                menuIndicator.style.transition = 'transform 0s, opacity 360ms ease';
                 menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
             }
         }
@@ -1140,8 +1139,6 @@
             companyMenuOverlay.classList.remove('is-open');
             header.classList.remove('menu-overlay-open');
             companyMenuOverlay.setAttribute('aria-hidden', 'true');
-            menuIndicator.style.opacity = '0';
-            menuIndicator.style.width = '0px';
             menuTriggers.forEach(function (trigger) {
                 trigger.classList.remove('is-active');
                 trigger.setAttribute('aria-expanded', 'false');
