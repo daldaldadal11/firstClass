@@ -148,12 +148,13 @@
         .header-menu-column::before {
             content: "";
             position: absolute;
-            top: -2px;
+            top: 0;
             left: 0;
             width: 100%;
             height: 2px;
             background: #d71920;
             opacity: 0;
+            z-index: 2;
             transition: opacity 520ms ease;
             pointer-events: none;
         }
