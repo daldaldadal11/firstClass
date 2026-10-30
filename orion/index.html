@@ -42,26 +42,12 @@
         }
 
         .site-header.menu-overlay-open .header-nav .header-nav-trigger.is-active {
-            color: #d71920;
+            color: var(--text-primary);
+            background: rgba(0, 0, 0, .06);
         }
 
         .header-nav-indicator {
-            position: absolute;
-            left: 0;
-            bottom: 4px;
-            height: 2px;
-            width: 0;
-            background: #d71920;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 30;
-            transform: translateX(0);
-            transform-origin: left center;
-            transition: width 300ms ease-in, opacity 150ms ease-in;
-        }
-
-        .site-header.menu-overlay-open .header-nav-indicator {
-            opacity: 1;
+            display: none;
         }
 
         .header-menu-overlay {
@@ -72,19 +58,22 @@
             width: 100%;
             min-height: 191px;
             padding: 20px 0 30px;
-            background: #fff;
+            background: rgba(255, 255, 255, .94);
             border-top: 0;
             box-sizing: border-box;
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 300ms ease-in, visibility 300ms ease-in;
+            transform: scaleY(0);
+            transform-origin: top center;
+            transition: transform 360ms ease, opacity 220ms ease, visibility 360ms ease;
         }
 
         .header-menu-overlay.is-open {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+            transform: scaleY(1);
         }
 
         .header-menu-overlay-inner {
@@ -115,17 +104,22 @@
         }
 
         .header-menu-column a {
+            display: block;
+            padding: 9px 16px;
+            margin: -9px -16px;
+            border-radius: 2px;
             color: #666;
             text-decoration: none;
             font-size: 16px;
             font-weight: 400;
             line-height: 1.15;
             white-space: nowrap;
-            transition: color .2s ease;
+            transition: background-color .15s ease, color .15s ease;
         }
 
         .header-menu-column a:hover {
-            color: #d71920;
+            color: #333;
+            background: rgba(0, 0, 0, .06);
         }
 
         @media (max-width: 1024px) {
@@ -1030,23 +1024,6 @@
         const menuIndicator = document.querySelector('.header-nav-indicator');
         let previousSlideCopy = null;
 
-        function moveMenuIndicator(activeTrigger) {
-            if (!activeTrigger || !menuIndicator) return;
-            const navRect = activeTrigger.parentElement.getBoundingClientRect();
-            const triggerRect = activeTrigger.getBoundingClientRect();
-            const targetLeft = triggerRect.left - navRect.left;
-            const targetWidth = triggerRect.width;
-
-            // Collapse at the new menu position, then grow from left to right.
-            menuIndicator.style.transition = 'none';
-            menuIndicator.style.width = '0px';
-            menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
-            menuIndicator.style.opacity = '1';
-            void menuIndicator.offsetWidth;
-            menuIndicator.style.transition = 'width 300ms ease-in, opacity 150ms ease-in';
-            menuIndicator.style.width = targetWidth + 'px';
-        }
-
         function alignSubmenusToTriggers() {
             if (!companyMenuOverlay) return;
             const overlayInner = companyMenuOverlay.querySelector('.header-menu-overlay-inner');
@@ -1076,9 +1053,7 @@
             });
             alignSubmenusToTriggers();
 
-            // Keep the line steady when moving from a trigger into its own submenu.
-            // Only replay the grow animation when the active top-level menu changes.
-            if (activeTriggerChanged) moveMenuIndicator(activeTrigger);
+
         }
 
         function closeHeaderOverlay() {
@@ -1086,8 +1061,6 @@
             companyMenuOverlay.classList.remove('is-open');
             header.classList.remove('menu-overlay-open');
             companyMenuOverlay.setAttribute('aria-hidden', 'true');
-            menuIndicator.style.opacity = '0';
-            menuIndicator.style.width = '0px';
             menuTriggers.forEach(function (trigger) {
                 trigger.classList.remove('is-active');
                 trigger.setAttribute('aria-expanded', 'false');
@@ -1113,8 +1086,7 @@
             companyMenuOverlay.addEventListener('mouseleave', closeHeaderOverlay);
             window.addEventListener('resize', function () {
                 alignSubmenusToTriggers();
-                const activeTrigger = document.querySelector('.header-nav-trigger.is-active');
-                if (activeTrigger) moveMenuIndicator(activeTrigger);
+
             });
         }
 
