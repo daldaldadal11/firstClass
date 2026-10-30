@@ -80,7 +80,7 @@
             visibility: hidden;
             pointer-events: none;
             clip-path: inset(0 0 100% 0);
-            transition: clip-path 360ms ease, opacity 180ms ease, visibility 360ms ease;
+            transition: clip-path 360ms ease, opacity 360ms ease, visibility 0s linear 360ms;
         }
 
         .header-menu-overlay.is-open {
@@ -88,6 +88,7 @@
             visibility: visible;
             pointer-events: auto;
             clip-path: inset(0 0 0 0);
+            transition: clip-path 360ms ease, opacity 360ms ease, visibility 0s;
         }
 
         .header-menu-overlay-inner {
