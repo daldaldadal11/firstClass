@@ -2,8 +2,9 @@
     /* Primitives */
     --gray: #F5F5F5;
 
-    /* Red */
+    /* Brand */
     --orion: #E60020;
+    --mo: #97924E;
     --deep: #B8001A;
 
     /* Yellow */
@@ -114,6 +115,17 @@ a {
     opacity: 0;
     transform: translateY(22px);
     transition: opacity .6s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Brand colors for the hero slide copy. */
+.slide-copy .hero-color-orion {
+    color: var(--orion);
+    font-style: normal;
+}
+
+.slide-copy .hero-color-mo {
+    color: var(--mo);
+    font-style: normal;
 }
 
 .hero-sec .swiper-slide-active .slide-copy span {
