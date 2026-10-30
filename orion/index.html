@@ -1080,17 +1080,14 @@
             const targetWidth = 150;
             const targetLeft = activeTrigger.offsetLeft + activeTrigger.offsetWidth / 2 - targetWidth / 2;
             const overlayInner = companyMenuOverlay && companyMenuOverlay.querySelector('.header-menu-overlay-inner');
+            const activeColumn = companyMenuOverlay && companyMenuOverlay.querySelectorAll('.header-menu-column')[Array.prototype.indexOf.call(menuTriggers, activeTrigger)];
             const nav = document.querySelector('.header-nav');
             const navRect = nav.getBoundingClientRect();
-            const innerRect = overlayInner ? overlayInner.getBoundingClientRect() : null;
-            const finalCenter = activeTrigger.offsetLeft + activeTrigger.offsetWidth / 2;
-            const panelStartCenter = innerRect
-                ? (innerRect.left - navRect.left + innerRect.width / 2) +
-                  ((navRect.left + finalCenter - (innerRect.left + innerRect.width / 2)) * .84)
-                : finalCenter;
-            const startLeft = panelStartCenter - targetWidth / 2;
+            const columnRect = activeColumn ? activeColumn.getBoundingClientRect() : null;
+            const panelLeft = columnRect ? columnRect.left - navRect.left : targetLeft;
+            const startLeft = panelLeft + (targetLeft - panelLeft) * .84;
 
-            menuIndicator.style.width = targetWidth + 'px';
+            menuIndicator.style.width = columnRect ? columnRect.width + 'px' : targetWidth + 'px';
             menuIndicator.style.opacity = '1';
 
             if (animateFromGathered) {
@@ -1098,10 +1095,10 @@
                 menuIndicator.style.transform = 'translateX(' + startLeft + 'px)';
                 void menuIndicator.offsetWidth;
                 menuIndicator.style.transition = 'transform 520ms cubic-bezier(.22,.61,.36,1), opacity 360ms ease';
-                menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
+                menuIndicator.style.transform = 'translateX(' + panelLeft + 'px)';
             } else {
                 menuIndicator.style.transition = 'transform 0s, opacity 360ms ease';
-                menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
+                menuIndicator.style.transform = 'translateX(' + panelLeft + 'px)';
             }
         }
 
