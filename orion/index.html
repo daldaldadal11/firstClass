@@ -62,7 +62,7 @@
         .header-nav-indicator {
             position: absolute;
             left: 0;
-            bottom: 4px;
+            bottom: 0;
             height: 2px;
             width: 0;
             background: #d71920;
@@ -121,7 +121,7 @@
             flex-direction: column;
             align-items: center;
             gap: 25.5px;
-            width: 180px;
+            width: 150px;
             min-width: 0;
             min-height: 100%;
             padding: 20px 24px 24px;
@@ -1063,9 +1063,15 @@
 
         function moveMenuIndicator(activeTrigger) {
             if (!activeTrigger || !menuIndicator) return;
-            const navRect = activeTrigger.parentElement.getBoundingClientRect();
-            const targetLeft = activeTrigger.offsetLeft;
-            const targetWidth = activeTrigger.offsetWidth;
+            const nav = activeTrigger.parentElement;
+            const navRect = nav.getBoundingClientRect();
+            const triggerCenter = navRect.left + activeTrigger.offsetLeft + activeTrigger.offsetWidth / 2;
+            const navCenter = navRect.left + navRect.width / 2;
+            const overlayInner = companyMenuOverlay.querySelector('.header-menu-overlay-inner');
+            const innerRect = overlayInner.getBoundingClientRect();
+            const panelCenter = innerRect.left + innerRect.width / 2 + (triggerCenter - innerRect.left - innerRect.width / 2) * .16;
+            const targetWidth = 150;
+            const targetLeft = panelCenter - navRect.left - targetWidth / 2;
 
             menuIndicator.style.transition = 'none';
             menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
