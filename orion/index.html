@@ -1062,22 +1062,27 @@
         const menuIndicator = document.querySelector('.header-nav-indicator');
         let previousSlideCopy = null;
 
-        function moveMenuIndicator(activeTrigger) {
+        function moveMenuIndicator(activeTrigger, animateFromGathered) {
             if (!activeTrigger || !menuIndicator) return;
-            const nav = activeTrigger.parentElement;
-            const navRect = nav.getBoundingClientRect();
-            const triggerCenter = navRect.left + activeTrigger.offsetLeft + activeTrigger.offsetWidth / 2;
-            const navCenter = navRect.left + navRect.width / 2;
-            const overlayInner = companyMenuOverlay.querySelector('.header-menu-overlay-inner');
-            const innerRect = overlayInner.getBoundingClientRect();
-            const panelCenter = triggerCenter;
             const targetWidth = 150;
-            const targetLeft = panelCenter - navRect.left - targetWidth / 2;
+            const targetLeft = activeTrigger.offsetLeft + activeTrigger.offsetWidth / 2 - targetWidth / 2;
+            const triggerIndex = Array.prototype.indexOf.call(menuTriggers, activeTrigger);
+            const inwardOffsets = [22, 14, 6, -6, -14, -22];
+            const inwardOffset = inwardOffsets[triggerIndex] || 0;
 
-            menuIndicator.style.transition = 'none';
-            menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
             menuIndicator.style.width = targetWidth + 'px';
             menuIndicator.style.opacity = '1';
+
+            if (animateFromGathered) {
+                menuIndicator.style.transition = 'none';
+                menuIndicator.style.transform = 'translateX(' + (targetLeft + inwardOffset) + 'px)';
+                void menuIndicator.offsetWidth;
+                menuIndicator.style.transition = 'transform 520ms cubic-bezier(.22,.61,.36,1)';
+                menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
+            } else {
+                menuIndicator.style.transition = 'none';
+                menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
+            }
         }
 
         function alignSubmenusToTriggers() {
@@ -1100,6 +1105,7 @@
 
         function openHeaderOverlay(activeTrigger) {
             if (!companyMenuOverlay) return;
+            const wasOverlayOpen = companyMenuOverlay.classList.contains('is-open');
             const currentActiveTrigger = document.querySelector('.header-nav-trigger.is-active');
             const activeTriggerChanged = currentActiveTrigger !== activeTrigger;
 
@@ -1115,7 +1121,7 @@
 
             // Keep the line steady when moving from a trigger into its own submenu.
             // Only replay the grow animation when the active top-level menu changes.
-            if (activeTriggerChanged) moveMenuIndicator(activeTrigger);
+            if (activeTriggerChanged) moveMenuIndicator(activeTrigger, !wasOverlayOpen);
         }
 
         function closeHeaderOverlay() {
