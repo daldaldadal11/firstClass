@@ -87,8 +87,10 @@
             z-index: 25;
             width: 100%;
             min-height: 191px;
-            padding: 0 0 45px;
-            background: rgba(255, 255, 255, .94);
+            padding: 0 0 20px;
+            background: rgba(255, 255, 255, .78);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
             border-top: 0;
             box-sizing: border-box;
             opacity: 0;
@@ -125,7 +127,7 @@
             gap: 30px;
             width: 150px;
             min-width: 0;
-            min-height: calc(100% + 45px);
+            min-height: calc(100% + 20px);
             padding: 20px 24px 24px;
             box-sizing: border-box;
             background: transparent;
@@ -1068,16 +1070,23 @@
             if (!activeTrigger || !menuIndicator) return;
             const targetWidth = 150;
             const targetLeft = activeTrigger.offsetLeft + activeTrigger.offsetWidth / 2 - targetWidth / 2;
-            const triggerIndex = Array.prototype.indexOf.call(menuTriggers, activeTrigger);
-            const inwardOffsets = [22, 14, 6, -6, -14, -22];
-            const inwardOffset = inwardOffsets[triggerIndex] || 0;
+            const overlayInner = companyMenuOverlay && companyMenuOverlay.querySelector('.header-menu-overlay-inner');
+            const nav = document.querySelector('.header-nav');
+            const navRect = nav.getBoundingClientRect();
+            const innerRect = overlayInner ? overlayInner.getBoundingClientRect() : null;
+            const finalCenter = activeTrigger.offsetLeft + activeTrigger.offsetWidth / 2;
+            const panelStartCenter = innerRect
+                ? (innerRect.left - navRect.left + innerRect.width / 2) +
+                  ((navRect.left + finalCenter - (innerRect.left + innerRect.width / 2)) * .84)
+                : finalCenter;
+            const startLeft = panelStartCenter - targetWidth / 2;
 
             menuIndicator.style.width = targetWidth + 'px';
             menuIndicator.style.opacity = '1';
 
             if (animateFromGathered) {
                 menuIndicator.style.transition = 'none';
-                menuIndicator.style.transform = 'translateX(' + (targetLeft + inwardOffset) + 'px)';
+                menuIndicator.style.transform = 'translateX(' + startLeft + 'px)';
                 void menuIndicator.offsetWidth;
                 menuIndicator.style.transition = 'transform 520ms cubic-bezier(.22,.61,.36,1)';
                 menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
