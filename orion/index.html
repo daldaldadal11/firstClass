@@ -25,11 +25,12 @@
 
         /* Header and submenu form one continuous white overlay. */
         .site-header {
-            transition: background-color 300ms ease-in;
+            background: transparent;
+            transition: background-color 360ms ease;
         }
 
         .site-header.menu-overlay-open {
-            background: #fff;
+            background: rgba(255, 255, 255, .94);
         }
 
         .site-header.menu-overlay-open .header-nav a,
