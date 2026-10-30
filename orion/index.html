@@ -43,21 +43,29 @@
 
         .site-header.menu-overlay-open .header-nav .header-nav-trigger.is-active {
             color: var(--text-primary);
-            background: rgba(0, 0, 0, .06);
+            background: transparent;
         }
 
-        .header-nav-indicator {
-            display: none;
+        .header-nav-indicator { display: none; }
+
+        .header-nav .header-nav-trigger.is-active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            background: #d71920;
         }
 
         .header-menu-overlay {
             position: absolute;
-            top: 80px;
+            top: 0;
             left: 0;
             z-index: 25;
             width: 100%;
-            min-height: 191px;
-            padding: 20px 0 30px;
+            min-height: 271px;
+            padding: 100px 0 30px;
             background: rgba(255, 255, 255, .94);
             border-top: 0;
             box-sizing: border-box;
@@ -66,6 +74,7 @@
             pointer-events: none;
             transform: scaleY(0);
             transform-origin: top center;
+            z-index: 25;
             transition: transform 360ms ease, opacity 220ms ease, visibility 360ms ease;
         }
 
@@ -82,12 +91,14 @@
             min-height: 151px;
             margin: 0 auto;
             padding: 0 24px;
+            background: transparent;
             box-sizing: border-box;
         }
 
         .header-menu-column {
             position: absolute;
             top: 0;
+            bottom: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -95,6 +106,14 @@
             width: max-content;
             min-width: 0;
             transform: translateX(-50%);
+            padding: 20px 28px 24px;
+            box-sizing: border-box;
+            background: transparent;
+            transition: background-color .15s ease;
+        }
+
+        .header-menu-column.is-active {
+            background: rgba(0, 0, 0, .055);
         }
 
         @media (min-width: 1025px) and (max-width: 1600px) {
@@ -118,8 +137,8 @@
         }
 
         .header-menu-column a:hover {
-            color: #333;
-            background: rgba(0, 0, 0, .06);
+            color: #d71920;
+            background: transparent;
         }
 
         @media (max-width: 1024px) {
@@ -1035,6 +1054,7 @@
                 const triggerRect = trigger.getBoundingClientRect();
                 const triggerCenter = triggerRect.left + triggerRect.width / 2;
                 columns[index].style.left = (triggerCenter - innerRect.left) + 'px';
+                columns[index].classList.toggle('is-active', trigger.classList.contains('is-active'));
             });
         }
 
@@ -1083,7 +1103,7 @@
                 });
             });
 
-            companyMenuOverlay.addEventListener('mouseleave', closeHeaderOverlay);
+            header.addEventListener('mouseleave', closeHeaderOverlay);
             window.addEventListener('resize', function () {
                 alignSubmenusToTriggers();
 
