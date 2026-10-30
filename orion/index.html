@@ -133,18 +133,29 @@
             background: transparent;
             /* Begin just a little inward from each column's final position. */
             transform: translateX(calc(-50% + var(--menu-start-offset, 0px)));
-            transition: transform 520ms cubic-bezier(.22,.61,.36,1), background-color 520ms ease;
+            transition: transform 520ms cubic-bezier(.22,.61,.36,1);
         }
 
         .header-menu-overlay.is-open .header-menu-column {
             transform: translateX(calc(-50% + var(--menu-offset, 0px)));
         }
 
-        .header-menu-column.is-active {
+        /* Gray panel and red top rule fade together as one visual unit. */
+        .header-menu-column::after {
+            content: "";
+            position: absolute;
+            inset: 0;
             background: rgba(0, 0, 0, .055);
+            opacity: 0;
+            z-index: 0;
+            transition: opacity 520ms ease;
+            pointer-events: none;
         }
 
-        /* The red rule is part of the panel and fades with the panel itself. */
+        .header-menu-column.is-active::after {
+            opacity: 1;
+        }
+
         .header-menu-column::before {
             content: "";
             position: absolute;
@@ -161,6 +172,11 @@
 
         .header-menu-column.is-active::before {
             opacity: 1;
+        }
+
+        .header-menu-column a {
+            position: relative;
+            z-index: 1;
         }
 
         .header-nav-indicator {
