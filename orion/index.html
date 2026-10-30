@@ -73,7 +73,7 @@
             z-index: 30;
             transform: translateX(0);
             transform-origin: left center;
-            transition: opacity 360ms ease;
+            transition: transform 480ms ease, opacity 480ms ease;
         }
 
         .site-header.menu-overlay-open .header-nav-indicator {
@@ -97,7 +97,7 @@
             visibility: hidden;
             pointer-events: none;
             clip-path: inset(0 0 100% 0);
-            transition: clip-path 360ms ease, opacity 360ms ease, visibility 0s linear 360ms;
+            transition: clip-path 480ms ease, opacity 480ms ease, visibility 0s linear 480ms;
         }
 
         .header-menu-overlay.is-open {
@@ -1142,11 +1142,22 @@
             if (activeTriggerChanged) moveMenuIndicator(activeTrigger, !wasOverlayOpen);
         }
 
+        function activeIndicatorLeft() {
+            if (!menuIndicator) return 0;
+            const match = menuIndicator.style.transform.match(/translateX\((-?[\d.]+)px\)/);
+            return match ? Number(match[1]) : 0;
+        }
+
         function closeHeaderOverlay() {
             if (!companyMenuOverlay) return;
             companyMenuOverlay.classList.remove('is-open');
             header.classList.remove('menu-overlay-open');
             syncHeaderMenuIcon();
+            if (menuIndicator) {
+                const currentLeft = activeIndicatorLeft();
+                menuIndicator.style.transform = 'translateX(' + (currentLeft + 150) + 'px)';
+                menuIndicator.style.opacity = '0';
+            }
             companyMenuOverlay.setAttribute('aria-hidden', 'true');
             menuTriggers.forEach(function (trigger) {
                 trigger.classList.remove('is-active');
