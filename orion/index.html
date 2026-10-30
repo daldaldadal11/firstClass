@@ -21,6 +21,19 @@
             display: inline-flex;
             align-items: center;
             z-index: 2;
+            transition: transform 520ms cubic-bezier(.22,.61,.36,1);
+        }
+
+        /* Start slightly gathered, then spread back to the aligned positions. */
+        .header-nav .header-nav-trigger:nth-child(1) { transform: translateX(22px); }
+        .header-nav .header-nav-trigger:nth-child(2) { transform: translateX(14px); }
+        .header-nav .header-nav-trigger:nth-child(3) { transform: translateX(6px); }
+        .header-nav .header-nav-trigger:nth-child(4) { transform: translateX(-6px); }
+        .header-nav .header-nav-trigger:nth-child(5) { transform: translateX(-14px); }
+        .header-nav .header-nav-trigger:nth-child(6) { transform: translateX(-22px); }
+
+        .site-header.menu-overlay-open .header-nav .header-nav-trigger {
+            transform: translateX(0);
         }
 
         /* Header and submenu form one continuous white overlay. */
@@ -752,8 +765,8 @@
                     <img src="img/orion_logo.png" alt="오리온">
                 </a>
                 <nav class="header-nav" aria-label="주 메뉴">
-                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">회사 소개</a>
-                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">사업 분야</a>
+                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">회사소개</a>
+                    <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">사업분야</a>
                     <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">윤리경영</a>
                     <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">투자정보</a>
                     <a class="header-nav-trigger" href="#" aria-expanded="false" aria-controls="company-menu-overlay">뉴스룸</a>
@@ -1051,9 +1064,8 @@
         function moveMenuIndicator(activeTrigger) {
             if (!activeTrigger || !menuIndicator) return;
             const navRect = activeTrigger.parentElement.getBoundingClientRect();
-            const triggerRect = activeTrigger.getBoundingClientRect();
-            const targetLeft = triggerRect.left - navRect.left;
-            const targetWidth = triggerRect.width;
+            const targetLeft = activeTrigger.offsetLeft;
+            const targetWidth = activeTrigger.offsetWidth;
 
             menuIndicator.style.transition = 'none';
             menuIndicator.style.transform = 'translateX(' + targetLeft + 'px)';
@@ -1068,11 +1080,13 @@
             if (!overlayInner || columns.length !== menuTriggers.length) return;
 
             const innerRect = overlayInner.getBoundingClientRect();
-            const innerCenter = innerRect.width / 2;
+            const nav = document.querySelector('.header-nav');
+            const navRect = nav.getBoundingClientRect();
             menuTriggers.forEach(function (trigger, index) {
-                const triggerRect = trigger.getBoundingClientRect();
-                const triggerCenter = triggerRect.left + triggerRect.width / 2;
-                columns[index].style.setProperty('--menu-offset', (triggerCenter - innerRect.left - innerCenter) + 'px');
+                // offsetLeft is layout-based, so submenu destinations stay aligned
+                // with the final spread position while the trigger is animating.
+                const triggerCenter = navRect.left + trigger.offsetLeft + trigger.offsetWidth / 2;
+                columns[index].style.setProperty('--menu-offset', (triggerCenter - innerRect.left - innerRect.width / 2) + 'px');
                 columns[index].classList.toggle('is-active', trigger.classList.contains('is-active'));
             });
         }
