@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>주가정보 | 오리온</title>
+  <link rel="stylesheet" href="../css/default.css">
+  <link rel="stylesheet" href="../font/css/pretendardvariable.css">
+  <link rel="stylesheet" href="css/stock.css">
+</head>
+<body>
+  <header class="site-header stock-header" id="page-top">
+    <div class="header-inner">
+      <a class="header-logo" href="index.html" aria-label="오리온 메인으로">
+        <img src="img/logo_orion_w.png" alt="ORION">
+      </a>
+      <nav class="header-nav" aria-label="주요 메뉴">
+        <a href="#stock-content">회사소개</a>
+        <a href="#stock-content">사업 분야</a>
+        <a href="#stock-content">윤리경영</a>
+        <a href="#stock-content" class="is-current" aria-current="page">투자정보</a>
+        <a href="#stock-content">뉴스룸</a>
+        <a href="#stock-content">고객센터</a>
+      </nav>
+      <div class="header-tools">
+        <span class="header-language">KOR</span>
+        <button class="header-menu" type="button" aria-label="메뉴" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="stock-content">
+    <section class="stock-visual" aria-labelledby="page-title">
+      <div class="stock-visual-inner">
+        <p class="stock-eyebrow">INVESTMENT INFORMATION</p>
+        <h1 id="page-title">주가정보</h1>
+        <p class="stock-visual-copy">오리온의 투자 정보를 확인하실 수 있습니다.</p>
+      </div>
+      <div class="stock-visual-image" aria-hidden="true"><!-- 이미지 교체 영역 --></div>
+    </section>
+
+    <nav class="stock-breadcrumb container" aria-label="현재 위치">
+      <a href="index.html">HOME</a><span aria-hidden="true">/</span><span>투자정보</span><span aria-hidden="true">/</span><strong>주가정보</strong>
+    </nav>
+
+    <section class="stock-section container">
+      <div class="stock-section-heading">
+        <p class="section-kicker">INVESTOR RELATIONS</p>
+        <h2>투자정보</h2>
+        <p>오리온의 주가와 주주 및 배당 정보를 안내합니다.</p>
+      </div>
+
+      <div class="stock-tabs" role="tablist" aria-label="투자정보 하위 메뉴">
+        <button class="stock-tab is-active" type="button" role="tab" id="tab-price" aria-controls="panel-price" aria-selected="true" data-tab="price">주가정보</button>
+        <button class="stock-tab" type="button" role="tab" id="tab-shareholders" aria-controls="panel-shareholders" aria-selected="false" data-tab="shareholders" tabindex="-1">주주구성</button>
+        <button class="stock-tab" type="button" role="tab" id="tab-dividend" aria-controls="panel-dividend" aria-selected="false" data-tab="dividend" tabindex="-1">배당정보</button>
+      </div>
+
+      <div class="stock-panels">
+        <section class="stock-panel is-active" id="panel-price" role="tabpanel" aria-labelledby="tab-price" data-panel="price">
+          <div class="panel-title-row"><h3>주가정보</h3><span class="data-caption">시세 데이터 영역</span></div>
+          <div class="quote-summary">
+            <div class="quote-main">
+              <span class="quote-label">ORION</span>
+              <strong class="quote-value">— <small>KRW</small></strong>
+              <p class="quote-note">실시간/기준 시세 데이터 연결 후 표시됩니다.</p>
+            </div>
+            <div class="quote-stats">
+              <div><span>전일 대비</span><strong>—</strong></div>
+              <div><span>등락률</span><strong>—</strong></div>
+              <div><span>거래량</span><strong>—</strong></div>
+            </div>
+          </div>
+          <div class="chart-placeholder" role="img" aria-label="주가 차트 이미지 또는 차트 라이브러리 삽입 영역">
+            <span class="placeholder-mark" aria-hidden="true">＋</span>
+            <strong>주가 차트 영역</strong>
+            <p>차트 또는 시각 자료를 이 영역에 배치하세요.</p>
+          </div>
+          <div class="data-table-wrap">
+            <table class="stock-table">
+              <caption>주가 주요 지표</caption>
+              <thead><tr><th scope="col">항목</th><th scope="col">현재</th><th scope="col">전일</th><th scope="col">비고</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">종가</th><td>—</td><td>—</td><td>데이터 연결 필요</td></tr>
+                <tr><th scope="row">시가</th><td>—</td><td>—</td><td>데이터 연결 필요</td></tr>
+                <tr><th scope="row">고가 / 저가</th><td>—</td><td>—</td><td>데이터 연결 필요</td></tr>
+                <tr><th scope="row">거래량</th><td>—</td><td>—</td><td>데이터 연결 필요</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="stock-panel" id="panel-shareholders" role="tabpanel" aria-labelledby="tab-shareholders" data-panel="shareholders" hidden>
+          <div class="panel-title-row"><h3>주주구성</h3><span class="data-caption">공시 기준일 자료 입력</span></div>
+          <div class="shareholder-layout">
+            <div class="chart-placeholder share-chart-placeholder"><span class="placeholder-mark" aria-hidden="true">＋</span><strong>주주구성 차트 영역</strong><p>주주 구성 비율을 차트로 표현할 수 있습니다.</p></div>
+            <div class="data-table-wrap">
+              <table class="stock-table">
+                <caption>주주 구성 현황</caption>
+                <thead><tr><th scope="col">주주 구분</th><th scope="col">보유 주식</th><th scope="col">지분율</th></tr></thead>
+                <tbody><tr><th scope="row">최대주주 및 특수관계인</th><td>—</td><td>—</td></tr><tr><th scope="row">기관 및 기타</th><td>—</td><td>—</td></tr><tr><th scope="row">개인주주</th><td>—</td><td>—</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+          <p class="data-footnote">※ 실제 공시 기준일과 수치를 확인한 후 업데이트해 주세요.</p>
+        </section>
+
+        <section class="stock-panel" id="panel-dividend" role="tabpanel" aria-labelledby="tab-dividend" data-panel="dividend" hidden>
+          <div class="panel-title-row"><h3>배당정보</h3><span class="data-caption">결산 기준 자료 입력</span></div>
+          <p class="panel-description">주주 환원 정책 및 연도별 배당 내역을 확인할 수 있습니다.</p>
+          <div class="data-table-wrap">
+            <table class="stock-table dividend-table">
+              <caption>연도별 배당 현황</caption>
+              <thead><tr><th scope="col">구분</th><th scope="col">2025</th><th scope="col">2024</th><th scope="col">2023</th></tr></thead>
+              <tbody><tr><th scope="row">주당 배당금</th><td>—</td><td>—</td><td>—</td></tr><tr><th scope="row">배당수익률</th><td>—</td><td>—</td><td>—</td></tr><tr><th scope="row">배당성향</th><td>—</td><td>—</td><td>—</td></tr></tbody>
+            </table>
+          </div>
+          <p class="data-footnote">※ 배당 관련 수치는 사업보고서 및 공시 자료 확인 후 입력합니다.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top"><a class="footer-logo" href="index.html" aria-label="오리온 메인"><img src="img/logo_orion_w.png" alt="ORION"></a>
+        <nav class="footer-links" aria-label="푸터 메뉴"><a href="#stock-content">회사소개</a><a href="#stock-content">사업 분야</a><a href="#stock-content">윤리경영</a><a href="#stock-content">투자정보</a><a href="#stock-content">뉴스룸</a></nav>
+      </div>
+      <div class="footer-bottom"><div class="footer-info"><p>서울특별시 용산구 백범로 90다길 13</p><p>대표전화 02-710-6000</p><small>© ORION CORP. ALL RIGHTS RESERVED.</small></div><a class="back-top" href="#page-top">TOP <span aria-hidden="true">↑</span></a></div>
+    </div>
+  </footer>
+  <script src="js/stock.js"></script>
+</body>
+</html>
