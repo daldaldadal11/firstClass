@@ -1,0 +1,173 @@
+/* Neo Brutalism skin — login page */
+:root {
+    --neo-yellow: #FFE66D;
+    --neo-pink: #FF8FAB;
+    --neo-blue: #8ED8F8;
+    --neo-green: #B8F28B;
+    --neo-ink: #171717;
+    --neo-paper: #FFFDF5;
+}
+
+body {
+    background-color: var(--neo-yellow);
+    color: var(--neo-ink);
+}
+
+#wrap {
+    background-color: var(--neo-paper);
+    border-left: 3px solid var(--neo-ink);
+    border-right: 3px solid var(--neo-ink);
+}
+
+header {
+    height: 58px;
+    border-bottom: 3px solid var(--neo-ink);
+    background: var(--neo-pink);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.prev_btn {
+    left: 8px;
+    border: 2px solid var(--neo-ink);
+    border-radius: 8px;
+    background-color: var(--neo-paper);
+    box-shadow: 3px 3px 0 var(--neo-ink);
+    transform: translate(-1px, -1px);
+}
+.prev_btn:active {
+    box-shadow: 1px 1px 0 var(--neo-ink);
+    transform: translate(1px, 1px);
+}
+
+main {
+    padding-top: 34px;
+}
+
+.title {
+    margin-bottom: 58px;
+    font-size: 2.8rem;
+    font-weight: 850;
+    line-height: 1.15;
+    letter-spacing: -0.06em;
+}
+.title span:first-child {
+    display: inline-block;
+    width: fit-content;
+    padding: 5px 9px;
+    background: var(--neo-blue);
+    border: 2px solid var(--neo-ink);
+    box-shadow: 4px 4px 0 var(--neo-ink);
+}
+
+.input_group {
+    gap: 14px;
+}
+
+input[type="email"],
+input[type="password"] {
+    height: 54px;
+    border: 2px solid var(--neo-ink);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 4px 4px 0 var(--neo-ink);
+    color: var(--neo-ink);
+    font-weight: 600;
+    transition: box-shadow .15s ease, transform .15s ease;
+}
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: 3px solid var(--neo-blue);
+    outline-offset: 2px;
+    box-shadow: 2px 2px 0 var(--neo-ink);
+    transform: translate(2px, 2px);
+}
+input::placeholder {
+    color: #777;
+    font-weight: 500;
+}
+
+.pw_btn {
+    border-radius: 5px;
+}
+
+.login_btn {
+    height: 50px;
+    margin-top: 24px;
+    border: 2px solid var(--neo-ink);
+    border-radius: 8px;
+    background: var(--neo-green);
+    box-shadow: 5px 5px 0 var(--neo-ink);
+    color: var(--neo-ink);
+    font-weight: 800;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.login_btn::before {
+    color: var(--neo-ink);
+    font-weight: 800;
+}
+.login_btn:hover {
+    background: var(--neo-blue);
+}
+.login_btn:active {
+    box-shadow: 1px 1px 0 var(--neo-ink);
+    transform: translate(4px, 4px);
+}
+
+.login_link {
+    margin-top: 25px;
+}
+.login_link a {
+    color: var(--neo-ink);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+}
+.login_link li + li::before {
+    background-color: var(--neo-ink);
+    opacity: 1;
+}
+
+.sns_login {
+    margin-top: 145px;
+}
+.sns_title {
+    color: var(--neo-ink);
+    font-weight: 750;
+}
+.sns_title::before,
+.sns_title::after {
+    height: 2px;
+    background: var(--neo-ink);
+    opacity: 1;
+}
+.sns_list {
+    gap: 16px;
+    margin-top: 28px;
+}
+.sns_list a {
+    border: 2px solid var(--neo-ink);
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 3px 3px 0 var(--neo-ink);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.sns_list a:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--neo-ink);
+}
+.sns_list li:first-child a { background-color: #FFE66D; }
+.sns_list li:nth-child(2) a { background-color: #B8F28B; }
+.sns_list li:nth-child(3) a { background-color: #fff; }
+.sns_list li:last-child a { background-color: var(--neo-blue); }
+
+@media (min-width: 391px) {
+    #wrap {
+        box-shadow: 8px 8px 0 var(--neo-ink);
+    }
+}
