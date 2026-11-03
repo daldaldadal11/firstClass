@@ -1,0 +1,147 @@
+@charset "UTF-8";
+/* Orion stock subpage — Design.md tokens & components */
+:root { --stock-content-width: 1380px; }
+body { color: var(--text-primary); background: var(--background-default); font-family: "Pretendard Variable", sans-serif; }
+.container { width: min(100% - 48px, var(--stock-content-width)); margin-inline: auto; }
+
+/* Header follows the main page's 80px / 1920px flex structure */
+.stock-header { position: absolute; inset: 0 0 auto; z-index: 20; height: 80px; background: #fff; }
+.stock-header .header-inner { width: 100%; max-width: 1920px; height: 80px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.stock-header .header-logo { flex: 0 0 auto; display: flex; align-items: center; }
+.stock-header .header-logo img { width: 120px; max-height: 48px; object-fit: contain; }
+.stock-header .header-nav { display: flex; align-items: center; justify-content: center; gap: clamp(24px, 4vw, 64px); white-space: nowrap; }
+.stock-header .header-nav a, .stock-header .header-language { color: var(--text-primary); text-decoration: none; font-size: 18px; line-height: 1; font-weight: 500; transition: color .2s ease; }
+.stock-header .header-nav a:hover, .stock-header .header-nav a.is-current { color: #d71920; }
+.stock-header .header-tools { display: flex; align-items: center; gap: 32px; }
+.stock-header .header-language { font-size: 16px; }
+.stock-header .header-menu { width: 24px; height: 24px; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 3px 0; background: transparent; }
+.stock-header .header-menu span { width: 24px; height: 2px; background: #222; display: block; }
+.stock-header a:focus-visible, .stock-header button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+/* Subpage visual: quiet title area, no fabricated photography */
+.stock-visual { position: relative; min-height: 360px; padding: 150px 24px 72px; overflow: hidden; background: var(--soft-gray); }
+.stock-visual-inner { position: relative; z-index: 1; width: min(100%, 1380px); margin: 0 auto; }
+.stock-eyebrow, .section-kicker { margin-bottom: 16px; color: var(--orion); font-size: 15px; font-weight: 600; letter-spacing: .08em; }
+.stock-visual h1 { margin: 0; color: #111; font-size: 48px; font-weight: 700; line-height: 1.25; }
+.stock-visual-copy { margin-top: 18px; color: #666; font-size: 20px; line-height: 1.6; }
+.stock-visual-image { position: absolute; inset: 0; pointer-events: none; /* 추후 이미지 삽입 가능 */ }
+
+.stock-breadcrumb { display: flex; align-items: center; gap: 12px; padding: 24px 0; color: #777; font-size: 14px; border-bottom: 1px solid #eee; }
+.stock-breadcrumb a { transition: color .2s ease; }
+.stock-breadcrumb a:hover { color: var(--orion); }
+.stock-breadcrumb strong { color: #222; font-weight: 500; }
+
+.stock-section { padding: 78px 0 100px; }
+.stock-section-heading { text-align: center; margin-bottom: 42px; }
+.stock-section-heading .section-kicker { margin-bottom: 12px; }
+.stock-section-heading h2 { margin: 0; color: #111; font-size: 38px; line-height: 1.4; font-weight: 700; }
+.stock-section-heading > p:last-child { margin-top: 18px; color: #777; font-size: 18px; line-height: 1.7; }
+
+.stock-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 0 0 44px; padding-bottom: 24px; border-bottom: 1px solid #e5e5e5; }
+.stock-tab { min-height: 46px; padding: 0 26px; border: 1px solid #e8e8e8; border-radius: 999px; background: #fff; color: #333; font-size: 17px; font-weight: 500; transition: color .2s ease, background-color .2s ease, border-color .2s ease; }
+.stock-tab:hover { border-color: #c60020; color: #c60020; }
+.stock-tab.is-active { border-color: #c60020; background: #c60020; color: #fff; }
+.stock-tab:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.stock-panel { animation: panelFade .24s ease both; }
+.stock-panel[hidden] { display: none; }
+@keyframes panelFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.panel-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
+.panel-title-row h3 { color: #111; font-size: 28px; font-weight: 700; line-height: 1.35; }
+.data-caption { color: #777; font-size: 14px; }
+
+.quote-summary { display: grid; grid-template-columns: 1fr 1.2fr; gap: 30px; padding: 36px 40px; border-radius: 10px; background: #f5f5f5; }
+.quote-label { color: #777; font-size: 15px; font-weight: 600; letter-spacing: .04em; }
+.quote-value { display: block; margin-top: 10px; color: #222; font-size: 42px; line-height: 1.2; font-weight: 700; }
+.quote-value small { font-size: 16px; font-weight: 500; }
+.quote-note { margin-top: 12px; color: #777; font-size: 14px; }
+.quote-stats { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; gap: 16px; }
+.quote-stats div { display: flex; flex-direction: column; gap: 12px; padding-left: 20px; border-left: 1px solid #ddd; }
+.quote-stats span { color: #777; font-size: 14px; }
+.quote-stats strong { color: #222; font-size: 22px; font-weight: 600; }
+
+.chart-placeholder { min-height: 360px; margin: 26px 0 38px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px dashed #d5d5d5; border-radius: 8px; background: #fafafa; color: #777; text-align: center; }
+.placeholder-mark { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #ddd; border-radius: 50%; color: #999; font-size: 24px; font-weight: 300; }
+.chart-placeholder strong { color: #666; font-size: 17px; font-weight: 600; }
+.chart-placeholder p { color: #999; font-size: 14px; }
+.data-table-wrap { width: 100%; overflow-x: auto; }
+.stock-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 16px; }
+.stock-table caption { padding: 0 0 16px; color: #222; font-size: 20px; font-weight: 700; text-align: left; }
+.stock-table thead { background: #f5f5f5; }
+.stock-table th, .stock-table td { padding: 19px 20px; border-bottom: 1px solid #e5e5e5; white-space: nowrap; }
+.stock-table thead th { color: #333; font-weight: 600; }
+.stock-table tbody th { color: #333; font-weight: 500; text-align: left; }
+.stock-table tbody td { color: #666; }
+.stock-table tbody tr:hover { background: #fafafa; }
+
+.shareholder-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 30px; align-items: stretch; }
+.share-chart-placeholder { min-height: 320px; margin: 0; }
+.shareholder-layout .stock-table caption { padding-top: 0; }
+.data-footnote { margin-top: 16px; color: #777; font-size: 14px; line-height: 1.6; }
+.panel-description { margin: -4px 0 28px; color: #666; font-size: 18px; line-height: 1.7; }
+
+.site-footer { padding: 0 24px 42px; background: #222; color: #777; }
+.footer-inner { width: min(100%, 1720px); margin: 0 auto; }
+.footer-top { min-height: 94px; display: flex; align-items: center; justify-content: space-between; gap: 30px; border-bottom: 1px solid #444; }
+.footer-logo img { width: 122px; height: auto; }
+.footer-links { display: flex; align-items: center; flex-wrap: wrap; gap: 42px; }
+.footer-links a { color: #f4f4f4; font-size: 16px; font-weight: 500; transition: color .2s ease; }
+.footer-links a:hover { color: #fff; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-top: 28px; }
+.footer-info p { font-size: 14px; line-height: 1.8; }
+.footer-info small { display: block; margin-top: 12px; font-size: 13px; line-height: 1.5; }
+.back-top { display: inline-flex; align-items: center; gap: 12px; color: #f4f4f4; font-size: 14px; }
+
+@media (max-width: 1600px) {
+  .stock-header .header-inner { padding-inline: 40px; }
+  .stock-header .header-tools { gap: 24px; }
+  .footer-links { gap: 28px; }
+}
+@media (max-width: 1024px) {
+  .stock-header, .stock-header .header-inner { height: 72px; }
+  .stock-header .header-inner { padding-inline: 24px; }
+  .stock-header .header-logo img { width: 104px; }
+  .stock-header .header-nav { display: none; }
+  .stock-header .header-tools { gap: 24px; }
+  .stock-visual { min-height: 310px; padding-top: 125px; padding-bottom: 56px; }
+  .stock-visual h1 { font-size: 40px; }
+  .stock-section { padding: 58px 0 72px; }
+  .shareholder-layout { grid-template-columns: 1fr; }
+  .share-chart-placeholder { min-height: 260px; }
+}
+@media (max-width: 700px) {
+  .container { width: calc(100% - 40px); }
+  .stock-visual { min-height: 260px; padding: 110px 20px 40px; }
+  .stock-eyebrow, .section-kicker { font-size: 11px; margin-bottom: 10px; }
+  .stock-visual h1 { font-size: 28px; }
+  .stock-visual-copy { margin-top: 12px; font-size: 14px; }
+  .stock-breadcrumb { gap: 8px; padding: 17px 0; font-size: 12px; }
+  .stock-section { padding: 42px 0 54px; }
+  .stock-section-heading { margin-bottom: 28px; }
+  .stock-section-heading h2 { font-size: 20px; }
+  .stock-section-heading > p:last-child { margin-top: 12px; font-size: 14px; }
+  .stock-tabs { gap: 7px; margin-bottom: 28px; padding-bottom: 18px; }
+  .stock-tab { min-height: 36px; padding: 0 15px; font-size: 13px; }
+  .panel-title-row { align-items: flex-start; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .panel-title-row h3 { font-size: 20px; }
+  .data-caption { font-size: 12px; }
+  .quote-summary { grid-template-columns: 1fr; gap: 22px; padding: 24px 20px; border-radius: 7px; }
+  .quote-value { font-size: 32px; }
+  .quote-stats { gap: 8px; }
+  .quote-stats div { padding-left: 10px; gap: 8px; }
+  .quote-stats span { font-size: 11px; }
+  .quote-stats strong { font-size: 16px; }
+  .chart-placeholder { min-height: 240px; margin: 18px 0 28px; }
+  .stock-table { font-size: 13px; }
+  .stock-table caption { font-size: 16px; }
+  .stock-table th, .stock-table td { padding: 14px 12px; }
+  .panel-description { font-size: 14px; }
+  .site-footer { padding: 0 20px 28px; }
+  .footer-top { align-items: flex-start; flex-direction: column; padding: 26px 0; gap: 22px; }
+  .footer-logo img { width: 100px; }
+  .footer-links { gap: 14px 22px; }
+  .footer-links a { font-size: 13px; }
+  .footer-bottom { align-items: flex-start; flex-direction: column; padding-top: 22px; }
+  .footer-info p { font-size: 12px; }
+  .footer-info small { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .stock-panel { animation: none; } }
