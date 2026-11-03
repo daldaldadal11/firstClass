@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../font/css/pretendardvariable.css">
+  <link rel="stylesheet" href="design-styles.css">
+  <title>Design Style Lab | 20 Styles</title>
+</head>
+<body data-theme="minimal">
+  <div class="lab">
+    <header class="lab-header">
+      <div>
+        <p class="eyebrow">SUBWAY · UI STYLE EXPERIMENT</p>
+        <h1>Design Style Lab<span>20</span></h1>
+        <p class="intro">하나의 로그인 화면으로 20가지 디자인 스타일을 비교해 보세요.</p>
+      </div>
+      <label class="select-wrap">
+        <span>DESIGN STYLE</span>
+        <select id="styleSelect" aria-label="디자인 스타일 선택">
+          <option value="minimal">01 · Minimalism</option>
+          <option value="editorial">02 · Editorial</option>
+          <option value="swiss">03 · Swiss Style</option>
+          <option value="bento">04 · Bento Grid</option>
+          <option value="glass">05 · Glassmorphism</option>
+          <option value="clay">06 · Claymorphism</option>
+          <option value="neo">07 · Neo Brutalism</option>
+          <option value="maximal">08 · Maximalism</option>
+          <option value="kinetic">09 · Kinetic Typography</option>
+          <option value="grain">10 · Grainy Gradient</option>
+          <option value="chrome">11 · Y2K Chrome</option>
+          <option value="pixel">12 · Pixel Art</option>
+          <option value="memphis">13 · Memphis</option>
+          <option value="bauhaus">14 · Bauhaus</option>
+          <option value="pop">15 · Pop Art</option>
+          <option value="collage">16 · Collage</option>
+          <option value="risograph">17 · Risograph</option>
+          <option value="deco">18 · Art Deco</option>
+          <option value="cyber">19 · Cyberpunk</option>
+          <option value="iso">20 · Isometric</option>
+        </select>
+      </label>
+    </header>
+
+    <main class="workspace">
+      <section class="style-info">
+        <p class="style-number" id="styleNumber">STYLE 01 / 20</p>
+        <h2 id="styleName">Minimalism</h2>
+        <p id="styleDesc">필요없는 건 다 빼고 여백과 타이포만 남기는 스타일</p>
+        <div class="chips" id="styleTags"><span>여백</span><span>무채색</span><span>간결함</span></div>
+        <p class="hint">위 셀렉트 메뉴에서 다른 스타일을 선택해 보세요.</p>
+      </section>
+
+      <section class="preview-area" aria-live="polite">
+        <div class="decor decor-a"></div><div class="decor decor-b"></div>
+        <article class="preview-card">
+          <div class="preview-top"><span class="brand-mark">S</span><span class="top-label">SUBWAY MEMBERSHIP</span></div>
+          <div class="preview-content">
+            <p class="mini-label">WELCOME BACK</p>
+            <h3 class="preview-title"><span>아이디로</span><br>로그인해주세요.</h3>
+            <form class="mock-form">
+              <label class="mock-field"><span>아이디(이메일)</span><input type="email" placeholder="name@example.com"></label>
+              <label class="mock-field"><span>비밀번호</span><input type="password" placeholder="비밀번호를 입력해주세요."></label>
+              <button type="button" class="mock-button">로그인 <span>↗</span></button>
+            </form>
+            <div class="mock-links"><span>아이디 찾기</span><span>비밀번호 재설정</span><span>회원가입</span></div>
+            <div class="mock-divider"><span>SNS로 간편하게 로그인</span></div>
+            <div class="mock-social"><span>K</span><span>N</span><span>●</span><span>S</span></div>
+          </div>
+          <footer class="preview-footer">STYLE PREVIEW <span>01 — 20</span></footer>
+        </article>
+      </section>
+    </main>
+    <footer class="lab-footer">DESIGN STYLE COLLECTION · 20 VISUAL DIRECTIONS</footer>
+  </div>
+  <script src="design-styles.js"></script>
+</body>
+</html>
