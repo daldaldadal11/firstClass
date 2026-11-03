@@ -166,7 +166,7 @@ body[data-theme="editorial"]{background:#e9e4da}
 [data-theme="risograph"] .brand-mark{background:#2b8fc2}
 /* 18 Art Deco */
 [data-theme="deco"]{background:#171717;color:#e9c875}
-[data-theme="deco"] .lab-header,.[data-theme="deco"] .lab-footer{border-color:#8e6b2e}
+[data-theme="deco"] [data-theme="deco"] .lab-header,[data-theme="deco"] .lab-footer{border-color:#8e6b2e}
 [data-theme="deco"] .preview-card{background:#171717;color:#e9c875;border:1px solid #c7a65b;outline:1px solid #c7a65b;outline-offset:6px}
 [data-theme="deco"] .preview-top,[data-theme="deco"] .preview-footer{border-color:#8e6b2e}
 [data-theme="deco"] .brand-mark{background:#c7a65b;color:#171717;border-radius:0}
