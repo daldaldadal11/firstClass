@@ -825,14 +825,20 @@
             z-index: 1;
         }
         .hero-sec.circle-pinned {
-            position: fixed;
-            inset: 0 0 auto 0;
+            position: sticky;
+            top: 0;
             width: 100%;
             height: 100vh;
             z-index: 1;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        .new-content-inner {
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         body.circle-transition-active {
-            overflow-x: hidden;
+            overflow-x: clip;
         }
         .new-content-sec {
             position: relative;
