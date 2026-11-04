@@ -1209,21 +1209,28 @@
 
     <script>
 
-        // Scroll progress expands the centered black circle while this section stays pinned.
+        // Expand the brand reveal, then keep the completed image on screen for five seconds.
         (function initBlackCircleScroll() {
             const section = document.querySelector('.new-content-sec');
             const inner = section && section.querySelector('.new-content-inner');
             if (!section || !inner) return;
-            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reducedMotion) {
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 section.classList.add('is-black');
                 return;
             }
-            let ticking = false;
+
             let targetProgress = 0;
             let animatedProgress = 0;
             let animationFrame = 0;
             let lastFrameTime = 0;
+            let holdPending = false;
+            let isHolding = false;
+            let holdTimer = 0;
+
+            const brandStart = 0.46;
+            const holdProgress = 0.88;
+            const finalLogoScale = 15.5;
 
             function readScrollProgress() {
                 const rect = section.getBoundingClientRect();
@@ -1231,12 +1238,47 @@
                 return Math.max(0, Math.min(1, -rect.top / travel));
             }
 
+            function preventHoldScroll(event) {
+                if (isHolding && event.cancelable) event.preventDefault();
+            }
+
+            function preventHoldKeys(event) {
+                if (!isHolding) return;
+                if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) {
+                    event.preventDefault();
+                }
+            }
+
+            function releaseScrollHold() {
+                isHolding = false;
+                holdPending = false;
+                window.removeEventListener('wheel', preventHoldScroll);
+                window.removeEventListener('touchmove', preventHoldScroll);
+                window.removeEventListener('keydown', preventHoldKeys);
+                targetProgress = readScrollProgress();
+                if (!animationFrame) animationFrame = requestAnimationFrame(animateCircle);
+            }
+
+            function beginScrollHold() {
+                if (holdPending || isHolding) return;
+                holdPending = true;
+                targetProgress = holdProgress;
+
+                const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
+                const sectionDocumentTop = section.getBoundingClientRect().top + window.scrollY;
+                const holdScrollY = sectionDocumentTop + travel * holdProgress;
+
+                window.addEventListener('wheel', preventHoldScroll, { passive: false });
+                window.addEventListener('touchmove', preventHoldScroll, { passive: false });
+                window.addEventListener('keydown', preventHoldKeys);
+                window.scrollTo({ top: holdScrollY, behavior: 'auto' });
+            }
+
             function animateCircle(time) {
                 animationFrame = 0;
                 const delta = lastFrameTime ? Math.min((time - lastFrameTime) / 1000, 0.05) : 0;
                 lastFrameTime = time;
 
-                // Smoothly catch up to scroll progress; continue easing after scrolling stops.
                 const ease = 1 - Math.exp(-delta * 7.5);
                 animatedProgress += (targetProgress - animatedProgress) * ease;
                 if (Math.abs(targetProgress - animatedProgress) < 0.0008) {
@@ -1248,19 +1290,26 @@
                 if (hero) hero.classList.toggle('circle-pinned', pinHero);
                 document.body.classList.toggle('circle-transition-active', pinHero);
 
-                // Circle covers the viewport in the first half; the logo/image reveal follows it.
                 const circleProgress = Math.min(animatedProgress / 0.52, 1);
                 inner.style.setProperty('--circle-scale', circleProgress.toFixed(4));
                 section.classList.toggle('is-black', animatedProgress >= 0.52);
 
                 const brand = section.querySelector('.brand-transition');
                 const orionImage = section.querySelector('.brand-transition-orion');
-                const brandStart = 0.46;
-                const reveal = Math.max(0, Math.min(1, (animatedProgress - brandStart) / (1 - brandStart)));
+                const reveal = Math.max(0, Math.min(1, (animatedProgress - brandStart) / (holdProgress - brandStart)));
                 section.classList.toggle('show-brand', animatedProgress >= brandStart);
                 if (brand && orionImage) {
-                    // Animate only the promoted image layer to keep scroll rendering smooth.
-                    orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + (1 + reveal * 7.5).toFixed(3) + ')';
+                    const logoScale = 1 + reveal * (finalLogoScale - 1);
+                    orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + logoScale.toFixed(3) + ')';
+                }
+
+                // Begin the timed hold only after the logo has reached its final size.
+                if (holdPending && !isHolding && animatedProgress >= holdProgress) {
+                    isHolding = true;
+                    holdTimer = window.setTimeout(function () {
+                        window.clearTimeout(holdTimer);
+                        releaseScrollHold();
+                    }, 5000);
                 }
 
                 if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
@@ -1271,7 +1320,18 @@
             }
 
             function updateCircle() {
-                targetProgress = readScrollProgress();
+                if (isHolding || holdPending) {
+                    targetProgress = holdProgress;
+                    return;
+                }
+
+                const progress = readScrollProgress();
+                if (progress >= holdProgress) {
+                    beginScrollHold();
+                } else {
+                    targetProgress = progress;
+                }
+
                 if (!animationFrame) animationFrame = requestAnimationFrame(animateCircle);
             }
 
