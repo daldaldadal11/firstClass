@@ -864,13 +864,12 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 48px;
-            height: 48px;
+            width: 300vmax;
+            height: 300vmax;
             border-radius: 50%;
             background: #000;
-            transform: translate(-50%, -50%) scale(var(--circle-scale, 1));
+            transform: translate(-50%, -50%) scale(var(--circle-scale, 0));
             transform-origin: center;
-            will-change: transform;
             z-index: 0;
         }
         .new-content-sec.is-black .new-content-inner {
@@ -1210,9 +1209,7 @@
                 if (hero) hero.classList.toggle('circle-pinned', pinHero);
                 document.body.classList.toggle('circle-transition-active', pinHero);
 
-                const viewportDiagonal = Math.hypot(window.innerWidth, window.innerHeight);
-                const scale = (viewportDiagonal * 1.7 / 48) * animatedProgress;
-                inner.style.setProperty('--circle-scale', scale.toFixed(3));
+                inner.style.setProperty('--circle-scale', animatedProgress.toFixed(4));
                 section.classList.toggle('is-black', animatedProgress >= 0.985);
 
                 if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
