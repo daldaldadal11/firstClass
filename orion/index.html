@@ -853,7 +853,7 @@
             background: transparent;
         }
         .new-content-inner {
-            position: sticky;
+            position: relative;
             top: 0;
             width: 100%;
             height: 100vh;
@@ -1259,6 +1259,8 @@
                     trigger: section,
                     start: 'top top',
                     end: 'bottom bottom',
+                    pin: inner,
+                    pinSpacing: false,
                     scrub: 0.8,
                     invalidateOnRefresh: true
                 }
