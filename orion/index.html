@@ -861,6 +861,26 @@
             background: transparent;
             isolation: isolate;
         }
+        .transition-title {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            color: #ededed;
+            font-size: clamp(150px, 20vw, 380px);
+            font-weight: 700;
+            letter-spacing: -0.055em;
+            line-height: .82;
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+        .brand-transition { z-index: 2; }
+        @media (max-width: 768px) {
+            .transition-title { font-size: 22vw; }
+        }
         .brand-transition {
             position: absolute;
             inset: 0;
@@ -1048,7 +1068,7 @@
             <!-- 새 섹션 자리: 히어로와 윤리경영 사이 -->
             <section class="new-content-sec" aria-label="스크롤 원형 및 이미지 전환">
                 <div class="new-content-inner">
-                    <div class="brand-transition" aria-hidden="true">
+                    <div class="transition-title" aria-hidden="true">Orion</div>\n                    <div class="brand-transition" aria-hidden="true">
                         <div class="brand-transition-color"></div>
                         <img class="brand-transition-base" src="img/bborioncom.jpg" alt="">
                         <img class="brand-transition-orion" src="img/or.png" alt="">
