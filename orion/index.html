@@ -867,7 +867,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1;
+            z-index: 0;
             color: #ededed;
             font-size: clamp(150px, 20vw, 380px);
             font-weight: 700;
@@ -934,7 +934,7 @@
             background: #000;
             transform: translate(-50%, -50%) scale(var(--circle-scale, 0));
             transform-origin: center;
-            z-index: 0;
+            z-index: 1;
         }
         .new-content-sec.is-black .new-content-inner {
             background: #000;
@@ -1255,6 +1255,8 @@
             function render(progress) {
                 const circleProgress = Math.min(progress / 0.52, 1);
                 inner.style.setProperty('--circle-scale', circleProgress.toFixed(4));
+                const transitionTitle = section.querySelector('.transition-title');
+                if (transitionTitle) transitionTitle.style.opacity = (1 - circleProgress).toFixed(3);
                 section.classList.toggle('is-black', progress >= 0.52);
 
                 const brand = section.querySelector('.brand-transition');
