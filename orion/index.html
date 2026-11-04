@@ -1264,8 +1264,7 @@
                 if (brand && orionImage) {
                     const logoScale = 1 + reveal * (finalLogoScale - 1);
                     orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + logoScale.toFixed(3) + ')';
-                    orionImage.style.opacity = reveal.toFixed(3);
-                }
+                                  }
 
                 if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
                     animationFrame = requestAnimationFrame(animateCircle);
