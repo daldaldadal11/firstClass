@@ -1247,7 +1247,7 @@
                 const zoomProgress = Math.max(0, Math.min(1, (reveal - hold) / (1 - hold)));
                 const logoScale = 1 + zoomProgress * (finalLogoScale - 1);
                 orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + logoScale.toFixed(3) + ')';
-                const handoff = Math.max(0, Math.min(1, (reveal - hold) / 0.18));
+                const handoff = Math.max(0, Math.min(1, (reveal - 0.82) / 0.18));
                 const colorLayer = brand.querySelector('.brand-transition-color');
                 const baseImage = brand.querySelector('.brand-transition-base');
                 if (colorLayer) colorLayer.style.opacity = (1 - handoff).toFixed(3);
