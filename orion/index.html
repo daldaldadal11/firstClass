@@ -864,7 +864,7 @@
             inset: 0;
             z-index: 1;
             overflow: hidden;
-            background: #000;
+            background: #D62300;
             opacity: 0;
             transition: opacity 180ms ease-out;
             will-change: opacity;
@@ -875,12 +875,18 @@
             display: block;
             max-width: none;
         }
+        .brand-transition-color {
+            position: absolute;
+            inset: 0;
+            background: #D62300;
+            opacity: 1;
+        }
         .brand-transition-base {
             inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 1;
+            opacity: 0;
         }
         .brand-transition-orion {
             left: 50%;
@@ -1041,6 +1047,7 @@
             <section class="new-content-sec" aria-label="스크롤 원형 및 이미지 전환">
                 <div class="new-content-inner">
                     <div class="brand-transition" aria-hidden="true">
+                        <div class="brand-transition-color"></div>
                         <img class="brand-transition-base" src="img/bborioncom.jpg" alt="">
                         <img class="brand-transition-orion" src="img/or.png" alt="">
                     </div>
@@ -1262,9 +1269,17 @@
                 const reveal = Math.max(0, Math.min(1, (animatedProgress - brandStart) / (revealEnd - brandStart)));
                 section.classList.toggle('show-brand', animatedProgress >= brandStart);
                 if (brand && orionImage) {
-                    const logoScale = 1 + reveal * (finalLogoScale - 1);
+                    // 등장 직후 0.1 진행 구간은 원래 크기로 유지한 뒤 확대
+                    const hold = 0.1;
+                    const zoomProgress = Math.max(0, Math.min(1, (reveal - hold) / (1 - hold)));
+                    const logoScale = 1 + zoomProgress * (finalLogoScale - 1);
                     orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + logoScale.toFixed(3) + ')';
-                                  }
+                    const handoff = Math.max(0, Math.min(1, (reveal - hold) / 0.18));
+                    const colorLayer = brand.querySelector('.brand-transition-color');
+                    const baseImage = brand.querySelector('.brand-transition-base');
+                    if (colorLayer) colorLayer.style.opacity = (1 - handoff).toFixed(3);
+                    if (baseImage) baseImage.style.opacity = handoff.toFixed(3);
+                }
 
                 if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
                     animationFrame = requestAnimationFrame(animateCircle);
