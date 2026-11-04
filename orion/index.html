@@ -900,8 +900,8 @@
         .brand-transition-color {
             position: absolute;
             inset: 0;
-            background: #E60020;
-            opacity: 1;
+            background: transparent;
+            opacity: 0;
         }
         .brand-transition-base {
             inset: 0;
@@ -1272,7 +1272,7 @@
                 const handoff = Math.max(0, Math.min(1, (reveal - 0.82) / 0.18));
                 const colorLayer = brand.querySelector('.brand-transition-color');
                 const baseImage = brand.querySelector('.brand-transition-base');
-                if (colorLayer) colorLayer.style.opacity = (1 - handoff).toFixed(3);
+                if (colorLayer) colorLayer.style.opacity = '0';
                 if (baseImage) baseImage.style.opacity = handoff.toFixed(3);
             }
 
