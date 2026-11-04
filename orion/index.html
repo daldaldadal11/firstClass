@@ -818,6 +818,22 @@
             }
         }
 
+        /* Placeholder section between hero and ethics */
+        .new-content-sec {
+            width: 100%;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            background: #fff;
+        }
+        .new-content-inner {
+            width: min(100% - 48px, 1380px);
+            min-height: 500px;
+            margin: 0 auto;
+        }
+
     </style>
 </head>
 <body>
@@ -936,6 +952,10 @@
                         </div>
                     </div>
                 </div>
+            </section>
+            <!-- 새 섹션 자리: 히어로와 윤리경영 사이 -->
+            <section class="new-content-sec" aria-label="새 콘텐츠 섹션">
+                <div class="new-content-inner"></div>
             </section>
             <section class="ethics-sec" aria-labelledby="ethics-heading">
                 <div class="ethics-inner">
