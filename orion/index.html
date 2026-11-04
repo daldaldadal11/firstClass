@@ -1040,7 +1040,7 @@
                 <div class="new-content-inner">
                     <div class="brand-transition" aria-hidden="true">
                         <img class="brand-transition-base" src="img/bborioncom.jpg" alt="">
-                        <img class="brand-transition-orion" src="img/ori.png" alt="">
+                        <img class="brand-transition-orion" src="img/or.png" alt="">
                     </div>
                 </div>
             </section>
@@ -1224,54 +1224,15 @@
             let animatedProgress = 0;
             let animationFrame = 0;
             let lastFrameTime = 0;
-            let holdPending = false;
-            let isHolding = false;
-            let holdTimer = 0;
 
             const brandStart = 0.52;
-            const holdProgress = 0.88;
+            const revealEnd = 0.88;
             const finalLogoScale = 15.5;
 
             function readScrollProgress() {
                 const rect = section.getBoundingClientRect();
                 const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
                 return Math.max(0, Math.min(1, -rect.top / travel));
-            }
-
-            function preventHoldScroll(event) {
-                if (isHolding && event.cancelable) event.preventDefault();
-            }
-
-            function preventHoldKeys(event) {
-                if (!isHolding) return;
-                if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) {
-                    event.preventDefault();
-                }
-            }
-
-            function releaseScrollHold() {
-                isHolding = false;
-                holdPending = false;
-                window.removeEventListener('wheel', preventHoldScroll);
-                window.removeEventListener('touchmove', preventHoldScroll);
-                window.removeEventListener('keydown', preventHoldKeys);
-                targetProgress = readScrollProgress();
-                if (!animationFrame) animationFrame = requestAnimationFrame(animateCircle);
-            }
-
-            function beginScrollHold() {
-                if (holdPending || isHolding) return;
-                holdPending = true;
-                targetProgress = holdProgress;
-
-                const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-                const sectionDocumentTop = section.getBoundingClientRect().top + window.scrollY;
-                const holdScrollY = sectionDocumentTop + travel * holdProgress;
-
-                window.addEventListener('wheel', preventHoldScroll, { passive: false });
-                window.addEventListener('touchmove', preventHoldScroll, { passive: false });
-                window.addEventListener('keydown', preventHoldKeys);
-                window.scrollTo({ top: holdScrollY, behavior: 'auto' });
             }
 
             function animateCircle(time) {
@@ -1296,20 +1257,11 @@
 
                 const brand = section.querySelector('.brand-transition');
                 const orionImage = section.querySelector('.brand-transition-orion');
-                const reveal = Math.max(0, Math.min(1, (animatedProgress - brandStart) / (holdProgress - brandStart)));
+                const reveal = Math.max(0, Math.min(1, (animatedProgress - brandStart) / (revealEnd - brandStart)));
                 section.classList.toggle('show-brand', animatedProgress >= brandStart);
                 if (brand && orionImage) {
                     const logoScale = 1 + reveal * (finalLogoScale - 1);
                     orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + logoScale.toFixed(3) + ')';
-                }
-
-                // Begin the timed hold only after the logo has reached its final size.
-                if (holdPending && !isHolding && animatedProgress >= holdProgress) {
-                    isHolding = true;
-                    holdTimer = window.setTimeout(function () {
-                        window.clearTimeout(holdTimer);
-                        releaseScrollHold();
-                    }, 5000);
                 }
 
                 if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
@@ -1320,18 +1272,7 @@
             }
 
             function updateCircle() {
-                if (isHolding || holdPending) {
-                    targetProgress = holdProgress;
-                    return;
-                }
-
-                const progress = readScrollProgress();
-                if (progress >= holdProgress) {
-                    beginScrollHold();
-                } else {
-                    targetProgress = progress;
-                }
-
+                targetProgress = readScrollProgress();
                 if (!animationFrame) animationFrame = requestAnimationFrame(animateCircle);
             }
 
