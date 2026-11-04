@@ -888,7 +888,7 @@
             overflow: hidden;
             background: transparent;
             opacity: 0;
-            transition: opacity 180ms ease-out;
+            transition: none;
             will-change: opacity;
             pointer-events: none;
         }
@@ -1247,7 +1247,7 @@
             if (!section || !inner || !window.gsap || !window.ScrollTrigger) return;
             gsap.registerPlugin(ScrollTrigger);
 
-            const brandStart = 0.20;
+            const brandStart = 0.52;
             const revealEnd = 0.88;
             const finalLogoScale = 15.5;
             const state = { progress: 0 };
