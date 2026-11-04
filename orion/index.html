@@ -883,7 +883,7 @@
         .brand-transition-orion {
             left: 50%;
             top: 50%;
-            width: 100vw;
+            width: 92vw;
             height: auto;
             object-fit: contain;
             transform: translate(-50%, -50%) scale(1);
@@ -1254,8 +1254,9 @@
                 const brand = section.querySelector('.brand-transition');
                 const baseImage = section.querySelector('.brand-transition-base');
                 const orionImage = section.querySelector('.brand-transition-orion');
-                const reveal = Math.max(0, Math.min(1, (animatedProgress - 0.52) / 0.48));
-                section.classList.toggle('show-brand', animatedProgress >= 0.52);
+                const brandStart = 0.46;
+                const reveal = Math.max(0, Math.min(1, (animatedProgress - brandStart) / (1 - brandStart)));
+                section.classList.toggle('show-brand', animatedProgress >= brandStart);
                 if (brand && baseImage && orionImage) {
                     // Keep the background image behind the transparent center of the logo.
                     baseImage.style.opacity = '1';
