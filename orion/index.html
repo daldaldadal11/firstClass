@@ -859,6 +859,36 @@
             background: transparent;
             isolation: isolate;
         }
+        .brand-transition {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .brand-transition img {
+            position: absolute;
+            display: block;
+            max-width: none;
+        }
+        .brand-transition-base {
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+        }
+        .brand-transition-orion {
+            left: 50%;
+            top: 50%;
+            width: min(62vw, 760px);
+            height: auto;
+            transform: translate(-50%, -50%) scale(.28);
+            transform-origin: center;
+            opacity: 1;
+        }
+        .new-content-sec.show-brand .brand-transition { opacity: 1; }
         .new-content-inner::before {
             content: "";
             position: absolute;
@@ -1002,8 +1032,13 @@
                 </div>
             </section>
             <!-- 새 섹션 자리: 히어로와 윤리경영 사이 -->
-            <section class="new-content-sec" aria-label="스크롤 원형 전환">
-                <div class="new-content-inner" aria-hidden="true"></div>
+            <section class="new-content-sec" aria-label="스크롤 원형 및 이미지 전환">
+                <div class="new-content-inner">
+                    <div class="brand-transition" aria-hidden="true">
+                        <img class="brand-transition-base" src="img/bborioncom.jpg" alt="">
+                        <img class="brand-transition-orion" src="img/borion.png" alt="">
+                    </div>
+                </div>
             </section>
             <section class="ethics-sec" aria-labelledby="ethics-heading">
                 <div class="ethics-inner">
@@ -1209,8 +1244,21 @@
                 if (hero) hero.classList.toggle('circle-pinned', pinHero);
                 document.body.classList.toggle('circle-transition-active', pinHero);
 
-                inner.style.setProperty('--circle-scale', animatedProgress.toFixed(4));
-                section.classList.toggle('is-black', animatedProgress >= 0.985);
+                // Circle covers the viewport in the first half; the logo/image reveal follows it.
+                const circleProgress = Math.min(animatedProgress / 0.52, 1);
+                inner.style.setProperty('--circle-scale', circleProgress.toFixed(4));
+                section.classList.toggle('is-black', animatedProgress >= 0.52);
+
+                const brand = section.querySelector('.brand-transition');
+                const baseImage = section.querySelector('.brand-transition-base');
+                const orionImage = section.querySelector('.brand-transition-orion');
+                const reveal = Math.max(0, Math.min(1, (animatedProgress - 0.52) / 0.48));
+                section.classList.toggle('show-brand', animatedProgress >= 0.52);
+                if (brand && baseImage && orionImage) {
+                    baseImage.style.opacity = reveal.toFixed(3);
+                    orionImage.style.transform = 'translate(-50%, -50%) scale(' + (0.28 + reveal * 5.2).toFixed(3) + ')';
+                    orionImage.style.opacity = (1 - reveal * 0.18).toFixed(3);
+                }
 
                 if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
                     animationFrame = requestAnimationFrame(animateCircle);
