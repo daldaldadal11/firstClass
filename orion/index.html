@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../npm/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="../font/css/pretendardvariable.css">
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="../npm/swiper/swiper-bundle.min.js"></script>
     <style>
         /* Company intro overlay: Figma-style dissolve, ease-in, 300ms. */
@@ -845,7 +847,7 @@
             position: relative;
             height: 320vh;
             width: 100%;
-            margin-top: -100vh;
+            margin-top: 0;
             z-index: 2;
             pointer-events: none;
             background: transparent;
@@ -1218,92 +1220,56 @@
 
     <script>
 
-        // Expand the brand reveal, then keep the completed image on screen for five seconds.
+        // Hero가 끝난 다음 별도 스크롤 구간에서 GSAP으로 원형/브랜드 전환 진행
         (function initBlackCircleScroll() {
             const section = document.querySelector('.new-content-sec');
             const inner = section && section.querySelector('.new-content-inner');
-            if (!section || !inner) return;
-
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                section.classList.add('is-black');
-                return;
-            }
-
-            let targetProgress = 0;
-            let animatedProgress = 0;
-            let animationFrame = 0;
-            let lastFrameTime = 0;
+            if (!section || !inner || !window.gsap || !window.ScrollTrigger) return;
+            gsap.registerPlugin(ScrollTrigger);
 
             const brandStart = 0.20;
             const revealEnd = 0.88;
             const finalLogoScale = 15.5;
+            const state = { progress: 0 };
 
-            function readScrollProgress() {
-                const rect = section.getBoundingClientRect();
-                const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-                return Math.max(0, Math.min(1, -rect.top / travel));
-            }
-
-            function animateCircle(time) {
-                animationFrame = 0;
-                const delta = lastFrameTime ? Math.min((time - lastFrameTime) / 1000, 0.05) : 0;
-                lastFrameTime = time;
-
-                const ease = 1 - Math.exp(-delta * 7.5);
-                animatedProgress += (targetProgress - animatedProgress) * ease;
-                if (Math.abs(targetProgress - animatedProgress) < 0.0008) {
-                    animatedProgress = targetProgress;
-                }
-
-                const hero = document.querySelector('.hero-sec');
-                const pinHero = targetProgress > 0 && targetProgress < 1;
-                if (hero) hero.classList.toggle('circle-pinned', pinHero);
-                document.body.classList.toggle('circle-transition-active', pinHero);
-
-                const circleProgress = Math.min(animatedProgress / 0.52, 1);
+            function render(progress) {
+                const circleProgress = Math.min(progress / 0.52, 1);
                 inner.style.setProperty('--circle-scale', circleProgress.toFixed(4));
-                section.classList.toggle('is-black', animatedProgress >= 0.52);
+                section.classList.toggle('is-black', progress >= 0.52);
 
                 const brand = section.querySelector('.brand-transition');
                 const orionImage = section.querySelector('.brand-transition-orion');
-                const reveal = Math.max(0, Math.min(1, (animatedProgress - brandStart) / (revealEnd - brandStart)));
-                section.classList.toggle('show-brand', animatedProgress >= brandStart);
-                if (brand && orionImage) {
-                    // 등장 직후 0.1 진행 구간은 원래 크기로 유지한 뒤 확대
-                    const hold = 0.1;
-                    const zoomProgress = Math.max(0, Math.min(1, (reveal - hold) / (1 - hold)));
-                    const logoScale = 1 + zoomProgress * (finalLogoScale - 1);
-                    orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + logoScale.toFixed(3) + ')';
-                    const handoff = Math.max(0, Math.min(1, (reveal - hold) / 0.18));
-                    const colorLayer = brand.querySelector('.brand-transition-color');
-                    const baseImage = brand.querySelector('.brand-transition-base');
-                    if (colorLayer) colorLayer.style.opacity = (1 - handoff).toFixed(3);
-                    if (baseImage) baseImage.style.opacity = handoff.toFixed(3);
+                const reveal = Math.max(0, Math.min(1, (progress - brandStart) / (revealEnd - brandStart)));
+                section.classList.toggle('show-brand', progress >= brandStart);
+                if (!brand || !orionImage) return;
+
+                const hold = 0.1;
+                const zoomProgress = Math.max(0, Math.min(1, (reveal - hold) / (1 - hold)));
+                const logoScale = 1 + zoomProgress * (finalLogoScale - 1);
+                orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + logoScale.toFixed(3) + ')';
+                const handoff = Math.max(0, Math.min(1, (reveal - hold) / 0.18));
+                const colorLayer = brand.querySelector('.brand-transition-color');
+                const baseImage = brand.querySelector('.brand-transition-base');
+                if (colorLayer) colorLayer.style.opacity = (1 - handoff).toFixed(3);
+                if (baseImage) baseImage.style.opacity = handoff.toFixed(3);
+            }
+
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 0.8,
+                    invalidateOnRefresh: true
                 }
+            }).to(state, {
+                progress: 1,
+                ease: 'none',
+                onUpdate: () => render(state.progress)
+            });
 
-                if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
-                    animationFrame = requestAnimationFrame(animateCircle);
-                } else {
-                    lastFrameTime = 0;
-                }
-            }
-
-            function handleTransitionWheel(event) {
-                const progress = readScrollProgress();
-                if (progress <= 0 || progress >= 1 || event.ctrlKey || event.deltaY === 0) return;
-                if (event.cancelable) event.preventDefault();
-                window.scrollBy({ top: event.deltaY * 0.25, left: 0, behavior: 'auto' });
-            }
-
-            function updateCircle() {
-                targetProgress = readScrollProgress();
-                if (!animationFrame) animationFrame = requestAnimationFrame(animateCircle);
-            }
-
-            window.addEventListener('wheel', handleTransitionWheel, { passive: false });
-            window.addEventListener('scroll', updateCircle, { passive: true });
-            window.addEventListener('resize', updateCircle);
-            updateCircle();
+            render(0);
+            ScrollTrigger.refresh();
         })();
 
         const footerFamily = document.querySelector('.footer-family');
