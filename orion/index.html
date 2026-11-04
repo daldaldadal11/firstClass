@@ -886,8 +886,10 @@
             width: 92vw;
             height: auto;
             object-fit: contain;
-            transform: translate(-50%, -50%) scale(1);
+            transform: translate3d(-50%, -50%, 0) scale(1);
             transform-origin: center;
+            backface-visibility: hidden;
+            will-change: transform;
             opacity: 1;
         }
         .new-content-sec.show-brand .brand-transition { opacity: 1; }
@@ -1252,17 +1254,13 @@
                 section.classList.toggle('is-black', animatedProgress >= 0.52);
 
                 const brand = section.querySelector('.brand-transition');
-                const baseImage = section.querySelector('.brand-transition-base');
                 const orionImage = section.querySelector('.brand-transition-orion');
                 const brandStart = 0.46;
                 const reveal = Math.max(0, Math.min(1, (animatedProgress - brandStart) / (1 - brandStart)));
                 section.classList.toggle('show-brand', animatedProgress >= brandStart);
-                if (brand && baseImage && orionImage) {
-                    // Keep the background image behind the transparent center of the logo.
-                    baseImage.style.opacity = '1';
-                    // The logo starts viewport-sized, then zooms in as the scroll continues.
-                    orionImage.style.transform = 'translate(-50%, -50%) scale(' + (1 + reveal * 7.5).toFixed(3) + ')';
-                    orionImage.style.opacity = '1';
+                if (brand && orionImage) {
+                    // Animate only the promoted image layer to keep scroll rendering smooth.
+                    orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + (1 + reveal * 7.5).toFixed(3) + ')';
                 }
 
                 if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
