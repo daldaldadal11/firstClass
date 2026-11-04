@@ -878,14 +878,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0;
+            opacity: 1;
         }
         .brand-transition-orion {
             left: 50%;
             top: 50%;
-            width: min(62vw, 760px);
-            height: auto;
-            transform: translate(-50%, -50%) scale(.28);
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            transform: translate(-50%, -50%) scale(1);
             transform-origin: center;
             opacity: 1;
         }
@@ -1256,9 +1257,11 @@
                 const reveal = Math.max(0, Math.min(1, (animatedProgress - 0.52) / 0.48));
                 section.classList.toggle('show-brand', animatedProgress >= 0.52);
                 if (brand && baseImage && orionImage) {
-                    baseImage.style.opacity = reveal.toFixed(3);
-                    orionImage.style.transform = 'translate(-50%, -50%) scale(' + (0.28 + reveal * 5.2).toFixed(3) + ')';
-                    orionImage.style.opacity = (1 - reveal * 0.18).toFixed(3);
+                    // Keep the background image behind the transparent center of the logo.
+                    baseImage.style.opacity = '1';
+                    // The logo starts viewport-sized, then zooms in as the scroll continues.
+                    orionImage.style.transform = 'translate(-50%, -50%) scale(' + (1 + reveal * 2.4).toFixed(3) + ')';
+                    orionImage.style.opacity = '1';
                 }
 
                 if (Math.abs(targetProgress - animatedProgress) > 0.0008) {
