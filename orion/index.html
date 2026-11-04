@@ -820,132 +820,7 @@
             }
         }
 
-        /* Scroll-controlled black circle transition section */
-        .hero-sec {
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-        .hero-sec.circle-pinned {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 1;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        .new-content-inner {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        body.circle-transition-active {
-            overflow-x: clip;
-            background: #000;
-        }
-        .new-content-sec {
-            position: relative;
-            height: 320vh;
-            width: 100%;
-            margin-top: 0;
-            z-index: 2;
-            pointer-events: none;
-            background: transparent;
-        }
-        .new-content-inner {
-            position: relative;
-            top: 0;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            background: transparent;
-            isolation: isolate;
-        }
-        .transition-title {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 0;
-            color: #ededed;
-            font-size: clamp(150px, 20vw, 380px);
-            font-weight: 700;
-            letter-spacing: -0.055em;
-            line-height: .82;
-            white-space: nowrap;
-            pointer-events: none;
-            user-select: none;
-        }
-        .brand-transition { z-index: 2; }
-        @media (max-width: 768px) {
-            .transition-title { font-size: 22vw; }
-        }
-        .brand-transition {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            overflow: hidden;
-            background: transparent;
-            opacity: 0;
-            transition: none;
-            will-change: opacity;
-            pointer-events: none;
-        }
-        .brand-transition img {
-            position: absolute;
-            display: block;
-            max-width: none;
-        }
-        .brand-transition-color {
-            position: absolute;
-            inset: 0;
-            background: transparent;
-            opacity: 0;
-        }
-        .brand-transition-base {
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-        }
-        .brand-transition-orion {
-            left: 50%;
-            top: 50%;
-            width: 100vw;
-            height: auto;
-            object-fit: contain;
-            transform: translate3d(-50%, -50%, 0) scale(1);
-            transform-origin: center;
-            backface-visibility: hidden;
-            will-change: transform;
-            opacity: 1;
-        }
-        .new-content-sec.show-brand .brand-transition { opacity: 1; }
-        .new-content-inner::before {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 300vmax;
-            height: 300vmax;
-            border-radius: 50%;
-            background: #000;
-            transform: translate(-50%, -50%) scale(var(--circle-scale, 0));
-            transform-origin: center;
-            z-index: 1;
-        }
-        .new-content-sec.is-black .new-content-inner {
-            background: #000;
-        }
-        .new-content-sec.is-black .new-content-inner::before {
-            opacity: 0;
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .new-content-inner::before { will-change: auto; }
-        }
-
+    
     </style>
 </head>
 <body>
@@ -1062,16 +937,6 @@
                                 <img src="img/Vector.svg" alt="">
                             </button>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <!-- 새 섹션 자리: 히어로와 윤리경영 사이 -->
-            <section class="new-content-sec" aria-label="스크롤 원형 및 이미지 전환">
-                <div class="new-content-inner">
-                    \n                    <div class="brand-transition" aria-hidden="true">
-                        <div class="brand-transition-color"></div>
-                        <img class="brand-transition-base" src="img/bborioncom.jpg" alt="">
-                        <img class="brand-transition-orion" src="img/or.png" alt="">
                     </div>
                 </div>
             </section>
@@ -1239,62 +1104,6 @@
     </div>
 
     <script>
-
-        // Hero가 끝난 다음 별도 스크롤 구간에서 GSAP으로 원형/브랜드 전환 진행
-        (function initBlackCircleScroll() {
-            const section = document.querySelector('.new-content-sec');
-            const inner = section && section.querySelector('.new-content-inner');
-            if (!section || !inner || !window.gsap || !window.ScrollTrigger) return;
-            gsap.registerPlugin(ScrollTrigger);
-
-            const brandStart = 0.52;
-            const revealEnd = 0.88;
-            const finalLogoScale = 15.5;
-            const state = { progress: 0 };
-
-            function render(progress) {
-                const circleProgress = Math.min(progress / 0.52, 1);
-                inner.style.setProperty('--circle-scale', circleProgress.toFixed(4));
-                const transitionTitle = section.querySelector('.transition-title');
-                if (transitionTitle) transitionTitle.style.opacity = (1 - circleProgress).toFixed(3);
-                section.classList.toggle('is-black', progress >= 0.52);
-
-                const brand = section.querySelector('.brand-transition');
-                const orionImage = section.querySelector('.brand-transition-orion');
-                const reveal = Math.max(0, Math.min(1, (progress - brandStart) / (revealEnd - brandStart)));
-                section.classList.toggle('show-brand', progress >= brandStart);
-                if (!brand || !orionImage) return;
-
-                const hold = 0.1;
-                const zoomProgress = Math.max(0, Math.min(1, (reveal - hold) / (1 - hold)));
-                const logoScale = 1 + zoomProgress * (finalLogoScale - 1);
-                orionImage.style.transform = 'translate3d(-50%, -50%, 0) scale(' + logoScale.toFixed(3) + ')';
-                const handoff = Math.max(0, Math.min(1, (reveal - 0.82) / 0.18));
-                const colorLayer = brand.querySelector('.brand-transition-color');
-                const baseImage = brand.querySelector('.brand-transition-base');
-                if (colorLayer) colorLayer.style.opacity = '0';
-                if (baseImage) baseImage.style.opacity = handoff.toFixed(3);
-            }
-
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top top',
-                    end: 'bottom bottom',
-                    pin: inner,
-                    pinSpacing: false,
-                    scrub: 0.8,
-                    invalidateOnRefresh: true
-                }
-            }).to(state, {
-                progress: 1,
-                ease: 'none',
-                onUpdate: () => render(state.progress)
-            });
-
-            render(0);
-            ScrollTrigger.refresh();
-        })();
 
         const footerFamily = document.querySelector('.footer-family');
         const footerFamilyToggle = document.querySelector('.footer-family-toggle');
