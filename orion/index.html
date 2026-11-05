@@ -229,26 +229,6 @@
             }
         }
 
-        /* Pinned scroll-up brand image section */
-        .brand-image-sec {
-            position: relative;
-            width: 100%;
-            height: 200vh;
-            overflow: hidden;
-            background: #fff;
-        }
-        .brand-image-sec img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
-            width: 100%;
-            height: 100vh;
-            object-fit: contain;
-            transform: translateY(100%);
-            will-change: transform;
-        }
-
         /* Ethics section */
         .ethics-sec {
             width: 100%;
@@ -1129,38 +1109,6 @@
     <script>
 
         // Reveal the brand image upward while pinning the viewport until it is fully visible.
-        (function initBrandImageReveal() {
-            const section = document.querySelector('.brand-image-sec');
-            const image = section && section.querySelector('img');
-            if (!section || !image || !window.gsap || !window.ScrollTrigger) return;
-
-            gsap.registerPlugin(ScrollTrigger);
-            const reveal = () => {
-                ScrollTrigger.getAll().forEach(trigger => {
-                    if (trigger.vars && trigger.vars.id === 'brand-image-reveal') trigger.kill();
-                });
-                gsap.set(image, { yPercent: 100 });
-                gsap.to(image, {
-                    yPercent: 0,
-                    ease: 'none',
-                    scrollTrigger: {
-                        id: 'brand-image-reveal',
-                        trigger: section,
-                        start: 'top top',
-                        end: '+=100%',
-                        pin: true,
-                        pinSpacing: true,
-                        scrub: 1,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true
-                    }
-                });
-                ScrollTrigger.refresh();
-            };
-            if (image.complete) reveal();
-            else image.addEventListener('load', reveal, { once: true });
-        })();
-
         const footerFamily = document.querySelector('.footer-family');
         const footerFamilyToggle = document.querySelector('.footer-family-toggle');
         if (footerFamily && footerFamilyToggle) {
