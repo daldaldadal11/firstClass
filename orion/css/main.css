@@ -80,6 +80,16 @@ a {
     overflow: hidden;
 }
 
+/* Darken hero photography like the reference while keeping text and controls bright. */
+.hero-sec .swiper-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, .55);
+    pointer-events: none;
+}
+
 .hero-sec .swiper-slide > img {
     display: block;
     width: 100%;
