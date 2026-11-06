@@ -656,7 +656,7 @@ a {
     overflow: hidden;
     z-index: 1;
     color: #fff;
-    background: url("../img/bg2.png") center center / cover no-repeat;
+    background: url("../img/bg2.png") center center / contain no-repeat;
     will-change: transform;
 }
 .company-intro-copy {
