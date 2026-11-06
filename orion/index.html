@@ -885,6 +885,7 @@
             </div>
         </header>
         <main>
+            <div class="hero-intro-stage">
             <section class="hero-sec">
                 <div class="swiper visual">
                     <div class="swiper-wrapper">
@@ -950,6 +951,7 @@
                     <img src="https://www.figma.com/api/mcp/asset/925f314a-0922-4eed-85b8-67a801b0586b.png" alt="오리온 본사 건물">
                 </div>
             </section>
+            </div>
 
             <section class="ethics-sec" aria-labelledby="ethics-heading">
                 <div class="ethics-inner">
@@ -1358,6 +1360,27 @@
                 prevEl: '.visual-prev',
             },
         });
+
+        // Scroll-driven cover transition: the intro rises over the hero.
+        gsap.registerPlugin(ScrollTrigger);
+        const heroIntroStage = document.querySelector('.hero-intro-stage');
+        const companyIntro = document.querySelector('.company-intro');
+
+        if (heroIntroStage && companyIntro) {
+            gsap.set(companyIntro, { yPercent: 100 });
+            gsap.to(companyIntro, {
+                yPercent: 0,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: heroIntroStage,
+                    start: 'top top',
+                    end: '+=100%',
+                    scrub: 1,
+                    pin: true,
+                    anticipatePin: 1
+                }
+            });
+        }
     </script>
 </body>
 </html>
