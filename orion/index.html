@@ -1374,9 +1374,10 @@
                 scrollTrigger: {
                     trigger: heroIntroStage,
                     start: 'top top',
-                    end: '+=100%',
+                    end: () => '+=' + heroIntroStage.offsetHeight,
                     scrub: 1,
                     pin: true,
+                    pinSpacing: false,
                     anticipatePin: 1
                 }
             });
