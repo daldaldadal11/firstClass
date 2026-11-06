@@ -631,15 +631,22 @@ a {
 }
 
 
-/* Figma company intro: gradient field and building image rising into view */
+/* Hero stays visually behind the next section as it naturally scrolls over it. */
+.hero-sec {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    height: 100dvh;
+}
+
+/* The next section covers the hero from the bottom upward. */
 .company-intro {
-    position: relative;
     position: relative;
     min-height: 100dvh;
     overflow: hidden;
-    z-index: 2;
+    z-index: 1;
     color: #fff;
-    background: linear-gradient(180deg, rgba(60,119,208,.30) 0%, #74bcfa 100%);
+    background: url("../img/bg2.png") center center / cover no-repeat;
 }
 .company-intro-copy {
     padding: 210px 24px 0;
