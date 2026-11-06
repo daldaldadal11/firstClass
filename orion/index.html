@@ -229,61 +229,137 @@
             }
         }
 
+        /* Global expansion section */
+        .global-sec {
+            position: relative;
+            width: 100%;
+            height: min(89.5vw, 1718px);
+            min-height: 980px;
+            overflow: hidden;
+            isolation: isolate;
+            background: #fff;
+            border-radius: 30px 30px 0 0;
+        }
+        .global-map-bg {
+            position: absolute;
+            z-index: -1;
+            top: -5.5%;
+            left: -36.5%;
+            width: 177.7%;
+            height: 105.5%;
+            object-fit: cover;
+            opacity: .08;
+            filter: invert(1);
+            pointer-events: none;
+        }
+        .global-rings {
+            position: absolute;
+            left: 30.57%;
+            top: 41.7%;
+            width: min(57.3vw, 1100px);
+            aspect-ratio: 1;
+            transform: translate(-50%, -50%);
+        }
+        .global-ring {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: block;
+            border: 1px solid rgba(230, 0, 32, .17);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .global-ring--outer { width: 100%; height: 100%; }
+        .global-ring--middle { width: 66.73%; height: 66.73%; }
+        .global-ring--inner { width: 37.1%; height: 37.1%; }
+        .global-ring--core { width: 13.1%; height: 13.1%; }
+        .global-dot {
+            position: absolute;
+            z-index: 2;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            background: #e60020;
+            box-shadow: 0 0 0 1px rgba(230,0,32,.35);
+        }
+        .global-dot--india { left: 9.3%; top: 58.5%; }
+        .global-dot--russia { left: 48.3%; top: 23.5%; }
+        .global-dot--china { left: 32.6%; top: 45.4%; }
+        .global-dot--korea { left: 48.8%; top: 44.5%; }
+        .global-dot--vietnam { left: 34.8%; top: 79.5%; }
+        .global-country {
+            position: absolute;
+            z-index: 2;
+            color: #555;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .global-country--india { left: 6.7%; top: 58.6%; }
+        .global-country--russia { left: 29.7%; top: 23.5%; }
+        .global-country--china { left: 29.7%; top: 45.5%; }
+        .global-country--korea { left: 42.4%; top: 44.5%; }
+        .global-country--vietnam { left: 29.7%; top: 79.5%; }
+        .global-copy {
+            position: absolute;
+            top: 32%;
+            left: 45.7%;
+            width: 48%;
+            color: #111;
+            text-align: center;
+            word-break: keep-all;
+        }
+        .global-copy p,
+        .global-copy h2 {
+            margin: 0;
+            font-size: clamp(26px, 2.6vw, 50px);
+            font-weight: 700;
+            line-height: 1.35;
+        }
+        .global-copy h2 { margin-top: 22px; }
+
         /* Ethics section */
         .ethics-sec {
             width: 100%;
-            min-height: 912px;
-            padding: 85px 24px 85px;
+            margin-top: 53px;
+            padding: 100px 0;
             background: #fff;
             box-sizing: border-box;
         }
-
-        .ethics-inner {
-            width: min(100%, 1380px);
-            margin: 0 auto;
-        }
-
+        .ethics-inner { width: 100%; margin: 0 auto; }
         .ethics-heading {
             margin: 0;
-            color: #111;
-            font-size: 38px;
+            color: #222;
+            font-size: 46px;
             font-weight: 700;
-            line-height: 1.4;
+            line-height: 1.2;
             text-align: center;
         }
-
         .ethics-description {
-            margin: 30px 0 36px;
-            color: #777;
-            font-size: 20px;
+            margin: 42px 24px 50px;
+            color: #666;
+            font-size: 25px;
             font-weight: 400;
-            line-height: 1.8;
+            line-height: 1.6;
             text-align: center;
         }
-
         .ethics-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            grid-template-rows: repeat(2, 320px);
-            gap: 22px;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 0;
+            width: 100%;
+            height: 702px;
         }
-
         .ethics-card {
             position: relative;
             display: block;
             min-width: 0;
             overflow: hidden;
-            border-radius: 5px;
+            border-radius: 0;
             color: #fff;
             text-decoration: none;
             background: #ddd;
         }
-
-        .ethics-card:nth-child(4) {
-            grid-column: 4;
-            grid-row: 1 / span 2;
-        }
-
         .ethics-card img {
             display: block;
             width: 100%;
@@ -291,73 +367,45 @@
             object-fit: cover;
             transition: transform .45s ease;
         }
-
         .ethics-card::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.06) 65%, rgba(0,0,0,.14));
+            background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.04) 65%, rgba(0,0,0,.12));
             pointer-events: none;
         }
-
-        .ethics-card:hover img {
-            transform: scale(1.04);
-        }
-
+        .ethics-card:hover img { transform: scale(1.04); }
         .ethics-card-title {
             position: absolute;
             top: 50px;
             left: 50px;
             z-index: 1;
-            max-width: calc(100% - 40px);
+            max-width: calc(100% - 60px);
             color: #fff;
-            font-size: 28px;
+            font-size: 35px;
             font-weight: 700;
-            line-height: 1.3;
+            line-height: 1.2;
             word-break: keep-all;
         }
-
-        .ethics-card-arrow {
-            position: absolute;
-            left: 50px;
-            bottom: 50px;
-            z-index: 1;
-            display: block;
-            width: 36px;
-            height: 36px;
+        @media (max-width: 900px) {
+            .global-sec { height: 980px; min-height: 980px; }
+            .global-map-bg { left: -70%; width: 240%; opacity: .06; }
+            .global-rings { left: 30%; top: 43%; width: min(78vw, 680px); }
+            .global-copy { left: 34%; top: 30%; width: 62%; }
+            .global-copy p, .global-copy h2 { font-size: clamp(22px, 4vw, 36px); }
+            .ethics-sec { margin-top: 32px; padding: 64px 0; }
+            .ethics-heading { font-size: 32px; }
+            .ethics-description { margin: 28px 20px 36px; font-size: 17px; }
+            .ethics-grid { display: flex; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; }
+            .ethics-card { flex: 0 0 42vw; height: 420px; scroll-snap-align: start; }
+            .ethics-card-title { top: 24px; left: 20px; font-size: 23px; }
         }
-
-        .ethics-card-arrow img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            filter: brightness(0) invert(1);
-        }
-
-        @media (max-width: 700px) {
-            .ethics-sec { min-height: auto; padding: 44px 20px; }
-            .ethics-heading { font-size: 20px; }
-            .ethics-description br { display: none; }
-            .ethics-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                grid-template-rows: repeat(4, 220px);
-                gap: 12px;
-            }
-            .ethics-card:nth-child(4) {
-                grid-column: auto;
-                grid-row: auto / span 2;
-            }
-            .ethics-card-title {
-                top: 18px;
-                left: 16px;
-                font-size: 15px;
-            }
-            .ethics-card-arrow {
-                left: 16px;
-                bottom: 16px;
-                width: 32px;
-                height: 32px;
-            }
+        @media (max-width: 600px) {
+            .global-sec { min-height: 760px; height: 760px; }
+            .global-copy { left: 8%; top: 10%; width: 84%; }
+            .global-rings { left: 50%; top: 65%; width: 85vw; }
+            .global-country { font-size: 10px; }
+            .ethics-card { flex-basis: 72vw; height: 360px; }
         }
 
         /* Newsroom section: match the Ethics section's vertical rhythm and typography. */
@@ -943,19 +991,44 @@
             </section>
             
                         <section class="company-intro" aria-label="기업 소개">
+                <div class="company-intro-background" aria-hidden="true"></div>
                 <div class="company-intro-panel company-intro-panel--first">
                     <div class="company-intro-copy">
-                        <p>제과를 넘어 글로벌<br>식품 · 헬스케어 기업으로 도약!</p>
+                        <p>제과를 넘어 글로벌<br>식품ㆍ헬스케어 기업으로 도약!</p>
                     </div>
                 </div>
                 <div class="company-intro-panel company-intro-panel--second">
                     <div class="company-intro-visual">
                         <p class="company-intro-caption">‘사람이 먹는 음식만큼은 가장 정직한 마음으로 만들어야 한다’</p>
-                        <img src="https://www.figma.com/api/mcp/asset/925f314a-0922-4eed-85b8-67a801b0586b.png" alt="오리온 본사 건물">
+                        <img src="img/com01.png" alt="오리온 본사 건물">
                     </div>
                 </div>
             </section>
             </div>
+
+            <section class="global-sec" aria-label="글로벌 진출 전략">
+                <img class="global-map-bg" src="img/main_global_bg.png" alt="" aria-hidden="true">
+                <div class="global-rings" aria-hidden="true">
+                    <span class="global-ring global-ring--outer"></span>
+                    <span class="global-ring global-ring--middle"></span>
+                    <span class="global-ring global-ring--inner"></span>
+                    <span class="global-ring global-ring--core"></span>
+                    <i class="global-dot global-dot--india"></i>
+                    <i class="global-dot global-dot--russia"></i>
+                    <i class="global-dot global-dot--china"></i>
+                    <i class="global-dot global-dot--korea"></i>
+                    <i class="global-dot global-dot--vietnam"></i>
+                    <span class="global-country global-country--india">인도</span>
+                    <span class="global-country global-country--russia">러시아</span>
+                    <span class="global-country global-country--china">중국</span>
+                    <span class="global-country global-country--korea">대한민국</span>
+                    <span class="global-country global-country--vietnam">베트남</span>
+                </div>
+                <div class="global-copy">
+                    <p>‘K-스낵’ 영토 확장에 앞장...</p>
+                    <h2>해외현지화 전략 통한 글로벌 진출!</h2>
+                </div>
+            </section>
 
             <section class="ethics-sec" aria-labelledby="ethics-heading">
                 <div class="ethics-inner">
@@ -965,41 +1038,13 @@
                         모든 이해관계자에게 기여함으로써 지속적으로 성장해 나가는 것입니다.
                     </p>
                     <div class="ethics-grid">
-                        <a class="ethics-card" href="#" aria-label="개요">
-                            <img src="img/yg01.jpg" alt="">
-                            <span class="ethics-card-title">개요</span>
-                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
-                        </a>
-                        <a class="ethics-card" href="#" aria-label="임직원">
-                            <img src="img/yg02.jpg" alt="">
-                            <span class="ethics-card-title">임직원</span>
-                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
-                        </a>
-                        <a class="ethics-card" href="#" aria-label="고객">
-                            <img src="img/yg03.jpg" alt="">
-                            <span class="ethics-card-title">고객</span>
-                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
-                        </a>
-                        <a class="ethics-card" href="#" aria-label="보고서 및 주요성과">
-                            <img src="img/yg07.jpg" alt="">
-                            <span class="ethics-card-title">보고서 및<br>주요성과</span>
-                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
-                        </a>
-                        <a class="ethics-card" href="#" aria-label="협력회사">
-                            <img src="img/yg04.jpg" alt="">
-                            <span class="ethics-card-title">협력회사</span>
-                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
-                        </a>
-                        <a class="ethics-card" href="#" aria-label="주주">
-                            <img src="img/yg05.jpg" alt="">
-                            <span class="ethics-card-title">주주</span>
-                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
-                        </a>
-                        <a class="ethics-card" href="#" aria-label="사회">
-                            <img src="img/yg06.jpg" alt="">
-                            <span class="ethics-card-title">사회</span>
-                            <span class="ethics-card-arrow" aria-hidden="true"><img src="img/news_arrow2.svg" alt=""></span>
-                        </a>
+                        <a class="ethics-card" href="#" aria-label="고객"><img src="img/yg03.jpg" alt=""><span class="ethics-card-title">고객</span></a>
+                        <a class="ethics-card" href="#" aria-label="임직원"><img src="img/yg02.jpg" alt=""><span class="ethics-card-title">임직원</span></a>
+                        <a class="ethics-card" href="#" aria-label="개요"><img src="img/yg01.jpg" alt=""><span class="ethics-card-title">개요</span></a>
+                        <a class="ethics-card" href="#" aria-label="보고서 및 주요성과"><img src="img/yg07.jpg" alt=""><span class="ethics-card-title">보고서 및<br>주요성과</span></a>
+                        <a class="ethics-card" href="#" aria-label="협력회사"><img src="img/yg04.jpg" alt=""><span class="ethics-card-title">협력회사</span></a>
+                        <a class="ethics-card" href="#" aria-label="주주"><img src="img/yg05.jpg" alt=""><span class="ethics-card-title">주주</span></a>
+                        <a class="ethics-card" href="#" aria-label="사회"><img src="img/yg06.jpg" alt=""><span class="ethics-card-title">사회</span></a>
                     </div>
                 </div>
             </section>
@@ -1369,10 +1414,11 @@
         gsap.registerPlugin(ScrollTrigger);
         const heroIntroStage = document.querySelector('.hero-intro-stage');
         const companyIntro = document.querySelector('.company-intro');
+        const introBackground = document.querySelector('.company-intro-background');
         const introFirstPanel = document.querySelector('.company-intro-panel--first');
         const introSecondPanel = document.querySelector('.company-intro-panel--second');
 
-        if (heroIntroStage && companyIntro && introFirstPanel && introSecondPanel) {
+        if (heroIntroStage && companyIntro && introBackground && introFirstPanel && introSecondPanel) {
             gsap.set(companyIntro, { yPercent: 100 });
             gsap.set(introSecondPanel, { yPercent: 100 });
 
@@ -1380,18 +1426,21 @@
                 scrollTrigger: {
                     trigger: heroIntroStage,
                     start: 'top top',
-                    end: '+=200%',
+                    end: '+=235%',
                     scrub: 1,
                     pin: true,
-                    pinSpacing: false,
+                    pinSpacing: true,
                     anticipatePin: 1
                 }
             });
 
             introTimeline
-                .to(companyIntro, { yPercent: 0, duration: 1, ease: 'none' })
-                .to(introFirstPanel, { yPercent: -100, duration: 1, ease: 'none' })
-                .to(introSecondPanel, { yPercent: 0, duration: 1, ease: 'none' }, '<');
+                .to(companyIntro, { yPercent: 0, duration: 0.4, ease: 'none' })
+                .to({}, { duration: 0.6 })
+                .to(introFirstPanel, { yPercent: -100, duration: 0.4, ease: 'none' })
+                .to(introSecondPanel, { yPercent: 0, duration: 0.4, ease: 'none' }, '<')
+                .to(introBackground, { yPercent: -48, duration: 0.4, ease: 'none' }, '<')
+                .to({}, { duration: 0.55 });
         }
     </script>
 </body>
