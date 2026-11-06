@@ -634,8 +634,10 @@ a {
 /* Figma company intro: gradient field and building image rising into view */
 .company-intro {
     position: relative;
-    min-height: 1050px;
+    position: relative;
+    min-height: 100dvh;
     overflow: hidden;
+    z-index: 2;
     color: #fff;
     background: linear-gradient(180deg, rgba(60,119,208,.30) 0%, #74bcfa 100%);
 }
