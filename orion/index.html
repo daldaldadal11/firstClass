@@ -352,21 +352,31 @@
             text-align: center;
         }
         .ethics-grid {
-            display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
+            display: flex;
             gap: 0;
             width: 100%;
             height: 702px;
+            overflow: hidden;
         }
         .ethics-card {
             position: relative;
             display: block;
+            flex: 1 1 0;
             min-width: 0;
             overflow: hidden;
             border-radius: 0;
             color: #fff;
             text-decoration: none;
             background: #ddd;
+            transition: flex-grow .65s cubic-bezier(.22,.61,.36,1);
+        }
+        .ethics-card:hover,
+        .ethics-card:focus-visible {
+            flex-grow: 2.8;
+        }
+        .ethics-grid:has(.ethics-card:hover) .ethics-card:not(:hover),
+        .ethics-grid:has(.ethics-card:focus-visible) .ethics-card:not(:focus-visible) {
+            flex-grow: .7;
         }
         .ethics-card img {
             display: block;
@@ -405,7 +415,11 @@
             .ethics-heading { font-size: 32px; }
             .ethics-description { margin: 28px 20px 36px; font-size: 17px; }
             .ethics-grid { display: flex; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; }
-            .ethics-card { flex: 0 0 42vw; height: 420px; scroll-snap-align: start; }
+            .ethics-card,
+            .ethics-card:hover,
+            .ethics-card:focus-visible { flex: 0 0 42vw; height: 420px; scroll-snap-align: start; }
+            .ethics-grid:has(.ethics-card:hover) .ethics-card:not(:hover),
+            .ethics-grid:has(.ethics-card:focus-visible) .ethics-card:not(:focus-visible) { flex: 0 0 42vw; }
             .ethics-card-title { top: 24px; left: 20px; font-size: 23px; }
         }
         @media (max-width: 600px) {
@@ -413,7 +427,9 @@
             .global-copy { left: 8%; top: 10%; width: 84%; }
             .global-rings { left: 50%; top: 65%; width: 85vw; }
             .global-country { font-size: 10px; }
-            .ethics-card { flex-basis: 72vw; height: 360px; }
+            .ethics-card,
+            .ethics-card:hover,
+            .ethics-card:focus-visible { flex-basis: 72vw; height: 360px; }
         }
 
         /* Newsroom section: match the Ethics section's vertical rhythm and typography. */
