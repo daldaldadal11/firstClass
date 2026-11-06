@@ -242,7 +242,7 @@
         }
         .global-map-bg {
             position: absolute;
-            z-index: -1;
+            z-index: 0;
             top: -5.5%;
             left: -36.5%;
             width: 177.7%;
@@ -254,6 +254,7 @@
         }
         .global-rings {
             position: absolute;
+            z-index: 1;
             left: 30.57%;
             top: 41.7%;
             width: min(57.3vw, 1100px);
@@ -283,11 +284,17 @@
             background: #e60020;
             box-shadow: 0 0 0 1px rgba(230,0,32,.35);
         }
-        .global-dot--india { left: 9.3%; top: 58.5%; }
-        .global-dot--russia { left: 48.3%; top: 23.5%; }
-        .global-dot--china { left: 32.6%; top: 45.4%; }
-        .global-dot--korea { left: 48.8%; top: 44.5%; }
-        .global-dot--vietnam { left: 34.8%; top: 79.5%; }
+        .global-locations {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .global-dot--india { left: 7.25%; top: 37.4%; }
+        .global-dot--russia { left: 29.65%; top: 25.8%; }
+        .global-dot--china { left: 20.57%; top: 41.6%; }
+        .global-dot--korea { left: 30.1%; top: 41.2%; }
+        .global-dot--vietnam { left: 21.2%; top: 52.2%; }
         .global-country {
             position: absolute;
             z-index: 2;
@@ -295,13 +302,14 @@
             font-size: 12px;
             white-space: nowrap;
         }
-        .global-country--india { left: 6.7%; top: 58.6%; }
-        .global-country--russia { left: 29.7%; top: 23.5%; }
-        .global-country--china { left: 29.7%; top: 45.5%; }
-        .global-country--korea { left: 42.4%; top: 44.5%; }
-        .global-country--vietnam { left: 29.7%; top: 79.5%; }
+        .global-country--india { left: 5.7%; top: 37.5%; }
+        .global-country--russia { left: 27.55%; top: 26.1%; }
+        .global-country--china { left: 19.1%; top: 41.9%; }
+        .global-country--korea { left: 27.2%; top: 41.2%; }
+        .global-country--vietnam { left: 19.1%; top: 52.4%; }
         .global-copy {
             position: absolute;
+            z-index: 2;
             top: 32%;
             left: 45.7%;
             width: 48%;
@@ -1013,8 +1021,6 @@
                     <span class="global-ring global-ring--middle"></span>
                     <span class="global-ring global-ring--inner"></span>
                     <span class="global-ring global-ring--core"></span>
-                </div>
-                <div class="global-locations" aria-hidden="true">
                     <i class="global-dot global-dot--india"></i>
                     <i class="global-dot global-dot--russia"></i>
                     <i class="global-dot global-dot--china"></i>
