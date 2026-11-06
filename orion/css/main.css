@@ -666,7 +666,7 @@ a {
     width: 100%;
     height: auto;
     object-fit: contain;
-    transform: translateY(220px);
+    transform: none;
     opacity: 1;
 }
 @media (max-width: 768px) {
