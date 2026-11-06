@@ -664,12 +664,8 @@ a {
     width: 100%;
     height: auto;
     object-fit: contain;
-    transform: translateY(100px);
-    opacity: 0;
-    animation: intro-image-rise 1.2s cubic-bezier(.22,.61,.36,1) forwards;
-}
-@keyframes intro-image-rise {
-    to { transform: translateY(0); opacity: 1; }
+    transform: translateY(220px);
+    opacity: 1;
 }
 @media (max-width: 768px) {
     .company-intro { min-height: 760px; }
