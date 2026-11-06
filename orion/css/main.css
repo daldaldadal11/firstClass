@@ -635,8 +635,7 @@ a {
 .hero-intro-stage {
     position: relative;
     width: 100%;
-    aspect-ratio: 1920 / 2389;
-    min-height: 100dvh;
+    height: 200dvh;
     overflow: hidden;
     isolation: isolate;
 }
@@ -653,16 +652,37 @@ a {
 }
 .company-intro {
     position: absolute;
-    inset: 0;
-    min-height: 100dvh;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
     overflow: hidden;
     z-index: 1;
     color: #fff;
-    background: url("../img/bg2.png") center center / 100% 100% no-repeat;
+    background: url("../img/bg2.png") top center / 100% auto no-repeat;
     will-change: transform;
 }
+.company-intro-panel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.company-intro-panel--first {
+    z-index: 1;
+}
+.company-intro-panel--second {
+    z-index: 2;
+    transform: translateY(100%);
+}
 .company-intro-copy {
-    padding: 210px 24px 0;
+    position: absolute;
+    top: 36%;
+    left: 0;
+    width: 100%;
+    padding: 0 24px;
+    transform: translateY(-50%);
     text-align: center;
     font-size: 30px;
     font-weight: 600;
@@ -673,13 +693,14 @@ a {
 .company-intro-visual {
     position: relative;
     width: min(1325px, calc(100% - 48px));
-    margin: 310px auto 0;
+    margin: 175px auto 0;
     text-align: center;
 }
 .company-intro-caption {
-    margin: 0 0 28px;
-    font-size: 16px;
-    font-weight: 500;
+    margin: 0 0 70px;
+    font-size: 30px;
+    line-height: 1.5;
+    font-weight: 600;
 }
 .company-intro-visual img {
     display: block;
@@ -690,8 +711,7 @@ a {
     opacity: 1;
 }
 @media (max-width: 768px) {
-    .company-intro { min-height: 760px; }
-    .company-intro-copy { padding-top: 120px; font-size: 22px; }
-    .company-intro-visual { margin-top: 190px; }
-    .company-intro-caption { font-size: 12px; }
+    .company-intro-copy { font-size: 22px; }
+    .company-intro-visual { width: calc(100% - 32px); margin-top: 130px; }
+    .company-intro-caption { margin-bottom: 36px; font-size: 17px; }
 }
