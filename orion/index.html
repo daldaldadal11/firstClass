@@ -1359,5 +1359,26 @@
             },
         });
     </script>
+    <script>
+        // Scroll-driven reveal: keep the intro pinned while the building image rises.
+        if (window.gsap && window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+            const introImage = document.querySelector('.company-intro-visual img');
+            if (introImage) {
+                gsap.to(introImage, {
+                    y: 0,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.company-intro',
+                        start: 'top top',
+                        end: '+=900',
+                        scrub: 0.8,
+                        pin: true,
+                        anticipatePin: 1
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>
