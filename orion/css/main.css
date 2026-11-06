@@ -630,3 +630,50 @@ a {
     }
 }
 
+
+/* Figma company intro: gradient field and building image rising into view */
+.company-intro {
+    position: relative;
+    min-height: 1050px;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(180deg, rgba(60,119,208,.30) 0%, #74bcfa 100%);
+}
+.company-intro-copy {
+    padding: 210px 24px 0;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: -.5px;
+}
+.company-intro-copy p { margin: 0; }
+.company-intro-visual {
+    position: relative;
+    width: min(1325px, calc(100% - 48px));
+    margin: 310px auto 0;
+    text-align: center;
+}
+.company-intro-caption {
+    margin: 0 0 28px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.company-intro-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transform: translateY(100px);
+    opacity: 0;
+    animation: intro-image-rise 1.2s cubic-bezier(.22,.61,.36,1) forwards;
+}
+@keyframes intro-image-rise {
+    to { transform: translateY(0); opacity: 1; }
+}
+@media (max-width: 768px) {
+    .company-intro { min-height: 760px; }
+    .company-intro-copy { padding-top: 120px; font-size: 22px; }
+    .company-intro-visual { margin-top: 190px; }
+    .company-intro-caption { font-size: 12px; }
+}
