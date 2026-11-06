@@ -632,11 +632,12 @@ a {
 
 
 /* Pinned transition stage: the intro is animated over the stationary hero. */
+/* Pinned, two-stage company introduction above the hero. */
 .hero-intro-stage {
     position: relative;
     width: 100%;
-    height: 200dvh;
-    overflow: hidden;
+    height: 100dvh;
+    overflow: visible;
     isolation: isolate;
 }
 .hero-intro-stage .hero-sec {
@@ -647,19 +648,26 @@ a {
     height: 100dvh;
     z-index: 0;
 }
-.hero-intro-stage .hero-sec .swiper {
-    height: 100%;
-}
+.hero-intro-stage .hero-sec .swiper { height: 100%; }
 .company-intro {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100dvh;
     overflow: hidden;
     z-index: 1;
     color: #fff;
-    background: url("../img/bg2.png") top center / 100% auto no-repeat;
+    background: transparent;
+    will-change: transform;
+}
+.company-intro-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250dvh;
+    z-index: 0;
+    background: url("../img/bg2.png") top center / 100% 100% no-repeat;
     will-change: transform;
 }
 .company-intro-panel {
@@ -669,38 +677,35 @@ a {
     height: 100%;
     overflow: hidden;
 }
-.company-intro-panel--first {
-    z-index: 1;
-}
-.company-intro-panel--second {
-    z-index: 2;
-    transform: translateY(100%);
-}
+.company-intro-panel--first { z-index: 1; }
+.company-intro-panel--second { z-index: 2; transform: translateY(100%); }
 .company-intro-copy {
     position: absolute;
-    top: 36%;
+    top: 40.5%;
     left: 0;
     width: 100%;
     padding: 0 24px;
     transform: translateY(-50%);
     text-align: center;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: clamp(34px, 3.65vw, 70px);
+    font-weight: 700;
     line-height: 1.55;
     letter-spacing: -.5px;
+    word-break: keep-all;
 }
 .company-intro-copy p { margin: 0; }
 .company-intro-visual {
     position: relative;
     width: min(1325px, calc(100% - 48px));
-    margin: 175px auto 0;
+    margin: 10.5vh auto 0;
     text-align: center;
 }
 .company-intro-caption {
-    margin: 0 0 70px;
-    font-size: 30px;
+    margin: 0 0 35px;
+    font-size: clamp(20px, 2.08vw, 40px);
     line-height: 1.5;
     font-weight: 600;
+    word-break: keep-all;
 }
 .company-intro-visual img {
     display: block;
@@ -711,7 +716,8 @@ a {
     opacity: 1;
 }
 @media (max-width: 768px) {
-    .company-intro-copy { font-size: 22px; }
-    .company-intro-visual { width: calc(100% - 32px); margin-top: 130px; }
-    .company-intro-caption { margin-bottom: 36px; font-size: 17px; }
+    .company-intro-copy { font-size: 24px; }
+    .company-intro-visual { width: calc(100% - 32px); margin-top: 12vh; }
+    .company-intro-caption { margin-bottom: 24px; font-size: 18px; }
+    .company-intro-background { height: 250dvh; }
 }
