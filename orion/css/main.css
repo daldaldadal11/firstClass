@@ -635,15 +635,17 @@ a {
 .hero-intro-stage {
     position: relative;
     width: 100%;
-    height: 100dvh;
+    aspect-ratio: 1920 / 2389;
+    min-height: 100dvh;
     overflow: hidden;
     isolation: isolate;
 }
 .hero-intro-stage .hero-sec {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 100dvh;
     z-index: 0;
 }
 .hero-intro-stage .hero-sec .swiper {
@@ -656,7 +658,7 @@ a {
     overflow: hidden;
     z-index: 1;
     color: #fff;
-    background: url("../img/bg2.png") top center / 100% auto no-repeat;
+    background: url("../img/bg2.png") center center / 100% 100% no-repeat;
     will-change: transform;
 }
 .company-intro-copy {
