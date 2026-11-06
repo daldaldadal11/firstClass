@@ -1360,24 +1360,26 @@
         });
     </script>
     <script>
-        // Scroll-driven reveal: keep the intro pinned while the building image rises.
-        if (window.gsap && window.ScrollTrigger) {
-            gsap.registerPlugin(ScrollTrigger);
-            const introImage = document.querySelector('.company-intro-visual img');
-            if (introImage) {
-                gsap.to(introImage, {
-                    y: 0,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '.company-intro',
-                        start: 'top top',
-                        end: '+=900',
-                        scrub: 0.8,
-                        pin: true,
-                        anticipatePin: 1
-                    }
-                });
-            }
+        // Pin the hero first; the blue intro panel moves over it.
+        gsap.registerPlugin(ScrollTrigger);
+        const hero = document.querySelector('.hero-sec');
+        const intro = document.querySelector('.company-intro');
+        const building = document.querySelector('.company-intro-visual img');
+        if (hero && intro && building) {
+            gsap.set(intro, { yPercent: 100 });
+            gsap.set(building, { y: 220 });
+            const sequence = gsap.timeline({
+                scrollTrigger: {
+                    trigger: hero,
+                    start: 'top top',
+                    end: '+=1100',
+                    scrub: 0.8,
+                    pin: true,
+                    anticipatePin: 1
+                }
+            });
+            sequence.to(intro, { yPercent: 0, ease: 'none' }, 0);
+            sequence.to(building, { y: 0, ease: 'none' }, 0.25);
         }
     </script>
 </body>
