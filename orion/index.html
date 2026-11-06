@@ -943,12 +943,16 @@
             </section>
             
                         <section class="company-intro" aria-label="기업 소개">
-                <div class="company-intro-copy">
-                    <p>제과를 넘어 글로벌<br>식품 · 헬스케어 기업으로 도약!</p>
+                <div class="company-intro-panel company-intro-panel--first">
+                    <div class="company-intro-copy">
+                        <p>제과를 넘어 글로벌<br>식품 · 헬스케어 기업으로 도약!</p>
+                    </div>
                 </div>
-                <div class="company-intro-visual">
-                    <p class="company-intro-caption">‘과자’ 속 작은 즐거움을 넘어, 더 큰 세상을 향해 나아갑니다.</p>
-                    <img src="https://www.figma.com/api/mcp/asset/925f314a-0922-4eed-85b8-67a801b0586b.png" alt="오리온 본사 건물">
+                <div class="company-intro-panel company-intro-panel--second">
+                    <div class="company-intro-visual">
+                        <p class="company-intro-caption">‘사람이 먹는 음식만큼은 가장 정직한 마음으로 만들어야 한다’</p>
+                        <img src="https://www.figma.com/api/mcp/asset/925f314a-0922-4eed-85b8-67a801b0586b.png" alt="오리온 본사 건물">
+                    </div>
                 </div>
             </section>
             </div>
@@ -1365,22 +1369,29 @@
         gsap.registerPlugin(ScrollTrigger);
         const heroIntroStage = document.querySelector('.hero-intro-stage');
         const companyIntro = document.querySelector('.company-intro');
+        const introFirstPanel = document.querySelector('.company-intro-panel--first');
+        const introSecondPanel = document.querySelector('.company-intro-panel--second');
 
-        if (heroIntroStage && companyIntro) {
+        if (heroIntroStage && companyIntro && introFirstPanel && introSecondPanel) {
             gsap.set(companyIntro, { yPercent: 100 });
-            gsap.to(companyIntro, {
-                yPercent: 0,
-                ease: 'none',
+            gsap.set(introSecondPanel, { yPercent: 100 });
+
+            const introTimeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroIntroStage,
                     start: 'top top',
-                    end: () => '+=' + heroIntroStage.offsetHeight,
+                    end: '+=200%',
                     scrub: 1,
                     pin: true,
                     pinSpacing: false,
                     anticipatePin: 1
                 }
             });
+
+            introTimeline
+                .to(companyIntro, { yPercent: 0, duration: 1, ease: 'none' })
+                .to(introFirstPanel, { yPercent: -100, duration: 1, ease: 'none' })
+                .to(introSecondPanel, { yPercent: 0, duration: 1, ease: 'none' }, '<');
         }
     </script>
 </body>
