@@ -227,14 +227,7 @@
             .header-menu-overlay {
                 display: none;
             }
-        }
-
-        /* Global section rises over the blue intro background */
-        .global-intro-stage { position: relative; height: 100dvh; overflow: visible; isolation: isolate; }
-        .global-intro-blue-bg { position: absolute; inset: 0; background: url("img/bg2.png") top center / 100% 100% no-repeat; }
-        .global-sec { position: absolute; inset: 0; height: 100dvh; min-height: 0; z-index: 1; transform: translateY(100%); will-change: transform; }
-
-        /* Global expansion section */
+        }/* Global expansion section */
         .global-sec {
             position: relative;
             width: 100%;
@@ -1033,11 +1026,7 @@
                     </div>
                 </div>
             </section>
-            </div>
-
-            <div class="global-intro-stage">
-            <div class="global-intro-blue-bg" aria-hidden="true"></div>
-            <section class="global-sec" aria-label="글로벌 진출 전략">
+            </div><section class="global-sec" aria-label="글로벌 진출 전략">
                 <img class="global-map-bg" src="img/main_global_bg.png" alt="" aria-hidden="true">
                 <div class="global-rings" aria-hidden="true">
                     <span class="global-ring global-ring--outer"></span>
@@ -1062,9 +1051,7 @@
                     <h2>해외현지화 전략 통한 글로벌 진출!</h2>
                 </div>
             </section>
-            </div>
-
-            <section class="ethics-sec" aria-labelledby="ethics-heading">
+<section class="ethics-sec" aria-labelledby="ethics-heading">
                 <div class="ethics-inner">
                     <h2 class="ethics-heading" id="ethics-heading">윤리경영</h2>
                     <p class="ethics-description">
@@ -1442,18 +1429,7 @@
                 nextEl: '.visual-next',
                 prevEl: '.visual-prev',
             },
-        });
-
-        // Global section rises from the blue background on scroll.
-        const globalStage = document.querySelector('.global-intro-stage');
-        const globalSection = document.querySelector('.global-sec');
-        if (globalStage && globalSection) {
-            gsap.set(globalSection, { yPercent: 100 });
-            gsap.timeline({ scrollTrigger: { trigger: globalStage, start: 'top top', end: '+=100%', scrub: 1, pin: true, pinSpacing: true, anticipatePin: 1 } })
-                .to(globalSection, { yPercent: 0, ease: 'none' });
-        }
-
-        // Scroll-driven cover transition: the intro rises over the hero.
+        });// Scroll-driven cover transition: the intro rises over the hero.
         gsap.registerPlugin(ScrollTrigger);
         const heroIntroStage = document.querySelector('.hero-intro-stage');
         const companyIntro = document.querySelector('.company-intro');
